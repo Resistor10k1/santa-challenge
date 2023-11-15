@@ -7,15 +7,49 @@
 
 
 #include <iostream>
-#include "templateLib.h"
+#include <vector>
+#include "Module.h"
+#include "Interface.h"
 
 using namespace std;
 
+template<typename T>
+void printVector(const std::vector<T>& vec)
+{
+    std::cout << "[ ";
+    
+    for(auto& elem : vec)
+    {
+        std::cout << elem;
+
+        if(elem == vec.back())
+        {
+            std::cout << " ]" << std::endl;
+        }
+        else
+        {
+            std::cout << ", ";
+        }
+    }
+}
 
 int main(void)
 {
+    std::vector<double> some_vec(5);
+
+    srandom(111);
+
+    for(auto& elem : some_vec)
+    {
+        elem = random() % 200;
+    }
+
     cout << "This is the application main" << endl;
-    cout << "Additional output ..." << endl;
-    cout << "Greeting: " << generateHelloStr("User") << endl;
+    functions::vecmul(some_vec, 2.1);
+
+    cout << "Result of multiplying the vector with 2.1: " << endl;
+    printVector(some_vec);
+    
+
     return 0;
 }
