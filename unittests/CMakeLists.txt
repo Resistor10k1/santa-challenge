@@ -17,6 +17,7 @@ FetchContent_MakeAvailable(googletest)
 
 file(GLOB test_targets
           #"${PROJECT_SOURCE_DIR}/source/main.cpp"
+          "${PROJECT_SOURCE_DIR}/source/formulas.cpp"
           "${PROJECT_SOURCE_DIR}/source/Module.cpp")
 
 add_executable(santaChallengeTest)
@@ -24,10 +25,11 @@ target_sources(santaChallengeTest
         PRIVATE
                 ${test_targets}
                 unittest_Module.cpp
+                unittest_Formulas.cpp
 )
 target_include_directories(santaChallengeTest PRIVATE "${PROJECT_SOURCE_DIR}/include")
 # Now simply link against gtest or gtest_main as needed.
 target_link_libraries(santaChallengeTest PRIVATE gtest_main)
-add_test(NAME cppTemplate_test COMMAND ./unittests/santaChallengeTest)
+add_test(NAME santaChallenge_test COMMAND ./unittests/santaChallengeTest)
 
 enable_testing()

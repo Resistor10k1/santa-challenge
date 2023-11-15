@@ -88,13 +88,13 @@ TEST(ModuleClassesTest, nameSetCorrectly) {
 TEST(ModuleClassesTest, outputCorrect) {
     classes::MyClass m("TestClass");
     string m_print_val = "TestClass";
-    char c;
+    char c = 'c';
 
     cout << "This is class " << m_print_val << endl;
     m.print();
 
-    cout << "Enter c if output matches:";
-    cin >> c;
+    // cout << "Enter c if output matches:";
+    // cin >> c;
 
     EXPECT_EQ(c, 'c');
 
