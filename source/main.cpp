@@ -8,31 +8,27 @@
 
 #include <iostream>
 #include <vector>
-#include "Module.h"
-#include "Interface.h"
+#include <filesystem>
 #include "misc.hpp"
 
 
 using namespace std;
+namespace fs = std::filesystem;
 
 
 int main(void)
 {
-    std::vector<double> some_vec(5);
-
-    srandom(111);
-
-    for(auto& elem : some_vec)
-    {
-        elem = random() % 200;
-    }
-
+    std::vector<Gift> giftList;
     cout << "This is the application main" << endl;
-    functions::vecmul(some_vec, 2.1);
 
-    cout << "Result of multiplying the vector with 2.1: " << endl;
-    misc::printVector(some_vec);
-    
+    fs::path abs_path = fs::canonical("/proc/self/exe");
+    fs::path caller_path = fs::current_path();
+
+    cout << "Absolut path: " << abs_path << endl;
+    cout << "Absolut path: " << caller_path << endl;
+
+    cout << "Read some data:" << endl;
+    readGiftsFromFile(caller_path/"data/example_data.csv", ',', giftList);
 
     return 0;
 }
