@@ -29,7 +29,7 @@ target_sources(${PROJECT_NAME}
         PRIVATE
                 main.cpp
                 formulas.cpp
-                Module.cpp
+                misc.cpp
 )
 target_include_directories(${PROJECT_NAME} PRIVATE "${PROJECT_SOURCE_DIR}/include")
 # target_link_libraries(${TARGET_NAME} ${LIB})

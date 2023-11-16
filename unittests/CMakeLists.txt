@@ -18,13 +18,12 @@ FetchContent_MakeAvailable(googletest)
 file(GLOB test_targets
           #"${PROJECT_SOURCE_DIR}/source/main.cpp"
           "${PROJECT_SOURCE_DIR}/source/formulas.cpp"
-          "${PROJECT_SOURCE_DIR}/source/Module.cpp")
+)
 
 add_executable(santaChallengeTest)
 target_sources(santaChallengeTest
         PRIVATE
                 ${test_targets}
-                unittest_Module.cpp
                 unittest_Formulas.cpp
 )
 target_include_directories(santaChallengeTest PRIVATE "${PROJECT_SOURCE_DIR}/include")
