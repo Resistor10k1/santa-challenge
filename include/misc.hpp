@@ -10,19 +10,9 @@
 #include <vector>
 #include <iostream>
 #include <filesystem>
+#include "Gift.hpp"
 
 namespace fs = std::filesystem;
-
-/**
- * @brief Location where a package is dropped.
-*/
-struct Gift
-{
-    size_t id = 0;
-    double lat = 0.0;
-    double lon = 0.0;
-    double weight = 0.0;
-};
 
 template<typename T>
 void printVector(const std::vector<T>& vec)

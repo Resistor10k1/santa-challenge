@@ -28,6 +28,7 @@ add_executable(${PROJECT_NAME})
 target_sources(${PROJECT_NAME}
         PRIVATE
                 main.cpp
+                Gift.cpp
                 algorithm.cpp
                 misc.cpp
 )
