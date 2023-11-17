@@ -34,6 +34,8 @@ void printVector(const std::vector<T>& vec)
     }
 }
 
+void str_split(const std::string& str, std::vector<std::string>& output, char separator=';');
+
 /**
  * @brief Reads the package drop locations from a CSV file.
  * @details The format of a location is: GiftId,Latitude,Longitude,Weight

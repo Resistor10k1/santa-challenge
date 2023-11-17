@@ -4,29 +4,58 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <initializer_list>
+using namespace std;
 
+void str_split(const std::string& str, std::vector<std::string>& output, char separator)
+{
+    int pos = str.find(separator);
+
+    if((pos != std::string::npos))
+    {
+        output.push_back(str.substr(0, pos));
+        str_split(str.substr(pos+1), output, separator);
+    }
+    else if(!str.empty())
+    {
+        output.push_back(str);
+    }
+}
 
 void readGiftsFromFile(fs::path path, char separator, std::vector<Gift>& output)
 {
     std::fstream readFile;
     std::string line;
+    unsigned int line_cntr = 0;
 
     readFile.open(path);
 
     if(readFile.is_open())
     {
-        size_t counter = 0;
+        std::getline(readFile, line);
+        if(line != "GiftId,Latitude,Longitude,Weight")
+            throw std::domain_error("File seems not to contain gifts.");
+        ++line_cntr;
+
         while(std::getline(readFile, line))
         {
+            ++line_cntr;
             // Expected format of points: GiftId,Latitude,Longitude,Weight
-            ++counter;
+            std::vector<std::string> ilist; 
+            str_split(line, ilist, separator);
 
-            size_t pos = 0;
-            while((pos = line.find(separator)) != std::string::npos)
+            if(ilist.size() == 4)
             {
-                
+                output.push_back(Gift(std::atol(ilist.at(0).c_str()), 
+                                  std::atof(ilist.at(1).c_str()),
+                                  std::atof(ilist.at(2).c_str()),
+                                  std::atof(ilist.at(3).c_str())));
             }
-
+            else
+            {
+                std::string msg("Invalid number of elements in file line " + std::to_string(line_cntr));
+                throw std::length_error(msg);
+            }
         }
     }
 
