@@ -64,3 +64,13 @@ bool operator!=(const Gift& g1, const Gift& g2)
 {
     return !(g1 == g2);
 }
+
+std::ostream& operator<<(std::ostream& os, const Gift& g)
+{
+    os << "Gift with ID " << g.id << ": " << std::endl;
+    os << "Latitude: " << g.lat << " rad" << std::endl;
+    os << "Longitude: " << g.lon << " rad" << std::endl;
+    os << "Weight: " << g.w << " kg" << std::endl;
+
+    return os;
+}

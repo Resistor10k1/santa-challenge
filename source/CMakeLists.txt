@@ -28,9 +28,9 @@ add_executable(${PROJECT_NAME})
 target_sources(${PROJECT_NAME}
         PRIVATE
                 main.cpp
+                misc.cpp
                 Gift.cpp
                 algorithm.cpp
-                misc.cpp
 )
 target_include_directories(${PROJECT_NAME} PRIVATE "${PROJECT_SOURCE_DIR}/include")
 # target_link_libraries(${TARGET_NAME} ${LIB})

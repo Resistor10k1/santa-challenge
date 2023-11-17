@@ -2,6 +2,7 @@
 
 #pragma once
 #include <initializer_list>
+#include <iostream>
 
 /**
  * @brief Location where a package is dropped.
@@ -22,6 +23,7 @@ class Gift
         Gift& operator=(const std::initializer_list<double> ilist);
         friend bool operator==(const Gift& g1, const Gift& g2);
         friend bool operator!=(const Gift& g1, const Gift& g2);
+        friend std::ostream& operator<<(std::ostream& os, const Gift& g);
 
     private:
         unsigned int id = 0;
