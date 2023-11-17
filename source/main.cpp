@@ -30,5 +30,10 @@ int main(void)
     cout << "Read some data:" << endl;
     readGiftsFromFile(caller_path/"data/example_data.csv", ',', giftList);
 
+    for(auto& gift : giftList)
+    {
+        cout << gift;
+    }
+
     return 0;
 }
