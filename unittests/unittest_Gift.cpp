@@ -3,9 +3,10 @@
 #include "Gift.hpp"
 
 TEST(GiftTest, checkConstructors) {
-    Gift g1(1, 0.1, 0.1, 0.1);
+    CompareIDStrategy cs;
+    Gift g1(1, 0.1, 0.1, 0.1, cs);
     Gift g2(g1);
-    Gift g3({2, 0.2, 0.2, 0.2});
+    Gift g3({2, 0.2, 0.2, 0.2}, cs);
 
     EXPECT_EQ(g1.ID(), 1);
     EXPECT_EQ(g1.latitude(), 0.1);
@@ -25,8 +26,9 @@ TEST(GiftTest, checkConstructors) {
 }
 
 TEST(GiftTest, assignOperator) {
-    Gift g1(1, 0.1, 0.1, 0.1);
-    Gift g2(2, 0.2, 0.2, 0.2);
+    CompareIDStrategy cs;
+    Gift g1(1, 0.1, 0.1, 0.1, cs);
+    Gift g2(2, 0.2, 0.2, 0.2, cs);
 
     g1 = g2;
     EXPECT_EQ(g1.ID(), 2);
@@ -42,15 +44,20 @@ TEST(GiftTest, assignOperator) {
 }
 
 TEST(GiftTest, equalityOperator) {
-    Gift g1(1, 0.1, 0.1, 0.1);
+    CompareIDStrategy cs;
+    Gift g1(1, 0.1, 0.1, 0.1, cs);
     Gift g2(g1);
 
     EXPECT_EQ(g1, g2);
+
+    g2 = {2, 0.1, 0.1, 0.1};
+    EXPECT_NE(g1, g2);
 }
 
 TEST(GiftTest, inequalityOperator) {
-    Gift g1(1, 0.1, 0.1, 0.1);
-    Gift g2(2, 0.2, 0.2, 0.2);
+    CompareIDStrategy cs;
+    Gift g1(1, 0.1, 0.1, 0.1, cs);
+    Gift g2(2, 0.2, 0.2, 0.2, cs);
 
     EXPECT_NE(g1, g2);
 }

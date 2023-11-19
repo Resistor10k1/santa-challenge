@@ -12,8 +12,9 @@ namespace fs = std::filesystem;
 
 
 TEST(MiscTest, calcHaversineDistance) {
-    Gift g1 = {1.0, 1.1, 2.2, 15.5};
-    Gift g2 = {2, 1.1, 2.2, 100.2};
+    CompareIDStrategy cs;
+    Gift g1({1.0, 1.1, 2.2, 15.5}, cs);
+    Gift g2({2, 1.1, 2.2, 100.2}, cs);
 
     double distance = haversine(g1, g2);
     
@@ -21,8 +22,9 @@ TEST(MiscTest, calcHaversineDistance) {
 }
 
 TEST(MiscTest, calcHaversineDistance2) {
-    Gift g1 = {1, 1.3, 2.1, 49};
-    Gift g2 = {2, 1.3, 0.2, 34};
+    CompareIDStrategy cs;
+    Gift g1({1, 1.3, 2.1, 49}, cs);
+    Gift g2({2, 1.3, 0.2, 34}, cs);
 
     double distance = haversine(g1, g2);
     
@@ -30,8 +32,9 @@ TEST(MiscTest, calcHaversineDistance2) {
 }
 
 TEST(MiscTest, calcHaversineDistance3) {
-    Gift g1 = {1, 0.0, 0.0, 9834};
-    Gift g2 = {2, 0.0, std::numbers::pi, 82};
+    CompareIDStrategy cs;
+    Gift g1({1, 0.0, 0.0, 9834}, cs);
+    Gift g2({2, 0.0, std::numbers::pi, 82}, cs);
 
     double distance = haversine(g1, g2);
     
