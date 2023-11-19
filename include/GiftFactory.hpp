@@ -23,3 +23,13 @@ class GiftWeightFactory : public IGiftFactory
         CompareWeightStrategy cs;
         Gift g;
 };
+
+class GiftIDFactory : public IGiftFactory
+{
+    public:
+        GiftIDFactory(void) : g(cs) {}
+    
+    private:
+        CompareIDStrategy cs;
+        Gift g;
+};
