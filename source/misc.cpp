@@ -1,10 +1,10 @@
 
 #include "misc.hpp"
+#include "GiftFactory.hpp"
 #include <string>
 #include <iostream>
-#include <fstream>
 #include <cmath>
-#include <initializer_list>
+
 using namespace std;
 
 void str_split(const std::string& str, std::vector<std::string>& output, char separator)
@@ -22,7 +22,7 @@ void str_split(const std::string& str, std::vector<std::string>& output, char se
     }
 }
 
-void readGiftsFromFile(fs::path path, char separator, std::vector<Gift>& output)
+void readGiftsFromFile(fs::path path, char separator, std::vector<Gift>& output, IGiftFactory& giftFactory)
 {
     std::fstream readFile;
     std::string line;
@@ -34,7 +34,7 @@ void readGiftsFromFile(fs::path path, char separator, std::vector<Gift>& output)
     {
         std::getline(readFile, line);
         if(line != "GiftId,Latitude,Longitude,Weight")
-            throw std::domain_error("File seems not to contain gifts.");
+            throw std::domain_error("File seems to not contain gifts.");
         ++line_cntr;
 
         while(std::getline(readFile, line))
@@ -46,7 +46,7 @@ void readGiftsFromFile(fs::path path, char separator, std::vector<Gift>& output)
 
             if(ilist.size() == 4)
             {
-                output.push_back(Gift(std::atol(ilist.at(0).c_str()), 
+                output.push_back(giftFactory.produceGift(std::atol(ilist.at(0).c_str()), 
                                   std::atof(ilist.at(1).c_str()),
                                   std::atof(ilist.at(2).c_str()),
                                   std::atof(ilist.at(3).c_str())));

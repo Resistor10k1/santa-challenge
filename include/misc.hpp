@@ -9,8 +9,11 @@
 
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include <filesystem>
+#include <initializer_list>
 #include "Gift.hpp"
+#include "GiftFactory.hpp"
 
 namespace fs = std::filesystem;
 
@@ -40,7 +43,7 @@ void str_split(const std::string& str, std::vector<std::string>& output, char se
  * @brief Reads the package drop locations from a CSV file.
  * @details The format of a location is: GiftId,Latitude,Longitude,Weight
 */
-void readGiftsFromFile(fs::path path, char separator, std::vector<Gift>& output);
+void readGiftsFromFile(fs::path path, char separator, std::vector<Gift>& output, IGiftFactory& giftFactory);
 
 /**
  * @brief Calculates the Hversine distance of two points.
