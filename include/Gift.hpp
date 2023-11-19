@@ -18,6 +18,7 @@ class Gift
         Gift(ICompareStrategy<Gift>& cs);
 
         void setCompareStrategy(ICompareStrategy<Gift>& cs) { compareStrategy = cs; }
+        ICompareStrategy<Gift>& getCompareStrategy(void) { return compareStrategy; }
 
         double ID(void) const { return id;}
         double latitude(void) const { return lat; }

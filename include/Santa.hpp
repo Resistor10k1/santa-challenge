@@ -13,7 +13,10 @@ class Santa
     
     private:
         const double sleigh_max_weight = 1000.0;
-        double sleigh_weight = 10.0;
+        const double sleigh_base_weight = 10.0;
+        double sleigh_weight = 0.0;
         double WRW = 0.0;
         std::vector<Gift* const> delivered_Gifts;
+
+        void updateReindeerWeariness(void);
 };
