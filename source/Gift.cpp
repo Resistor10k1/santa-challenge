@@ -3,15 +3,13 @@
 #include <exception>
 #include "Gift.hpp"
 
-Gift::Gift(unsigned int id, double latitude, double longitude, double weight) :
-        id(id), lat(latitude), lon(longitude), w(weight)
+Gift::Gift(unsigned int id, double latitude, double longitude, double weight,
+            ICompareStrategy<Gift>& cs) :
+        id(id), lat(latitude), lon(longitude), w(weight), compareStrategy(cs)
 {}
 
-Gift::Gift(const Gift& g) :
-        id(g.id), lat(g.lat), lon(g.lon), w(g.w)
-{}
-
-Gift::Gift(const std::initializer_list<double> ilist)
+Gift::Gift(const std::initializer_list<double> ilist, ICompareStrategy<Gift>& cs) :
+        compareStrategy(cs)
 {
     auto it = ilist.begin();
     unsigned int size = ilist.size();
@@ -22,6 +20,13 @@ Gift::Gift(const std::initializer_list<double> ilist)
     this->w = (size >= 4) ? *(it+3) : 0.0;
 }
 
+Gift::Gift(const Gift& g) :
+        id(g.id), lat(g.lat), lon(g.lon), w(g.w), compareStrategy(g.compareStrategy)
+{}
+Gift::Gift(ICompareStrategy<Gift>& cs) :
+        id(0), lat(0.0), lon(0.0), w(0.0), compareStrategy(cs)
+{}
+
 Gift& Gift::operator=(const Gift& g)
 {
     if(this != &g)
@@ -30,6 +35,7 @@ Gift& Gift::operator=(const Gift& g)
         this->lat = g.lat;
         this->lon = g.lon;
         this->w = g.w;
+        this->compareStrategy = g.compareStrategy;
     }
 
     return *this;
@@ -50,19 +56,29 @@ Gift& Gift::operator=(const std::initializer_list<double> ilist)
 
 bool operator==(const Gift& g1, const Gift& g2)
 {
-    bool ret_val = true;
-
-    if((g1.id != g2.id) || (g1.lat != g2.lat) || (g1.lon != g2.lon) || (g1.w != g2.w))
-    {
-        ret_val = false;
-    }
-
-    return ret_val;
+    return g1.compareStrategy.equals(g1, g2);
 }
 
 bool operator!=(const Gift& g1, const Gift& g2)
 {
-    return !(g1 == g2);
+    return g1.compareStrategy.nonEquals(g1, g2);
+}
+
+bool operator<(const Gift& g1, const Gift& g2)
+{
+    return g1.compareStrategy.lesserThan(g1, g2);
+}
+bool operator>(const Gift& g1, const Gift& g2)
+{
+    return g1.compareStrategy.greaterThan(g1, g2);
+}
+bool operator<=(const Gift& g1, const Gift& g2)
+{
+    return g1.compareStrategy.lessOrEqual(g1, g2);
+}
+bool operator>=(const Gift& g1, const Gift& g2)
+{
+    return g1.compareStrategy.greatOrEqual(g1, g2);
 }
 
 std::ostream& operator<<(std::ostream& os, const Gift& g)
