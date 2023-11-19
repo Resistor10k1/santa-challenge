@@ -1,5 +1,7 @@
 # Santa Challenge
 
+![Santa-Challenge unit-tests](https://github.com/Resistor10k1/santa-challenge/actions/workflows/santa-challenge-unit-tests.yml/badge.svg)
+
 Two different approaches:
 - Fill the sleigh with knapsack and the closest locations and optimize with some TSP algorithm.
 - K-means clustering to group the locations which are close to each other. Apply some threshold (heuristics) for maximum distance within the group and also check that the sleigh weight is not exceeded. Start with the locations furthest away and optimize with some TSP algorithm.
