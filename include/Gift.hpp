@@ -20,6 +20,9 @@ class Gift
         void setCompareStrategy(ICompareStrategy<Gift>& cs) { compareStrategy = cs; }
         ICompareStrategy<Gift>& getCompareStrategy(void) { return compareStrategy; }
 
+        void setDistance2Pole(double dist) { distance2pole = dist; }
+        double getDistance2Pole(void) const { return distance2pole; }
+
         double ID(void) const { return id;}
         double latitude(void) const { return lat; }
         double longitude(void) const { return lon; }
@@ -44,6 +47,7 @@ class Gift
         double lat = 0.0;
         double lon = 0.0;
         double w = 0.0;
+        double distance2pole = 0.0;
 };
 
 class CompareIDStrategy : public ICompareStrategy<Gift>
@@ -66,4 +70,26 @@ class CompareWeightStrategy : public ICompareStrategy<Gift>
         bool greaterThan(const Gift& t1, const Gift& t2) override { return (t1.weight() > t2.weight()); }
         bool lessOrEqual(const Gift& t1, const Gift& t2) override { return (t1.weight() <= t2.weight()); }
         bool greatOrEqual(const Gift& t1, const Gift& t2) override { return (t1.weight() >= t2.weight()); }
+};
+
+class CompareDistanceStrategy : public ICompareStrategy<Gift>
+{
+    public:
+        bool equals(const Gift& t1, const Gift& t2) override
+        { return (t1.getDistance2Pole() == t2.getDistance2Pole()); }
+
+        bool nonEquals(const Gift& t1, const Gift& t2) override 
+        { return (t1.getDistance2Pole() != t2.getDistance2Pole()); }
+
+        bool lesserThan(const Gift& t1, const Gift& t2) override 
+        { return (t1.getDistance2Pole() < t2.getDistance2Pole()); }
+
+        bool greaterThan(const Gift& t1, const Gift& t2) override 
+        { return (t1.getDistance2Pole() > t2.getDistance2Pole()); }
+
+        bool lessOrEqual(const Gift& t1, const Gift& t2) override 
+        { return (t1.getDistance2Pole() <= t2.getDistance2Pole()); }
+
+        bool greatOrEqual(const Gift& t1, const Gift& t2) override 
+        { return (t1.getDistance2Pole() >= t2.getDistance2Pole()); }
 };
