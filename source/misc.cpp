@@ -61,17 +61,35 @@ void readGiftsFromFile(fs::path path, char separator, std::vector<Gift>& output,
 
     readFile.close();
 }
- 
-double haversine(const Gift& p1, const Gift& p2)
+
+double haversine(double lat1, double lon1, double lat2, double lon2, CoordinateFormat cf)
 {
     double distance = 0.0;
     double r_earth = 6371.0087714;
-    double term1 = sin((p2.latitude() - p1.latitude())*(1/2.0))*sin((p2.latitude() - p1.latitude())*(1/2.0));
-    double term2 = cos(p1.latitude())*cos(p2.latitude())*sin((p2.longitude() - 
-                    p1.longitude())*(1/2.0))*sin((p2.longitude() - p1.longitude())*(1/2.0));
+
+    if(cf == degree)
+    {
+        lat1 *= (2*std::numbers::pi / 360);
+        lon1 *= (2*std::numbers::pi / 360);
+        lat2 *= (2*std::numbers::pi / 360);
+        lon2 *= (2*std::numbers::pi / 360);
+    }
+
+    double term1 = sin((lat2 - lat1)*(1/2.0))*sin((lat2 - lat1)*(1/2.0));
+    double term2 = cos(lat1)*cos(lat2)*sin((lon2 - lon1)*(1/2.0))*sin((lon2 - lon1)*(1/2.0));
 
     distance = 2*r_earth*asin(sqrt(term1 + term2));
     return distance;
+}
+ 
+double haversine(const Gift& g1, const Gift& g2, CoordinateFormat cf)
+{
+    return haversine(g1.latitude(), g1.longitude(), g2.latitude(), g2.longitude(), cf);
+}
+
+double haversine(double lat, double lon, const Gift& g, CoordinateFormat cf)
+{
+    return haversine(lat, lon, g.latitude(), g.longitude(), cf);
 }
 
 

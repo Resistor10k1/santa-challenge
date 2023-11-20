@@ -45,8 +45,17 @@ void str_split(const std::string& str, std::vector<std::string>& output, char se
 */
 void readGiftsFromFile(fs::path path, char separator, std::vector<Gift>& output, IGiftFactory& giftFactory);
 
+
+enum CoordinateFormat
+{
+    radian,
+    degree
+};
+
 /**
- * @brief Calculates the Hversine distance of two points.
+ * @brief Calculates the Haversine distance of two points.
 */
-double haversine(const Gift& p1, const Gift& p2);
+double haversine(double lat1, double lon1, double lat2, double lon2, CoordinateFormat cf);
+double haversine(const Gift& g1, const Gift& g2, CoordinateFormat cf);
+double haversine(double lat, double lon, const Gift& g, CoordinateFormat cf);
 
