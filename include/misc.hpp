@@ -17,6 +17,11 @@
 
 namespace fs = std::filesystem;
 
+/**
+ * @brief Prints the content of a vector to the console.
+ * @details Print format: [ <i>elem_1</i>, <i>elem_2</i>, ..., <i>elem_n</i> ]
+ * @param vec Vetor to print.
+*/
 template<typename T>
 void printVector(const std::vector<T>& vec)
 {
@@ -37,23 +42,45 @@ void printVector(const std::vector<T>& vec)
     }
 }
 
+/**
+ * @brief Splits a string into sub-strings
+ * @note If the string ends with a separator character, no empty string is added to the list.
+ * @param str The string to split
+ * @param output List contaning the sub-strings
+ * @param separator Separator character to split the string
+*/
 void str_split(const std::string& str, std::vector<std::string>& output, char separator=';');
 
 /**
  * @brief Reads the package drop locations from a CSV file.
- * @details The format of a location is: GiftId,Latitude,Longitude,Weight
+ * @details The format of a location is: GiftId,Latitude,Longitude,Weight. The latitude and longitude can 
+ * be in format 'degree' or 'radiant'.
+ * @param path Path to the csv file containing the gift data
+ * @param separator Separator character used in the csv file.
+ * @param output List with the data extracted as Giff objects
+ * @param giftFactory Factory which produces the Gift objects (see GiftFactory.hpp and Gift.hpp for more
+ * information.)
 */
 void readGiftsFromFile(fs::path path, char separator, std::vector<Gift>& output, IGiftFactory& giftFactory);
 
-
+/**
+ * @brief Coordinate format for calculation in haversine().
+*/
 enum CoordinateFormat
 {
-    radian,
+    radiant,
     degree
 };
 
 /**
  * @brief Calculates the Haversine distance of two points.
+ * @details The earth radius is set to 6371.0087714 km.
+ * @param lat1 Latitude of point 1
+ * @param lon1 Longitude of point 1
+ * @param lat2 Latitude of point 2
+ * @param lon2 Longitude of point 2
+ * @param cf Coordinate format in 'degree' or 'radiant'.
+ * @return Returns the distance in km.
 */
 double haversine(double lat1, double lon1, double lat2, double lon2, CoordinateFormat cf);
 double haversine(const Gift& g1, const Gift& g2, CoordinateFormat cf);
