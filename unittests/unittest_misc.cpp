@@ -14,38 +14,38 @@ namespace fs = std::filesystem;
 
 TEST(MiscTest, calcHaversineDistance) {
     CompareIDStrategy cs;
-    Gift g1({1.0, 1.1, 2.2, 15.5}, cs);
-    Gift g2({2, 1.1, 2.2, 100.2}, cs);
+    Gift g1({1.0, 1.1, 2.2, 15.5}, &cs);
+    Gift g2({2, 1.1, 2.2, 100.2}, &cs);
 
-    double distance = haversine(g1, g2, radian);
+    double distance = haversine(g1, g2, radiant);
     
     EXPECT_NEAR(distance, 0.0, 1e-4);
 }
 
 TEST(MiscTest, calcHaversineDistance2) {
     CompareIDStrategy cs;
-    Gift g1({1, 1.3, 2.1, 49}, cs);
-    Gift g2({2, 1.3, 0.2, 34}, cs);
+    Gift g1({1, 1.3, 2.1, 49}, &cs);
+    Gift g2({2, 1.3, 0.2, 34}, &cs);
 
-    double distance = haversine(g1, g2, radian);
+    double distance = haversine(g1, g2, radiant);
     
     EXPECT_NEAR(distance, 2794.863, 1e-4);
 }
 
 TEST(MiscTest, calcHaversineDistance3) {
     CompareIDStrategy cs;
-    Gift g1({1, 0.0, 0.0, 9834}, cs);
-    Gift g2({2, 0.0, std::numbers::pi, 82}, cs);
+    Gift g1({1, 0.0, 0.0, 9834}, &cs);
+    Gift g2({2, 0.0, std::numbers::pi, 82}, &cs);
 
-    double distance = haversine(g1, g2, radian);
+    double distance = haversine(g1, g2, radiant);
     
     EXPECT_NEAR(distance, 20015.114352, 1e-4);
 }
 
 TEST(MiscTest, calcHaversineDistanceDegree1) {
     CompareIDStrategy cs;
-    Gift g1({1, 0.0, 0.0, 9834}, cs);
-    Gift g2({2, 0.0, 180.0, 82}, cs);
+    Gift g1({1, 0.0, 0.0, 9834}, &cs);
+    Gift g2({2, 0.0, 180.0, 82}, &cs);
 
     double distance = haversine(g1, g2, degree);
     
@@ -54,8 +54,8 @@ TEST(MiscTest, calcHaversineDistanceDegree1) {
 
 TEST(MiscTest, calcHaversineDistanceDegree2) {
     CompareIDStrategy cs;
-    Gift g1({1, 90.0, 0.0, 9834}, cs);
-    Gift g2({6,53.5679698071,-71.3593080866,38.0001512626}, cs);
+    Gift g1({1, 90.0, 0.0, 9834}, &cs);
+    Gift g2({6,53.5679698071,-71.3593080866,38.0001512626}, &cs);
 
     double distance = haversine(g1, g2, degree);
     
@@ -64,8 +64,8 @@ TEST(MiscTest, calcHaversineDistanceDegree2) {
 
 TEST(MiscTest, calcHaversineDistanceDegree3) {
     CompareIDStrategy cs;
-    Gift g1({1, 90.0, 0.0, 9834}, cs);
-    Gift g2({15,-68.884672727,61.214391432,1.0}, cs);
+    Gift g1({1, 90.0, 0.0, 9834}, &cs);
+    Gift g2({15,-68.884672727,61.214391432,1.0}, &cs);
 
     double distance = haversine(g1, g2, degree);
     

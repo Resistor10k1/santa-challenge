@@ -12,7 +12,7 @@ class IGiftFactory
 class GiftWeightFactory : public IGiftFactory
 {
     public:
-        GiftWeightFactory(void) : g(cs) {}
+        GiftWeightFactory(void) : g(&cs) {}
         Gift produceGift(unsigned int id, double latitude, double longitude, double weight) override
         {
             g = { static_cast<double>(id), latitude, longitude, weight };
@@ -27,7 +27,12 @@ class GiftWeightFactory : public IGiftFactory
 class GiftIDFactory : public IGiftFactory
 {
     public:
-        GiftIDFactory(void) : g(cs) {}
+        GiftIDFactory(void) : g(&cs) {}
+        Gift produceGift(unsigned int id, double latitude, double longitude, double weight) override
+        {
+            g = { static_cast<double>(id), latitude, longitude, weight };
+            return g;
+        }
     
     private:
         CompareIDStrategy cs;

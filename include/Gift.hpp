@@ -12,13 +12,13 @@ class Gift
 {
     public:
         Gift(unsigned int id, double latitude, double longitude, double weight,
-             ICompareStrategy<Gift>& cs);
-        Gift(const std::initializer_list<double> ilist, ICompareStrategy<Gift>& cs);
+             ICompareStrategy<Gift>* cs);
+        Gift(const std::initializer_list<double> ilist, ICompareStrategy<Gift>* cs);
         Gift(const Gift& g);
-        Gift(ICompareStrategy<Gift>& cs);
+        Gift(ICompareStrategy<Gift>* cs);
 
-        void setCompareStrategy(ICompareStrategy<Gift>& cs) { compareStrategy = cs; }
-        ICompareStrategy<Gift>& getCompareStrategy(void) { return compareStrategy; }
+        void setCompareStrategy(ICompareStrategy<Gift>* cs) { compareStrategy = cs; }
+        ICompareStrategy<Gift>* getCompareStrategy(void) { return compareStrategy; }
 
         void setDistance2Pole(double dist) { distance2pole = dist; }
         double getDistance2Pole(void) const { return distance2pole; }
@@ -42,7 +42,7 @@ class Gift
         friend std::ostream& operator<<(std::ostream& os, const Gift& g);
 
     private:
-        ICompareStrategy<Gift>& compareStrategy;
+        ICompareStrategy<Gift>* compareStrategy;
         unsigned int id = 0;
         double lat = 0.0;
         double lon = 0.0;
