@@ -10,79 +10,82 @@
 #include <vector>
 #include <filesystem>
 #include <fstream>
-#include <algorithm>
+#include <chrono>
 #include "misc.hpp"
 #include "Gift.hpp"
 #include "GiftFactory.hpp"
 
 using namespace std;
+using namespace std::chrono;
 namespace fs = std::filesystem;
 
 
-int main(void)
+int main(int argc, char* argv[])
 {
     std::vector<Gift> giftList;
     GiftWeightFactory gwf;
-    CompareDistanceStrategy cds;
-    std::vector<double> test_dist;
+    GiftDistanceFactory gdf;
     ofstream output_file;
-    cout << "This is the application main" << endl;
-
+    fs::path gift_file_path;
     fs::path abs_path = fs::canonical("/proc/self/exe");
     fs::path caller_path = fs::current_path();
+    double duration_ms = 0.0;
+    auto start = high_resolution_clock::now();
+
+    cout << "This is the application main" << endl;
+    
+    if(argc > 1)
+    {
+        gift_file_path = caller_path / argv[1];
+    }
+    else
+    {
+        gift_file_path = caller_path/"data/example_data.csv";
+    }
 
     cout << "Absolut path: " << abs_path << endl;
-    cout << "Absolut path: " << caller_path << endl;
+    cout << "Caller path: " << caller_path << endl;
 
-    cout << "Read some data:" << endl;
-    readGiftsFromFile(caller_path/"data/example_data.csv", ',', giftList, gwf);
+    cout << "Read some data..." << endl;
+    readGiftsFromFile(gift_file_path, ',', giftList, gwf);
+    cout << "Size gift-list: " << giftList.size() << endl;
 
-    cout << "Unsorted gifts: " << endl;
-    printVector(giftList);
+    sort_weight(giftList);
+    cout << "Sort gifts by weight" << endl;
 
-    std::sort(giftList.begin(), giftList.end());
-    cout << "Sorted gifts by weight: " << endl;
-    printVector(giftList);
+    cout << "Min. weight: " << giftList.front().weight() << endl;
+    cout << "Max. weight: " << giftList.back().weight() << endl;
+    cout << "Avg. weight: " << mean_weight(giftList) << endl;
+    cout << "Med. weight: " << median(giftList).weight() << endl;
 
     for(auto& gift : giftList)
     {
-        // cout << gift;
-        test_dist.push_back(haversine(90.0, 0.0, gift, degree));
-        gift.setDistance2Pole(test_dist.back());
-        gift.setCompareStrategy(&cds);
+        // gift = gdf.produceGift(gift.ID(), gift.latitude(), gift.longitude(), gift.weight());
+        gift.setDistance2Pole(haversine(90.0, 0.0, gift, degree));
     }
 
-    cout << *giftList.begin() << endl;
-    cout << *(giftList.end()-1) << endl;
-    cout << (giftList.at(0) > giftList.at(1)) << endl;
-    cout << giftList.at(0).getCompareStrategy() << "=?=" << &cds << endl;
+    sort_distance(giftList);
+    cout << "Sort gifts by distance to the north pole" << endl;
 
-    // cout << "== : " << (giftList.at(0) == giftList.at(1)) << endl;
-    // cout << "!= : " << (giftList.at(0) != giftList.at(1)) << endl;
-    // cout << ">  : " << (giftList.at(0) > giftList.at(1)) << endl;
-    // cout << "<  : " << (giftList.at(0) < giftList.at(1)) << endl;
-    // cout << ">= : " << (giftList.at(0) >= giftList.at(1)) << endl;
-    // cout << "<= : " << (giftList.at(0) <= giftList.at(1)) << endl;
+    cout << "Min. dist: " << giftList.front().getDistance2Pole() << endl;
+    cout << "Max. dist: " << giftList.back().getDistance2Pole() << endl;
+    cout << "Avg. dist: " << mean_distance(giftList) << endl;
+    cout << "Med. dist: " << median(giftList).getDistance2Pole() << endl;
 
-    cout << "giftList pre-sorting: " << endl;
-    printVector(giftList);
-
-    std::sort(giftList.begin(), giftList.end());
-    cout << "Sorted gifts by distance to the north pole: " << endl;
-    printVector(giftList);
-
+    cout << "Save distance to the north pole to file..." << endl;
     output_file.open(caller_path/"data/output_dist.txt");
     if(output_file.is_open())
     {
-        for(auto& dist : test_dist)
+        for(auto& gift : giftList)
         {
-            output_file << std::setprecision(21) << dist << "\n";
+            output_file << std::setprecision(21) << gift.getDistance2Pole() << "\n";
         }
     }
     output_file.close();
 
-    cout << "Is g0 equal to g1? " << (giftList.at(0) == giftList.at(1)) << endl;
-    cout << "Is g0 equal to g15? " << (giftList.at(0) == giftList.at(14)) << endl;
+    auto stop = high_resolution_clock::now();
+    duration_ms += static_cast<double>(duration_cast<milliseconds>(stop-start).count());
+    cout << "Execution took " << duration_ms << " ms" << endl;
 
     return 0;
 }
