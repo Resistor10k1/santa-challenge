@@ -3,10 +3,11 @@
 #pragma once
 #include <initializer_list>
 #include <iostream>
+#include <vector>
 #include "ICompareStrategy.hpp"
 
 /**
- * @brief Location where a package is dropped.
+ * @brief Data abstraction of location where a package is dropped.
 */
 class Gift
 {
@@ -22,7 +23,6 @@ class Gift
 
         void setDistance2Pole(double dist) { distance2pole = dist; }
         double getDistance2Pole(void) const { return distance2pole; }
-
         double ID(void) const { return id;}
         double latitude(void) const { return lat; }
         double longitude(void) const { return lon; }
@@ -30,10 +30,8 @@ class Gift
 
         Gift& operator=(const Gift& g);
         Gift& operator=(const std::initializer_list<double> ilist);
-
         friend bool operator==(const Gift& g1, const Gift& g2);
         friend bool operator!=(const Gift& g1, const Gift& g2);
-
         friend bool operator<(const Gift& g1, const Gift& g2);
         friend bool operator>(const Gift& g1, const Gift& g2);
         friend bool operator<=(const Gift& g1, const Gift& g2);
@@ -41,15 +39,20 @@ class Gift
 
         friend std::ostream& operator<<(std::ostream& os, const Gift& g);
 
+        Gift* getNearest(const std::vector<Gift>& gifts);
+
     private:
-        ICompareStrategy<Gift>* compareStrategy;
-        unsigned int id = 0;
-        double lat = 0.0;
-        double lon = 0.0;
-        double w = 0.0;
-        double distance2pole = 0.0;
+        ICompareStrategy<Gift>* compareStrategy; /**< Compare strategy applied with the operator-functions*/
+        unsigned int id = 0; /**< ID of the gift*/
+        double lat = 0.0; /**< Latitude of the gift*/
+        double lon = 0.0; /**< Longitude of the gift*/
+        double w = 0.0; /**< Weight of the gift*/
+        double distance2pole = 0.0; /**< Distance from the north pole to the gift*/
 };
 
+/**
+ * @brief Sets the operator-functions of Gift-Class to be applied to the id attribute.
+*/
 class CompareIDStrategy : public ICompareStrategy<Gift>
 {
     public:
@@ -61,6 +64,9 @@ class CompareIDStrategy : public ICompareStrategy<Gift>
         bool greatOrEqual(const Gift& t1, const Gift& t2) override { return (t1.ID() >= t2.ID()); }
 };
 
+/**
+ * @brief Sets the operator-functions of Gift-Class to be applied to the weight attribute.
+*/
 class CompareWeightStrategy : public ICompareStrategy<Gift>
 {
     public:
@@ -72,6 +78,9 @@ class CompareWeightStrategy : public ICompareStrategy<Gift>
         bool greatOrEqual(const Gift& t1, const Gift& t2) override { return (t1.weight() >= t2.weight()); }
 };
 
+/**
+ * @brief Sets the operator-functions of Gift-Class to be applied to the distance2Pole attribute.
+*/
 class CompareDistanceStrategy : public ICompareStrategy<Gift>
 {
     public:
