@@ -38,3 +38,18 @@ class GiftIDFactory : public IGiftFactory
         CompareIDStrategy cs;
         Gift g;
 };
+
+class GiftDistanceFactory : public IGiftFactory
+{
+    public:
+        GiftDistanceFactory(void) : g(&cs) {}
+        Gift produceGift(unsigned int id, double latitude, double longitude, double weight) override
+        {
+            g = { static_cast<double>(id), latitude, longitude, weight };
+            return g;
+        }
+    
+    private:
+        CompareDistanceStrategy cs;
+        Gift g;
+};
