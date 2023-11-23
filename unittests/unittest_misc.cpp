@@ -74,7 +74,7 @@ TEST(MiscTest, calcHaversineDistanceDegree3) {
 
 TEST(MiscTest, readFile) {
     GiftWeightFactory gwf;
-    fs::path path = fs::current_path() / "data/example_data.csv";
+    fs::path path = "../data/example_data.csv";
     std::vector<Gift> giftList;
     std::vector<Gift> giftList_val = {  gwf.produceGift(1,16.3457688674,6.30354512503,1.0),
                                         gwf.produceGift(2,12.494749307,28.6263955635,15.5244795726),
