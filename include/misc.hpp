@@ -25,19 +25,22 @@ namespace fs = std::filesystem;
 template<typename T>
 void printVector(const std::vector<T>& vec)
 {
-    std::cout << "[ ";
-    
-    for(auto& elem : vec)
+    if(vec.size() > 0)
     {
-        std::cout << elem;
+        std::cout << "[ ";
+        
+        for(auto& elem : vec)
+        {
+            std::cout << elem;
 
-        if(elem == vec.back())
-        {
-            std::cout << " ]" << std::endl;
-        }
-        else
-        {
-            std::cout << ", ";
+            if(elem == vec.back())
+            {
+                std::cout << " ]" << std::endl;
+            }
+            else
+            {
+                std::cout << ", ";
+            }
         }
     }
 }
@@ -85,4 +88,26 @@ enum CoordinateFormat
 double haversine(double lat1, double lon1, double lat2, double lon2, CoordinateFormat cf);
 double haversine(const Gift& g1, const Gift& g2, CoordinateFormat cf);
 double haversine(double lat, double lon, const Gift& g, CoordinateFormat cf);
+
+double mean_weight(std::vector<Gift> g_vec);
+double mean_distance(std::vector<Gift> g_vec);
+
+template<typename T>
+T median(std::vector<T> vec)
+{
+    unsigned int i = vec.size() / 2;
+
+    if(vec.size() > 0)
+    {
+        return vec.at(i);
+    }
+    else
+    {
+        throw std::range_error("Cannot calculate median of vector of size 0!");
+    }
+}
+
+void sort_id(std::vector<Gift>& gift_list);
+void sort_weight(std::vector<Gift>& gift_list);
+void sort_distance(std::vector<Gift>& gift_list);
 

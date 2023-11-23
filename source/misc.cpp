@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 #include <cmath>
+#include <exception>
+#include <algorithm>
 
 using namespace std;
 
@@ -58,6 +60,10 @@ void readGiftsFromFile(fs::path path, char separator, std::vector<Gift>& output,
             }
         }
     }
+    else
+    {
+        throw runtime_error("Could not open file!");
+    }
 
     readFile.close();
 }
@@ -92,4 +98,77 @@ double haversine(double lat, double lon, const Gift& g, CoordinateFormat cf)
     return haversine(lat, lon, g.latitude(), g.longitude(), cf);
 }
 
+double mean_weight(std::vector<Gift> g_vec)
+{
+    double ret_val = 0.0;
+
+    if(g_vec.size() > 0)
+    {
+        for(auto& gift : g_vec)
+        {
+            ret_val += gift.weight();
+        }
+        ret_val /= g_vec.size();
+    }
+
+    return ret_val;
+}
+
+double mean_distance(std::vector<Gift> g_vec)
+{
+    double ret_val = 0.0;
+
+    if(g_vec.size() > 0)
+    {
+        for(auto& gift : g_vec)
+        {
+            ret_val += gift.getDistance2Pole();
+        }
+        ret_val /= g_vec.size();
+    }
+
+    return ret_val;
+}
+
+void sort_id(std::vector<Gift>& gift_list)
+{
+    if(gift_list.size() > 0)
+    {
+        CompareIDStrategy cds;
+        for(auto& gift : gift_list)
+        {
+            // ICompareStrategy<Gift>* temp_cs = gift.getCompareStrategy();
+            gift.setCompareStrategy(&cds);
+        }
+        std::sort(gift_list.begin(), gift_list.end());
+    }
+}
+
+void sort_weight(std::vector<Gift>& gift_list)
+{
+    if(gift_list.size() > 0)
+    {
+        CompareWeightStrategy cds;
+        for(auto& gift : gift_list)
+        {
+            // ICompareStrategy<Gift>* temp_cs = gift.getCompareStrategy();
+            gift.setCompareStrategy(&cds);
+        }
+        std::sort(gift_list.begin(), gift_list.end());
+    }
+}
+
+void sort_distance(std::vector<Gift>& gift_list)
+{
+    if(gift_list.size() > 0)
+    {
+        CompareDistanceStrategy cds;
+        for(auto& gift : gift_list)
+        {
+            // ICompareStrategy<Gift>* temp_cs = gift.getCompareStrategy();
+            gift.setCompareStrategy(&cds);
+        }
+        std::sort(gift_list.begin(), gift_list.end());
+    }
+}
 
