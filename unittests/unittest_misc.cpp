@@ -103,3 +103,55 @@ TEST(MiscTest, readFile) {
         EXPECT_EQ(giftList.at(i).weight(), giftList_val.at(i).weight());
     }
 }
+
+TEST(MiscTest, meanWeight) {
+    GiftWeightFactory gwf;
+    std::vector<Gift> giftList = {  gwf.produceGift(1,16.3457688674,6.30354512503,1.0),
+                                    gwf.produceGift(2,12.494749307,28.6263955635,15.5244795726),
+                                    gwf.produceGift(3,27.794615136,60.0324947881,8.05849862195),
+                                    gwf.produceGift(4,44.4269923769,110.114216113,1.0),
+                                    gwf.produceGift(5,-69.8540884125,87.9468778773,25.0888919163),
+                                    gwf.produceGift(6,53.5679698071,-71.3593080866,38.0001512626),
+                                    gwf.produceGift(7,12.9025840371,79.9669489093,44.2066162418),
+                                    gwf.produceGift(8,-6.29109889296,-64.8917508931,1.0),
+                                    gwf.produceGift(9,-2.68531605304,111.089758191,1.0),
+                                    gwf.produceGift(10,38.4288618657,101.973670947,35.7013112369),
+                                    gwf.produceGift(11,39.0901430146,72.6189278664,27.579921436),
+                                    gwf.produceGift(12,-15.5749342275,39.5572954834,14.5519741369),
+                                    gwf.produceGift(13,73.1896497296,-106.604219923,4.98356232888),
+                                    gwf.produceGift(14,57.0682897236,134.171051275,23.6559977941),
+                                    gwf.produceGift(15,-68.884672727,61.214391432,1.0)
+                                };
+    double weight_val = 16.15676;
+
+    EXPECT_NEAR(mean_weight(giftList), weight_val, 1e-6);
+}
+
+TEST(MiscTest, meanDistance) {
+    GiftWeightFactory gwf;
+    std::vector<Gift> giftList = {  gwf.produceGift(1,16.3457688674,6.30354512503,1.0),
+                                    gwf.produceGift(2,12.494749307,28.6263955635,15.5244795726),
+                                    gwf.produceGift(3,27.794615136,60.0324947881,8.05849862195),
+                                    gwf.produceGift(4,44.4269923769,110.114216113,1.0),
+                                    gwf.produceGift(5,-69.8540884125,87.9468778773,25.0888919163),
+                                    gwf.produceGift(6,53.5679698071,-71.3593080866,38.0001512626),
+                                    gwf.produceGift(7,12.9025840371,79.9669489093,44.2066162418),
+                                    gwf.produceGift(8,-6.29109889296,-64.8917508931,1.0),
+                                    gwf.produceGift(9,-2.68531605304,111.089758191,1.0),
+                                    gwf.produceGift(10,38.4288618657,101.973670947,35.7013112369),
+                                    gwf.produceGift(11,39.0901430146,72.6189278664,27.579921436),
+                                    gwf.produceGift(12,-15.5749342275,39.5572954834,14.5519741369),
+                                    gwf.produceGift(13,73.1896497296,-106.604219923,4.98356232888),
+                                    gwf.produceGift(14,57.0682897236,134.171051275,23.6559977941),
+                                    gwf.produceGift(15,-68.884672727,61.214391432,1.0)
+                                };
+    double distance_val = 8435.855395;
+
+    for(auto& gift : giftList)
+    {
+        gift.setDistance2Pole(haversine(90.0, 0.0, gift, degree));
+    }
+
+    EXPECT_NEAR(mean_distance(giftList), distance_val, 1e-6);
+}
+
