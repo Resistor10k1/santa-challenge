@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 {
     std::vector<Gift> giftList;
     GiftWeightFactory gwf;
-    GiftDistanceFactory gdf;
+
     ofstream output_file;
     fs::path gift_file_path;
     fs::path abs_path = fs::canonical("/proc/self/exe");
@@ -36,11 +36,11 @@ int main(int argc, char* argv[])
     
     if(argc > 1)
     {
-        gift_file_path = caller_path / argv[1];
+        gift_file_path = argv[1];
     }
     else
     {
-        gift_file_path = caller_path/"data/example_data.csv";
+        gift_file_path = "../data/example_data.csv";
     }
 
     cout << "Absolut path: " << abs_path << endl;
@@ -60,7 +60,6 @@ int main(int argc, char* argv[])
 
     for(auto& gift : giftList)
     {
-        // gift = gdf.produceGift(gift.ID(), gift.latitude(), gift.longitude(), gift.weight());
         gift.setDistance2Pole(haversine(90.0, 0.0, gift, degree));
     }
 
