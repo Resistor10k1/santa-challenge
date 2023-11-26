@@ -18,65 +18,58 @@ message(STATUS "C compiler is: ${CMAKE_C_COMPILER}")
 message(STATUS "CXX compiler is: ${CMAKE_CXX_COMPILER}")
 message(STATUS "CXX standard is: ${CMAKE_CXX_STANDARD}")
 
-if("${SOURCE}" STREQUAL "main")
-        message(STATUS "Prepare build of main app...")
-        message(STATUS "Build config: ${CMAKE_BUILD_TYPE}")
-        # add_executable(${PROJECT_NAME})
-        # target_sources(${PROJECT_NAME}
-        #         PRIVATE
-        #                 main.cpp
-        # )
-        add_subdirectory(source)
+# Main executable ===============================================
+message(STATUS "Prepare build of main app...")
 
-        if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
-                message(STATUS "Compile options -O3")
-                add_compile_options(-O3)
-        else()
-                message(STATUS "Compile options -O0")
-                add_compile_options(-O0)
-        endif()
+# Debug executable ...
+# set(CMAKE_BUILD_TYPE Debug)
+# set(compile_options -O0)
+# message(STATUS "Build config: ${CMAKE_BUILD_TYPE}")
+# add_executable("${PROJECT_NAME}_d")
+# add_subdirectory(source)
+# add_compile_options(${compile_options})
+# message(STATUS "main compile options: ${compile_options}")
+# find_package(OpenMP REQUIRED)
+# target_link_libraries("${PROJECT_NAME}_d" PRIVATE OpenMP::OpenMP_CXX)
 
-        find_package(OpenMP REQUIRED)
-        target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX)
-else()
-        message(STATUS "Prepare unittest...")
-        message(STATUS "Build config: ${CMAKE_BUILD_TYPE}")
+# Release executable ...
+set(CMAKE_BUILD_TYPE Release)
+set(compile_options -O3)
+message(STATUS "Build config: ${CMAKE_BUILD_TYPE}")
+add_executable(${PROJECT_NAME})
+add_subdirectory(source)
+add_compile_options(${compile_options})
+message(STATUS "main compile options: ${compile_options}")
+find_package(OpenMP REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX)
 
-        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG")
-        add_compile_options(-O0)
 
-        # for google-test
-        #DOWNLOAD_EXTRACT_TIMESTAMP true
-        include(FetchContent)
-        FetchContent_Declare(
-        googletest
-        # Specify the commit you depend on and update it regularly.
-        URL https://github.com/google/googletest/archive/837f2229a905f44678fd6dc9af83f9a9f08e4a8f.zip
-        )
-        # For Windows: Prevent overriding the parent project's compiler/linker settings
-        set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-        FetchContent_MakeAvailable(googletest)
+# Executable with tests ===============================================
+message(STATUS "Prepare unittest...")
 
-# Executable with math tests ===============================================
+# for google-test
+#DOWNLOAD_EXTRACT_TIMESTAMP true
+include(FetchContent)
+FetchContent_Declare(
+googletest
+# Specify the commit you depend on and update it regularly.
+URL https://github.com/google/googletest/archive/837f2229a905f44678fd6dc9af83f9a9f08e4a8f.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
-        file(GLOB test_targets
-                "${PROJECT_SOURCE_DIR}/source/misc.cpp"
-                "${PROJECT_SOURCE_DIR}/source/Gift.cpp"
-        )
+set(CMAKE_BUILD_TYPE Debug)
+set(compile_options -O0)
 
-        add_executable(santaChallengeTest)
-        target_sources(santaChallengeTest
-                PRIVATE
-                        ${test_targets}
-                        unittests/unittest_misc.cpp
-                        unittests/unittest_Gift.cpp
-        )
-        target_include_directories(santaChallengeTest PRIVATE "${PROJECT_SOURCE_DIR}/include")
-        target_link_libraries(santaChallengeTest PRIVATE gtest_main)
-        add_test(NAME SantaChallenge_test COMMAND ./santaChallengeTest)
-# Executable with math tests ===============================================
+message(STATUS "Build config: ${CMAKE_BUILD_TYPE}")
+message(STATUS "tests compile options: ${compile_options}")
 
-    # Enable testing in CI pipeline
-	enable_testing()
-endif()
+add_executable(santaChallengeTest)
+add_subdirectory(unittests)
+add_compile_options(${compile_options})
+add_test(NAME SantaChallenge_test COMMAND ./santaChallengeTest)
+
+# Enable testing in CI pipeline
+enable_testing()
 
