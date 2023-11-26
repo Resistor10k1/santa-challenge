@@ -2,11 +2,14 @@
 
 #include <exception>
 #include "Gift.hpp"
+#include "misc.hpp"
 
 Gift::Gift(unsigned int id, double latitude, double longitude, double weight,
             ICompareStrategy<Gift>* cs) :
-        id(id), lat(latitude), lon(longitude), w(weight), compareStrategy(cs)
-{}
+        id(id), coordinate({latitude, longitude}), w(weight), compareStrategy(cs)
+{
+    distance2pole = haversine(90, 0.0, this->coordinate, degree);
+}
 
 Gift::Gift(const std::initializer_list<double> ilist, ICompareStrategy<Gift>* cs) :
         compareStrategy(cs)
@@ -15,28 +18,33 @@ Gift::Gift(const std::initializer_list<double> ilist, ICompareStrategy<Gift>* cs
     unsigned int size = ilist.size();
 
     this->id = (size >= 1) ? static_cast<unsigned int>(*it) : 0;
-    this->lat = (size >= 2) ? *(it+1) : 0.0;
-    this->lon = (size >= 3) ? *(it+2) : 0.0;
+    this->coordinate.latitude = (size >= 2) ? *(it+1) : 0.0;
+    this->coordinate.longitude = (size >= 3) ? *(it+2) : 0.0;
     this->w = (size >= 4) ? *(it+3) : 0.0;
-    this->distance2pole = (size >= 5) ? *(it+4) : 0.0;
-    this->tour_nr = (size >= 6) ? *(it+5) : 9999999;
+
+    distance2pole = haversine(90, 0.0, this->coordinate, degree);
+    this->tour_nr = 9999999;
+    // this->distance2pole = (size >= 5) ? *(it+4) : 0.0;
+    // this->tour_nr = (size >= 6) ? *(it+5) : 9999999;
 }
 
 Gift::Gift(const Gift& g) :
-        id(g.id), lat(g.lat), lon(g.lon), w(g.w), distance2pole(g.distance2pole), tour_nr(g.tour_nr),
-        compareStrategy(g.compareStrategy)
+        id(g.id), coordinate({g.coordinate.latitude, g.coordinate.longitude}), w(g.w), 
+        distance2pole(g.distance2pole), tour_nr(g.tour_nr), compareStrategy(g.compareStrategy)
 {}
 Gift::Gift(ICompareStrategy<Gift>* cs) :
-        id(0), lat(0.0), lon(0.0), w(0.0), distance2pole(0.0), tour_nr(9999999), compareStrategy(cs)
-{}
+        id(0), coordinate({0.0, 0.0}), w(0.0), distance2pole(0.0), tour_nr(9999999), compareStrategy(cs)
+{
+    // distance2pole = haversine(90, 0.0, this->coordinate, degree);
+}
 
 Gift& Gift::operator=(const Gift& g)
 {
     if(this != &g)
     {
         this->id = g.id;
-        this->lat = g.lat;
-        this->lon = g.lon;
+        this->coordinate.latitude = g.coordinate.latitude;
+        this->coordinate.longitude = g.coordinate.longitude;
         this->w = g.w;
         this->distance2pole = g.distance2pole;
         this->compareStrategy = g.compareStrategy;
@@ -52,11 +60,14 @@ Gift& Gift::operator=(const std::initializer_list<double> ilist)
     unsigned int size = ilist.size();
 
     this->id = (size >= 1) ? static_cast<unsigned int>(*it) : 0;
-    this->lat = (size >= 2) ? *(it+1) : 0.0;
-    this->lon = (size >= 3) ? *(it+2) : 0.0;
+    this->coordinate.latitude = (size >= 2) ? *(it+1) : 0.0;
+    this->coordinate.longitude = (size >= 3) ? *(it+2) : 0.0;
     this->w = (size >= 4) ? *(it+3) : 0.0;
-    this->distance2pole = (size >= 5) ? *(it+4) : 0.0;
-    this->tour_nr = (size >= 6) ? *(it+5) : 9999999;
+
+    distance2pole = haversine(90, 0.0, this->coordinate, degree);
+    this->tour_nr = 9999999;
+    // this->distance2pole = (size >= 5) ? *(it+4) : 0.0;
+    // this->tour_nr = (size >= 6) ? *(it+5) : 9999999;
 
     return *this;
 }
@@ -96,7 +107,8 @@ std::ostream& operator<<(std::ostream& os, const Gift& g)
     // os << "Weight: " << g.w << " kg" << std::endl;
     // os << "Distance2Pole: " << g.distance2pole << " km" << std::endl;
 
-    os << g.id << ", " << g.lat << ", " << g.lon << ", " << g.w << ", " << g.distance2pole << std::endl;
+    os << g.id << ", " << g.coordinate.latitude << ", " << g.coordinate.longitude << ", ";
+    os << g.w << ", " << g.distance2pole << std::endl;
 
     return os;
 }

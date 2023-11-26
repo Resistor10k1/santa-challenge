@@ -58,11 +58,6 @@ int main(int argc, char* argv[])
     cout << "Avg. weight: " << mean_weight(giftList) << endl;
     cout << "Med. weight: " << median(giftList).weight() << endl;
 
-    for(auto& gift : giftList)
-    {
-        gift.setDistance2Pole(haversine(90.0, 0.0, gift, degree));
-    }
-
     sort_distance(giftList);
     cout << "Sort gifts by distance to the north pole" << endl;
 

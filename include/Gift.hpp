@@ -6,6 +6,13 @@
 #include <vector>
 #include "ICompareStrategy.hpp"
 
+
+struct Coordinate
+{
+    double latitude = 0.0;
+    double longitude = 0.0;
+};
+
 /**
  * @brief Data abstraction of location where a package is dropped.
 */
@@ -21,12 +28,13 @@ class Gift
         void setCompareStrategy(ICompareStrategy<Gift>* cs) { compareStrategy = cs; }
         ICompareStrategy<Gift>* getCompareStrategy(void) { return compareStrategy; }
 
-        void setDistance2Pole(double dist) { distance2pole = dist; }
+        // void setDistance2Pole(double dist) { distance2pole = dist; }
         double getDistance2Pole(void) const { return distance2pole; }
         double ID(void) const { return id;}
-        double latitude(void) const { return lat; }
-        double longitude(void) const { return lon; }
+        double latitude(void) const { return coordinate.latitude; }
+        double longitude(void) const { return coordinate.longitude; }
         double weight(void) const { return w; }
+        Coordinate getCoordinate(void) const { return coordinate; }
 
         void setTourNumber(unsigned int nbr) { tour_nr = nbr; }
         unsigned int getTourNumber(void) const { return tour_nr; }
@@ -47,8 +55,11 @@ class Gift
     private:
         ICompareStrategy<Gift>* compareStrategy; /**< Compare strategy applied with the operator-functions*/
         unsigned int id = 0; /**< ID of the gift*/
-        double lat = 0.0; /**< Latitude of the gift*/
-        double lon = 0.0; /**< Longitude of the gift*/
+
+        Coordinate coordinate;
+
+        // double lat = 0.0; /**< Latitude of the gift*/
+        // double lon = 0.0; /**< Longitude of the gift*/
         double w = 0.0; /**< Weight of the gift*/
         double distance2pole = 0.0; /**< Distance from the north pole to the gift*/
         unsigned int tour_nr = 9999999;

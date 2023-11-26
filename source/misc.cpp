@@ -88,14 +88,14 @@ double haversine(double lat1, double lon1, double lat2, double lon2, CoordinateF
     return distance;
 }
  
-double haversine(const Gift& g1, const Gift& g2, CoordinateFormat cf)
+double haversine(const Coordinate& p1, const Coordinate& p2, CoordinateFormat cf)
 {
-    return haversine(g1.latitude(), g1.longitude(), g2.latitude(), g2.longitude(), cf);
+    return haversine(p1.latitude, p1.longitude, p2.latitude, p2.longitude, cf);
 }
 
-double haversine(double lat, double lon, const Gift& g, CoordinateFormat cf)
+double haversine(double lat, double lon, const Coordinate& p, CoordinateFormat cf)
 {
-    return haversine(lat, lon, g.latitude(), g.longitude(), cf);
+    return haversine(lat, lon, p.latitude, p.longitude, cf);
 }
 
 double mean_weight(const std::vector<Gift>& g_vec)

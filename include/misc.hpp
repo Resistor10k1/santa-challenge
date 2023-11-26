@@ -86,8 +86,8 @@ enum CoordinateFormat
  * @return Returns the distance in km.
 */
 double haversine(double lat1, double lon1, double lat2, double lon2, CoordinateFormat cf);
-double haversine(const Gift& g1, const Gift& g2, CoordinateFormat cf);
-double haversine(double lat, double lon, const Gift& g, CoordinateFormat cf);
+double haversine(const Coordinate& p1, const Coordinate& p2, CoordinateFormat cf);
+double haversine(double lat, double lon, const Coordinate& p, CoordinateFormat cf);
 
 double mean_weight(const std::vector<Gift>& g_vec);
 double mean_distance(const std::vector<Gift>& g_vec);

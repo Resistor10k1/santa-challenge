@@ -13,61 +13,55 @@ namespace fs = std::filesystem;
 
 
 TEST(MiscTest, calcHaversineDistance) {
-    CompareIDStrategy cs;
-    Gift g1({1.0, 1.1, 2.2, 15.5}, &cs);
-    Gift g2({2, 1.1, 2.2, 100.2}, &cs);
+    Coordinate p1 = {1.1, 2.2};
+    Coordinate p2 = {1.1, 2.2};
 
-    double distance = haversine(g1, g2, radiant);
+    double distance = haversine(p1, p2, radiant);
     
     EXPECT_NEAR(distance, 0.0, 1e-4);
 }
 
 TEST(MiscTest, calcHaversineDistance2) {
-    CompareIDStrategy cs;
-    Gift g1({1, 1.3, 2.1, 49}, &cs);
-    Gift g2({2, 1.3, 0.2, 34}, &cs);
+    Coordinate p1 = {1.3, 2.1};
+    Coordinate p2 = {1.3, 0.2};
 
-    double distance = haversine(g1, g2, radiant);
+    double distance = haversine(p1, p2, radiant);
     
     EXPECT_NEAR(distance, 2794.863, 1e-4);
 }
 
 TEST(MiscTest, calcHaversineDistance3) {
-    CompareIDStrategy cs;
-    Gift g1({1, 0.0, 0.0, 9834}, &cs);
-    Gift g2({2, 0.0, std::numbers::pi, 82}, &cs);
+    Coordinate p1 = {0.0, 0.0};
+    Coordinate p2 = {0.0, std::numbers::pi};
 
-    double distance = haversine(g1, g2, radiant);
+    double distance = haversine(p1, p2, radiant);
     
     EXPECT_NEAR(distance, 20015.114352, 1e-4);
 }
 
 TEST(MiscTest, calcHaversineDistanceDegree1) {
-    CompareIDStrategy cs;
-    Gift g1({1, 0.0, 0.0, 9834}, &cs);
-    Gift g2({2, 0.0, 180.0, 82}, &cs);
+    Coordinate p1 = {0.0, 0.0};
+    Coordinate p2 = {0.0, 180.0};
 
-    double distance = haversine(g1, g2, degree);
+    double distance = haversine(p1, p2, degree);
     
     EXPECT_NEAR(distance, 20015.114352, 1e-4);
 }
 
 TEST(MiscTest, calcHaversineDistanceDegree2) {
-    CompareIDStrategy cs;
-    Gift g1({1, 90.0, 0.0, 9834}, &cs);
-    Gift g2({6,53.5679698071,-71.3593080866,38.0001512626}, &cs);
+    Coordinate p1 = {90.0, 0.0};
+    Coordinate p2 = {53.5679698071,-71.3593080866};
 
-    double distance = haversine(g1, g2, degree);
+    double distance = haversine(p1, p2, degree);
     
     EXPECT_NEAR(distance, 4051.0625021844452931, 1e-4);
 }
 
 TEST(MiscTest, calcHaversineDistanceDegree3) {
-    CompareIDStrategy cs;
-    Gift g1({1, 90.0, 0.0, 9834}, &cs);
-    Gift g2({15,-68.884672727,61.214391432,1.0}, &cs);
+    Coordinate p1 = {90.0, 0.0};
+    Coordinate p2 = {-68.884672727,61.214391432};
 
-    double distance = haversine(g1, g2, degree);
+    double distance = haversine(p1, p2, degree);
     
     EXPECT_NEAR(distance, 17667.1938524478464387, 1e-4);
 }
@@ -146,11 +140,6 @@ TEST(MiscTest, meanDistance) {
                                     gwf.produceGift(15,-68.884672727,61.214391432,1.0)
                                 };
     double distance_val = 8435.855395;
-
-    for(auto& gift : giftList)
-    {
-        gift.setDistance2Pole(haversine(90.0, 0.0, gift, degree));
-    }
 
     EXPECT_NEAR(mean_distance(giftList), distance_val, 1e-6);
 }
