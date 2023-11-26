@@ -28,6 +28,9 @@ class Gift
         double longitude(void) const { return lon; }
         double weight(void) const { return w; }
 
+        void setTourNumber(unsigned int nbr) { tour_nr = nbr; }
+        unsigned int getTourNumber(void) const { return tour_nr; }
+
         Gift& operator=(const Gift& g);
         Gift& operator=(const std::initializer_list<double> ilist);
         friend bool operator==(const Gift& g1, const Gift& g2);
@@ -48,6 +51,7 @@ class Gift
         double lon = 0.0; /**< Longitude of the gift*/
         double w = 0.0; /**< Weight of the gift*/
         double distance2pole = 0.0; /**< Distance from the north pole to the gift*/
+        unsigned int tour_nr = 9999999;
 };
 
 /**
