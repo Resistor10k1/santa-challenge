@@ -10,18 +10,20 @@ class Santa
     public:
         Santa(void);
         void load(const std::vector<Gift>& giftList);
-        void travel(const Gift& g);
+        void start_delivering(void);
 
         double getSleighMaxLoad(void) const { return sleigh_max_load; }
         double getSleighWeight(void) const { return sleigh_weight; }
-        double getSleighCurrentWeight(void) const { return sleigh_current_weight; }
+
+        double getSleighCurrentLoad(void) const { return sleigh_current_load; }
+        Coordinate getCurrentPos(void) const { return current_pos; }
+        double getWRW(void) const { return WRW; }
     
     private:
         const double sleigh_max_load = 1000.0;
         const double sleigh_weight = 10.0;
-        double sleigh_current_weight = 0.0;
+        double sleigh_current_load = 0.0;
         double WRW = 0.0;
-        std::vector<const Gift*> delivered_Gifts;
-
-        void updateReindeerWeariness(void);
+        Coordinate current_pos;
+        std::vector<Gift> loaded_gifts;
 };

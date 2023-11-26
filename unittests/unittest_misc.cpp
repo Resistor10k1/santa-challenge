@@ -66,6 +66,15 @@ TEST(MiscTest, calcHaversineDistanceDegree3) {
     EXPECT_NEAR(distance, 17667.1938524478464387, 1e-4);
 }
 
+TEST(MiscTest, calcHaversineDistanceDegree4) {
+    Coordinate p1 = {0.0, 175};
+    Coordinate p2 = {0.0, -175};
+
+    double distance = haversine(p1, p2, degree);
+    
+    EXPECT_NEAR(distance, 1111.95, 0.009);
+}
+
 TEST(MiscTest, readFile) {
     GiftWeightFactory gwf;
     fs::path path = "../data/example_data.csv";

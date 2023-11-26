@@ -2,37 +2,36 @@
 #include "Santa.hpp"
 #include "misc.hpp"
 
-Santa::Santa(void)
+Santa::Santa(void) : current_pos({90.0, 0.0})
 {
 
 }
 
 void Santa::load(const std::vector<Gift>& giftList)
 {
-    sleigh_current_weight = 0.0;
+    current_pos = {90.0, 0.0};
+    sleigh_current_load = 0.0;
+    this->loaded_gifts = giftList;
 
     for(auto& gift : giftList)
     {
-        if((sleigh_current_weight+gift.weight()) > sleigh_max_load)
+        if((sleigh_current_load+gift.weight()) > sleigh_max_load)
             throw std::runtime_error("Sleigh max load exceeded!");
         
-        sleigh_current_weight += gift.weight();
+        sleigh_current_load += gift.weight();
     }
 }
 
-void Santa::travel(const Gift& g)
+void Santa::start_delivering(void)
 {
-    for(auto gift_ptr : delivered_Gifts)
+    auto gift = loaded_gifts.begin();
+    for(; gift != loaded_gifts.end(); ++gift)
     {
-        if(gift_ptr->ID() == g.ID()) throw std::runtime_error("Gift has already been delivered!");
+        WRW += (sleigh_weight + sleigh_current_load) * haversine(current_pos, gift->getCoordinate(), degree);
+        sleigh_current_load -= gift->weight();
+        current_pos = gift->getCoordinate();
     }
-
-    delivered_Gifts.push_back(&g);
-    updateReindeerWeariness();
+    WRW += sleigh_weight * haversine(current_pos, {90.0, 0.0}, degree);
+    current_pos = {90.0, 0.0};
 }
 
-void Santa::updateReindeerWeariness(void)
-{
-    WRW += (sleigh_weight + sleigh_current_weight) * haversine(**(delivered_Gifts.rbegin()+1), 
-                                                               **delivered_Gifts.rbegin(), degree);
-}
