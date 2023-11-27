@@ -89,6 +89,7 @@ double haversine(double lat1, double lon1, double lat2, double lon2, CoordinateF
 double haversine(const Coordinate& p1, const Coordinate& p2, CoordinateFormat cf);
 double haversine(double lat, double lon, const Coordinate& p, CoordinateFormat cf);
 
+double sum_weight(const std::vector<Gift>& g_vec);
 double mean_weight(const std::vector<Gift>& g_vec);
 double mean_distance(const std::vector<Gift>& g_vec);
 

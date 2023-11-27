@@ -98,7 +98,7 @@ double haversine(double lat, double lon, const Coordinate& p, CoordinateFormat c
     return haversine(lat, lon, p.latitude, p.longitude, cf);
 }
 
-double mean_weight(const std::vector<Gift>& g_vec)
+double sum_weight(const std::vector<Gift>& g_vec)
 {
     double ret_val = 0.0;
 
@@ -108,6 +108,18 @@ double mean_weight(const std::vector<Gift>& g_vec)
         {
             ret_val += gift.weight();
         }
+    }
+
+    return ret_val;
+}
+
+double mean_weight(const std::vector<Gift>& g_vec)
+{
+    double ret_val = 0.0;
+
+    if(g_vec.size() > 0)
+    {
+        ret_val = sum_weight(g_vec);
         ret_val /= g_vec.size();
     }
 
