@@ -14,6 +14,7 @@
 #include "misc.hpp"
 #include "Gift.hpp"
 #include "GiftFactory.hpp"
+#include "TripManager.hpp"
 
 using namespace std;
 using namespace std::chrono;
@@ -24,7 +25,6 @@ int main(int argc, char* argv[])
 {
     std::vector<Gift> giftList;
     GiftWeightFactory gwf;
-
     ofstream output_file;
     fs::path gift_file_path;
     fs::path abs_path = fs::canonical("/proc/self/exe");
@@ -48,11 +48,12 @@ int main(int argc, char* argv[])
 
     cout << "Read some data..." << endl;
     readGiftsFromFile(gift_file_path, ',', giftList, gwf);
+    
+//  Print some statistics about the gifts =================================================
     cout << "Size gift-list: " << giftList.size() << endl;
 
     sort_weight(giftList);
     cout << "Sort gifts by weight" << endl;
-
     cout << "Min. weight: " << giftList.front().weight() << endl;
     cout << "Max. weight: " << giftList.back().weight() << endl;
     cout << "Avg. weight: " << mean_weight(giftList) << endl;
@@ -60,19 +61,45 @@ int main(int argc, char* argv[])
 
     sort_distance(giftList);
     cout << "Sort gifts by distance to the north pole" << endl;
-
     cout << "Min. dist: " << giftList.front().getDistance2Pole() << endl;
     cout << "Max. dist: " << giftList.back().getDistance2Pole() << endl;
     cout << "Avg. dist: " << mean_distance(giftList) << endl;
     cout << "Med. dist: " << median(giftList).getDistance2Pole() << endl;
 
+    cout << "Optimal number of tours: " << sum_weight(giftList) / 1000.0 << endl;
+
+//  Decide which strategies to use and deliver gifts =====================================
+    NaiveLoadingStrategy naiveLoader;
+    NaiveStrategy naiveDistributer;
+
+    sort_distance(giftList);
+    TripManager tm_ByDistance(giftList, naiveLoader, naiveDistributer);
+    tm_ByDistance.startDelivery();
+    cout << "Delivery of gifts sorted by distance to the north pole took " << tm_ByDistance.getNumberOfTours();
+    cout << " tours and resulted in a WRW of " << tm_ByDistance.getSantasWRW() << endl;
+
+    sort_weight(giftList);
+    TripManager tm_ByWeight(giftList, naiveLoader, naiveDistributer);
+    tm_ByWeight.startDelivery();
+    cout << "Delivery of gifts sorted by weight to the north pole took " << tm_ByWeight.getNumberOfTours();
+    cout << " tours and resulted in a WRW of " << tm_ByWeight.getSantasWRW() << endl;
+
+    sort_id(giftList);
+    TripManager tm_ById(giftList, naiveLoader, naiveDistributer);
+    tm_ById.startDelivery();
+    cout << "Delivery of gifts sorted by id to the north pole took " << tm_ById.getNumberOfTours();
+    cout << " tours and resulted in a WRW of " << tm_ById.getSantasWRW() << endl;
+
+//  Save results to file =================================================================
+    sort_id(giftList);
     cout << "Save distance to the north pole to file..." << endl;
-    output_file.open(caller_path/"data/output_dist.txt");
+    output_file.open(caller_path/"data/output_trips.txt");
     if(output_file.is_open())
     {
+        output_file << "GiftId,TripId\n";
         for(auto& gift : giftList)
         {
-            output_file << std::setprecision(21) << gift.getDistance2Pole() << "\n";
+            output_file << gift.ID() << "," << gift.getTourNumber() << "\n";
         }
     }
     output_file.close();
