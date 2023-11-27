@@ -39,6 +39,8 @@ int Santa::load(const std::vector<Gift>& giftList)
 
 void Santa::start_delivering(void)
 {
+    this->WRW = 0.0;
+    
     auto gift = loaded_gifts.begin();
     for(; gift != loaded_gifts.end(); ++gift)
     {
