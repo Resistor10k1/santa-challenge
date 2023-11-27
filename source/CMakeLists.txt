@@ -10,5 +10,7 @@ target_sources(${PROJECT_NAME}
                 Gift.cpp
                 TripManager.cpp
                 Santa.cpp
+                DistributeStrategy.cpp
+                LoadStrategy.cpp
 )
 target_include_directories(${PROJECT_NAME} PRIVATE "${PROJECT_SOURCE_DIR}/include")

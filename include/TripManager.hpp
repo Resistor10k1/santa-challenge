@@ -3,33 +3,25 @@
 #include <vector>
 #include "Santa.hpp"
 #include "Gift.hpp"
-
-
-class ITripManagerStrategy
-{
-    public:
-        virtual Gift calculateNextDelivery(void) = 0;
-};
-
-class PilotTSPStrategy : public ITripManagerStrategy
-{
-    public:
-        Gift calculateNextDelivery(void) override;
-    private:
-        void _nearestNeighbourhood(void);
-        void _2opt(void);
-        void _bestImproving(void);
-};
+#include "LoadStrategy.hpp"
+#include "DistributeStrategy.hpp"
 
 
 class TripManager
 {
     public:
-        TripManager(const std::vector<Gift>& giftList, ITripManagerStrategy& strategy);
+        TripManager(std::vector<Gift>& giftList, ILoadStrategy& ls, IDistributeStrategy& ds);
         void startDelivery(void);
+
+        unsigned int getNumberOfTours(void) const { return this->current_tour; }
+        double getSantasWRW(void) const { return this->global_WRW; }
     
     private:
-        ITripManagerStrategy& tripStrategy;
+        IDistributeStrategy& distributeStrategy;
+        ILoadStrategy& loadStrategy;
         Santa santa;
+        std::vector<Gift>& gift_list;
+        unsigned int current_tour = 1;
+        double global_WRW = 0.0;
 };
 
