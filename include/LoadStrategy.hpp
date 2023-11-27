@@ -7,15 +7,16 @@
 class ILoadStrategy
 {
     public:
-        virtual int loadSleigh(Santa santa, const Gift& gift) = 0;
-        virtual std::vector<Gift>::iterator loadSleigh(Santa santa, const std::vector<Gift>::iterator& gift_it, 
-                                                        const std::vector<Gift>::iterator& it_end) = 0;
+        virtual int loadSleigh(Santa& santa, Gift& gift, unsigned int tour_nbr) = 0;
+        virtual std::vector<Gift>::iterator loadSleigh(Santa& santa, const std::vector<Gift>::iterator& gift_it, 
+                                                        const std::vector<Gift>::iterator& it_end, 
+                                                        unsigned int tour_nbr) = 0;
 };
 
-class KnapsackLoadingStrategy : public ILoadStrategy
+class NaiveLoadingStrategy : public ILoadStrategy
 {
     public:
-        int loadSleigh(Santa santa, const Gift& gift) override;
-        std::vector<Gift>::iterator loadSleigh(Santa santa, const std::vector<Gift>::iterator& gift_it,
-                                                const std::vector<Gift>::iterator& it_end) override;
+        int loadSleigh(Santa& santa, Gift& gift, unsigned int tour_nbr) override;
+        std::vector<Gift>::iterator loadSleigh(Santa& santa, const std::vector<Gift>::iterator& gift_it,
+                                                const std::vector<Gift>::iterator& it_end, unsigned int tour_nbr) override;
 };
