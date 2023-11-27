@@ -30,7 +30,7 @@ class Gift
 
         // void setDistance2Pole(double dist) { distance2pole = dist; }
         double getDistance2Pole(void) const { return distance2pole; }
-        double ID(void) const { return id;}
+        unsigned int ID(void) const { return id;}
         double latitude(void) const { return coordinate.latitude; }
         double longitude(void) const { return coordinate.longitude; }
         double weight(void) const { return w; }
