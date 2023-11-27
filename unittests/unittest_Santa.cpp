@@ -68,7 +68,7 @@ TEST(SantaTest, testOverLoading) {
                             };
     double sleigh_load_val = 972.1;
     
-    EXPECT_THROW(santa.load(giftList), std::runtime_error);
+    EXPECT_EQ(santa.load(giftList), -1);
     EXPECT_EQ(santa.getSleighCurrentLoad(), sleigh_load_val);
 }
 
