@@ -137,7 +137,6 @@ void sort_id(std::vector<Gift>& gift_list)
         CompareIDStrategy cds;
         for(auto& gift : gift_list)
         {
-            // ICompareStrategy<Gift>* temp_cs = gift.getCompareStrategy();
             gift.setCompareStrategy(&cds);
         }
         std::sort(gift_list.begin(), gift_list.end());
@@ -151,7 +150,6 @@ void sort_weight(std::vector<Gift>& gift_list)
         CompareWeightStrategy cds;
         for(auto& gift : gift_list)
         {
-            // ICompareStrategy<Gift>* temp_cs = gift.getCompareStrategy();
             gift.setCompareStrategy(&cds);
         }
         std::sort(gift_list.begin(), gift_list.end());
@@ -165,7 +163,6 @@ void sort_distance(std::vector<Gift>& gift_list)
         CompareDistanceStrategy cds;
         for(auto& gift : gift_list)
         {
-            // ICompareStrategy<Gift>* temp_cs = gift.getCompareStrategy();
             gift.setCompareStrategy(&cds);
         }
         std::sort(gift_list.begin(), gift_list.end());
