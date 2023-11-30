@@ -70,28 +70,39 @@ int main(int argc, char* argv[])
 
 //  Decide which strategies to use and deliver gifts =====================================
     NaiveLoadingStrategy naiveLoader;
+    NearestLoadingStrategy nearestLoader;
+    NNLoadingStrategy nnLoader;
+
     NaiveStrategy naiveDistributer;
+    SimulatedAnnealingStrategy saDistributer;
 
-    sort_distance(giftList);
-    TripManager tm_ByDistance(giftList, naiveLoader, naiveDistributer);
-    tm_ByDistance.startDelivery();
-    cout << "Delivery of gifts sorted by distance to the north pole took " << tm_ByDistance.getNumberOfTours();
-    cout << " tours and resulted in a WRW of " << tm_ByDistance.getSantasWRW() << endl;
+    // sort_weight(giftList);
+    // cout << "dkjskjb" << endl;
+    // TripManager tm_ByWeight(giftList, naiveLoader, naiveDistributer);
+    // tm_ByWeight.startDelivery();
+    // cout << "Delivery of gifts sorted by weight to the north pole took " << tm_ByWeight.getNumberOfTours();
+    // cout << " tours and resulted in a WRW of " << tm_ByWeight.getTotalWRW() << endl;
 
-    sort_weight(giftList);
-    TripManager tm_ByWeight(giftList, naiveLoader, naiveDistributer);
-    tm_ByWeight.startDelivery();
-    cout << "Delivery of gifts sorted by weight to the north pole took " << tm_ByWeight.getNumberOfTours();
-    cout << " tours and resulted in a WRW of " << tm_ByWeight.getSantasWRW() << endl;
+    // sort_id(giftList);
+    // TripManager tm_ById(giftList, naiveLoader, naiveDistributer);
+    // tm_ById.startDelivery();
+    // cout << "Delivery of gifts sorted by id to the north pole took " << tm_ById.getNumberOfTours();
+    // cout << " tours and resulted in a WRW of " << tm_ById.getTotalWRW() << endl;
 
-    sort_id(giftList);
-    TripManager tm_ById(giftList, naiveLoader, naiveDistributer);
-    tm_ById.startDelivery();
-    cout << "Delivery of gifts sorted by id to the north pole took " << tm_ById.getNumberOfTours();
-    cout << " tours and resulted in a WRW of " << tm_ById.getSantasWRW() << endl;
+    // TripManager tm_ByDistance(giftList, nearestLoader, naiveDistributer);
+    // tm_ByDistance.startDelivery();
+    // cout << "Delivery of gifts sorted by distance to the north pole took " << tm_ByDistance.getNumberOfTours();
+    // cout << " tours and resulted in a WRW of " << tm_ByDistance.getTotalWRW() << endl;
+
+    TripManager tm_Serious(giftList, nnLoader, saDistributer);
+    tm_Serious.startDelivery();
+    cout << "Delivery by 'Serious Trip-Manager' took " << tm_Serious.getNumberOfTours();
+    cout << " tours and resulted in a WRW of " << setprecision(21) << tm_Serious.getTotalWRW() << endl;
+
+    giftList = tm_Serious.getTotalBestTour();
 
 //  Save results to file =================================================================
-    sort_id(giftList);
+    // sort_id(giftList);
     cout << "Save distance to the north pole to file..." << endl;
     output_file.open(caller_path/"data/output_trips.txt");
     if(output_file.is_open())
@@ -103,6 +114,13 @@ int main(int argc, char* argv[])
         }
     }
     output_file.close();
+
+    // Santa santa_val(__DBL_MAX__);
+    // santa_val.load(giftList);
+
+    // cout << "Check if gift-list has been modified:" << endl;
+    // cout << "WRW: " << santa_val.calculateWRW() << endl;
+    // cout << "List size: " << giftList.size() << endl;
 
     auto stop = high_resolution_clock::now();
     duration_ms += static_cast<double>(duration_cast<milliseconds>(stop-start).count());
