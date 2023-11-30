@@ -89,10 +89,24 @@ double haversine(double lat1, double lon1, double lat2, double lon2, CoordinateF
 double haversine(const Coordinate& p1, const Coordinate& p2, CoordinateFormat cf);
 double haversine(double lat, double lon, const Coordinate& p, CoordinateFormat cf);
 
+/**
+ * @brief Calculates the sum of the weights of the gifts in list g_vec.
+*/
 double sum_weight(const std::vector<Gift>& g_vec);
+
+/**
+ * @brief Calculates the mean of the weights of the gifts in list g_vec.
+*/
 double mean_weight(const std::vector<Gift>& g_vec);
+
+/**
+ * @brief Calculates the mean of the distances to the north pole of the gifts in list g_vec.
+*/
 double mean_distance(const std::vector<Gift>& g_vec);
 
+/**
+ * @brief Returns the median value of list vec.
+*/
 template<typename T>
 T median(std::vector<T> vec)
 {
@@ -108,7 +122,20 @@ T median(std::vector<T> vec)
     }
 }
 
+/**
+ * @brief Sorts the list gift_list by id, using CompareIDStrategy.
+*/
 void sort_id(std::vector<Gift>& gift_list);
+
+/**
+ * @brief Sorts the list gift_list by weight, using CompareWeightStrategy.
+*/
 void sort_weight(std::vector<Gift>& gift_list);
+
+/**
+ * @brief Sorts the list gift_list by distance, using CompareDistanceStrategy.
+*/
 void sort_distance(std::vector<Gift>& gift_list);
+
+void sort_distToRef(std::vector<Gift>& gift_list);
 
