@@ -11,7 +11,7 @@
 using namespace std;
 
 TEST(SantaTest, testBasicConfig) {
-    Santa santa;
+    Santa santa(1000.0);
 
     EXPECT_EQ(santa.getSleighMaxLoad(), 1000.0);
     EXPECT_EQ(santa.getSleighWeight(), 10.0);
@@ -19,7 +19,7 @@ TEST(SantaTest, testBasicConfig) {
 }
 
 TEST(SantaTest, testLoading) {
-    Santa santa;
+    Santa santa(1000.0);
     GiftWeightFactory gwf;
     vector<Gift> giftList = {   gwf.produceGift(1,16.3457688674,6.30354512503,   1.0),
                                 gwf.produceGift(2,12.494749307,28.6263955635,    15.5),
@@ -48,7 +48,7 @@ TEST(SantaTest, testLoading) {
 }
 
 TEST(SantaTest, testOverLoading) {
-    Santa santa;
+    Santa santa(1000.0);
     GiftWeightFactory gwf;
     vector<Gift> giftList = {   gwf.produceGift(1,16.3457688674,6.30354512503,   100.0),
                                 gwf.produceGift(2,12.494749307,28.6263955635,    150.5),
@@ -73,7 +73,7 @@ TEST(SantaTest, testOverLoading) {
 }
 
 TEST(SantaTest, checkDelivering) {
-    Santa santa;
+    Santa santa(1000.0);
     GiftWeightFactory gwf;
     vector<Gift> giftList = {   gwf.produceGift(1, 16.3457688674, 6.30354512503,   10.0),
                                 gwf.produceGift(2, 12.494749307, 28.6263955635,    20.0),
@@ -123,7 +123,7 @@ TEST(SantaTest, checkDelivering) {
     EXPECT_EQ(santa.getCurrentPos().longitude, 0.0);
     EXPECT_EQ(santa.getWRW(), 0.0);
 
-    santa.start_delivering();
+    santa.calculateWRW();
 
     EXPECT_EQ(santa.getSleighCurrentLoad(), 0.0);
     EXPECT_EQ(santa.getCurrentPos().latitude, 90.0);
