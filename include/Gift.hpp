@@ -60,7 +60,7 @@ class Gift
         Coordinate coordinate; /**< Coordinate where the gift is dropped */
         double w = 0.0; /**< Weight of the gift*/
         double distance2pole = 0.0; /**< Distance from the north pole to the gift*/
-        unsigned int tour_nr = 9999999; /**< Number indicating the tour in which the gift is delivered */
+        unsigned int tour_nr = 0; /**< Number indicating the tour in which the gift is delivered */
         double distanceToRef = 0.0;
 };
 

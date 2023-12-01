@@ -29,14 +29,14 @@ TEST(GiftTest, checkConstructors) {
     EXPECT_EQ(g3.longitude(), 0.2);
     EXPECT_EQ(g3.weight(), 0.2);
     EXPECT_NEAR(g3.getDistance2Pole(), 9985.32, 0.009);
-    EXPECT_EQ(g3.getTourNumber(), 9999999);
+    EXPECT_EQ(g3.getTourNumber(), 0);
 
     EXPECT_EQ(g4.ID(), 0);
     EXPECT_EQ(g4.latitude(), 0.0);
     EXPECT_EQ(g4.longitude(), 0.0);
     EXPECT_EQ(g4.weight(), 0.0);
     EXPECT_EQ(g4.getDistance2Pole(), 0.0);
-    EXPECT_EQ(g4.getTourNumber(), 9999999);
+    EXPECT_EQ(g4.getTourNumber(), 0);
 }
 
 TEST(GiftTest, assignOperator) {
@@ -60,7 +60,7 @@ TEST(GiftTest, assignOperator) {
     EXPECT_EQ(g2.longitude(), 1.3);
     EXPECT_EQ(g2.weight(), 3.45);
     EXPECT_NEAR(g2.getDistance2Pole(), 9729.57, 0.009);
-    EXPECT_EQ(g2.getTourNumber(), 9999999);
+    EXPECT_EQ(g2.getTourNumber(), 0);
 }
 
 TEST(GiftTest, equalityOperator) {

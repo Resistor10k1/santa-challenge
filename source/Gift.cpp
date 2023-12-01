@@ -25,7 +25,7 @@ Gift::Gift(const std::initializer_list<double> ilist, ICompareStrategy<Gift>* cs
 
     distance2pole = haversine(90, 0.0, this->coordinate, degree);
     distanceToRef = 0.0;
-    this->tour_nr = 9999999;
+    this->tour_nr = 0;
     // this->distance2pole = (size >= 5) ? *(it+4) : 0.0;
     // this->tour_nr = (size >= 6) ? *(it+5) : 9999999;
 }
@@ -36,7 +36,7 @@ Gift::Gift(const Gift& g) :
         compareStrategy(g.compareStrategy)
 {}
 Gift::Gift(ICompareStrategy<Gift>* cs) :
-        id(0), coordinate({0.0, 0.0}), w(0.0), distance2pole(0.0), distanceToRef(0.0), tour_nr(9999999), compareStrategy(cs)
+        id(0), coordinate({0.0, 0.0}), w(0.0), distance2pole(0.0), distanceToRef(0.0), tour_nr(0), compareStrategy(cs)
 {
     // distance2pole = haversine(90, 0.0, this->coordinate, degree);
 }
@@ -75,7 +75,7 @@ Gift& Gift::operator=(const std::initializer_list<double> ilist)
 
     distance2pole = haversine(90, 0.0, this->coordinate, degree);
     distanceToRef = 0.0;
-    this->tour_nr = 9999999;
+    this->tour_nr = 0;
     // this->distance2pole = (size >= 5) ? *(it+4) : 0.0;
     // this->tour_nr = (size >= 6) ? *(it+5) : 9999999;
 
