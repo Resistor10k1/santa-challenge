@@ -5,6 +5,10 @@
 TripManager::TripManager(std::vector<Gift>& giftList, ILoadStrategy& ls, IDistributeStrategy& ds) : 
                 gift_list(giftList), loadStrategy(ls), distributeStrategy(ds), santa(1000.0)
 {
+    for(auto gift : giftList)
+    {
+        giftID_list.push_back(gift.ID());
+    }
 }
 
 void TripManager::startDelivery(void)
@@ -19,7 +23,7 @@ void TripManager::startDelivery(void)
     {
         std::cout << "Delivering tour number " << current_tour << " ... " << std::endl;
         ++this->current_tour;
-        gift_ptr = this->loadStrategy.loadTourToSleigh(santa, gift_ptr, gift_list.end(), current_tour);
+        gift_ptr = this->loadStrategy.loadTourToSleigh(santa, gift_list.begin(), gift_list.end(), current_tour);
         this->distributeStrategy.distributeGifts(santa);
 
         this->total_WRW += this->distributeStrategy.getSolution();
@@ -30,4 +34,20 @@ void TripManager::startDelivery(void)
         }
     }
     while(gift_ptr != gift_list.end());
+}
+
+bool TripManager::verify_tour(void)
+{
+    unsigned int hit_counter = 0;
+    for(auto gift : total_best_tour)
+    {
+        if(std::find(giftID_list.begin(), giftID_list.end(), gift.ID()) != giftID_list.end())
+        {
+            ++hit_counter;
+        }
+    }
+
+    std::cout << "Hit counter is: " << hit_counter << std::endl;
+
+    return ((hit_counter == total_best_tour.size()) && (giftID_list.size() == total_best_tour.size()));
 }
