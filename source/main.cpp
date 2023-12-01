@@ -76,28 +76,11 @@ int main(int argc, char* argv[])
     NaiveStrategy naiveDistributer;
     SimulatedAnnealingStrategy saDistributer;
 
-    // sort_weight(giftList);
-    // cout << "dkjskjb" << endl;
-    // TripManager tm_ByWeight(giftList, naiveLoader, naiveDistributer);
-    // tm_ByWeight.startDelivery();
-    // cout << "Delivery of gifts sorted by weight to the north pole took " << tm_ByWeight.getNumberOfTours();
-    // cout << " tours and resulted in a WRW of " << tm_ByWeight.getTotalWRW() << endl;
-
-    // sort_id(giftList);
-    // TripManager tm_ById(giftList, naiveLoader, naiveDistributer);
-    // tm_ById.startDelivery();
-    // cout << "Delivery of gifts sorted by id to the north pole took " << tm_ById.getNumberOfTours();
-    // cout << " tours and resulted in a WRW of " << tm_ById.getTotalWRW() << endl;
-
-    // TripManager tm_ByDistance(giftList, nearestLoader, naiveDistributer);
-    // tm_ByDistance.startDelivery();
-    // cout << "Delivery of gifts sorted by distance to the north pole took " << tm_ByDistance.getNumberOfTours();
-    // cout << " tours and resulted in a WRW of " << tm_ByDistance.getTotalWRW() << endl;
-
     TripManager tm_Serious(giftList, nnLoader, saDistributer);
     tm_Serious.startDelivery();
-    cout << "Delivery by 'Serious Trip-Manager' took " << tm_Serious.getNumberOfTours();
-    cout << " tours and resulted in a WRW of " << setprecision(21) << tm_Serious.getTotalWRW() << endl;
+    cout << "Delivery by 'Serious Trip-Manager' is " << (tm_Serious.verify_tour() ? "complete" : "not complete") << endl;
+    cout << "Number of tours: " << tm_Serious.getNumberOfTours() << endl;
+    cout << "Resulted in a WRW of " << setprecision(21) << tm_Serious.getTotalWRW() << endl;
 
     giftList = tm_Serious.getTotalBestTour();
 
