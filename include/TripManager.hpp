@@ -16,7 +16,7 @@ class TripManager
         TripManager(std::vector<Gift>& giftList, ILoadStrategy& ls, IDistributeStrategy& ds);
         void startDelivery(void);
 
-        unsigned int getNumberOfTours(void) const { return this->current_tour; }
+        unsigned int getNumberOfTours(void) const { return this->current_tour-1; }
         double getTotalWRW(void) const { return this->total_WRW; }
         std::vector<Gift> getTotalBestTour(void) const { return total_best_tour; }
 

@@ -17,13 +17,13 @@ void TripManager::startDelivery(void)
 
     auto gift_ptr = this->gift_list.begin();
     this->total_WRW = 0.0;
-    this->current_tour = 0;
+    this->current_tour = 1;
 
-    do
+    for(; gift_ptr!=gift_list.end(); ++this->current_tour)
     {
-        std::cout << "Delivering tour number " << current_tour << " ... " << std::endl;
-        ++this->current_tour;
-        gift_ptr = this->loadStrategy.loadTourToSleigh(santa, gift_list.begin(), gift_list.end(), current_tour);
+        std::cout << "Delivering tour number " << this->current_tour << " ... " << std::endl;
+        
+        gift_ptr = this->loadStrategy.loadTourToSleigh(santa, gift_list, gift_ptr, current_tour);
         this->distributeStrategy.distributeGifts(santa);
 
         this->total_WRW += this->distributeStrategy.getSolution();
@@ -33,7 +33,6 @@ void TripManager::startDelivery(void)
             this->total_best_tour.push_back(gift);
         }
     }
-    while(gift_ptr != gift_list.end());
 }
 
 bool TripManager::verify_tour(void)
