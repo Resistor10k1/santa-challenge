@@ -2,13 +2,15 @@
 #include "LoadStrategy.hpp"
 #include "misc.hpp"
 
-std::vector<Gift>::iterator NaiveLoadingStrategy::loadTourToSleigh(Santa& santa, const std::vector<Gift>::iterator& it_start,
-                                                                const std::vector<Gift>::iterator& it_end,
+std::vector<Gift>::iterator NaiveLoadingStrategy::loadTourToSleigh(Santa& santa, std::vector<Gift>& giftList, 
+                                                                const std::vector<Gift>::iterator& it_ref, 
                                                                 unsigned int tour_nbr)
 {
-    auto gift = it_start;
+    auto gift = giftList.begin();
 
-    while((loadSleigh(santa, *gift, tour_nbr)==0) && (gift!=it_end))
+    santa.unloadSleigh();
+
+    while((loadSleigh(santa, *gift, tour_nbr)==0) && (gift!=giftList.end()))
     {
         ++gift;
     }
@@ -25,11 +27,15 @@ void NearestLoadingStrategy::preprocessGifts(std::vector<Gift>& giftList)
     sort_distance(giftList);
 }
 
-std::vector<Gift>::iterator NearestLoadingStrategy::loadTourToSleigh(Santa& santa, const std::vector<Gift>::iterator& it_start,
-                                                                const std::vector<Gift>::iterator& it_end,
+std::vector<Gift>::iterator NearestLoadingStrategy::loadTourToSleigh(Santa& santa, std::vector<Gift>& giftList, 
+                                                                const std::vector<Gift>::iterator& it_ref, 
                                                                 unsigned int tour_nbr)
 {
-    auto gift = it_start;
+    // auto gift = it_start;
+
+    auto gift = giftList.begin();
+    auto it_end = giftList.end();
+
     santa.unloadSleigh();
 
     while((loadSleigh(santa, *gift, tour_nbr)==0) && (gift!=it_end))
@@ -44,15 +50,19 @@ std::vector<Gift>::iterator NearestLoadingStrategy::loadTourToSleigh(Santa& sant
 void NNLoadingStrategy::preprocessGifts(std::vector<Gift>& giftList)
 {
     sort_distance(giftList);
+    // loadSleigh(santa, giftList.front(), tour_nbr);
 }
 
-std::vector<Gift>::iterator NNLoadingStrategy::loadTourToSleigh(Santa& santa, const std::vector<Gift>::iterator& it_start,
-                                                                const std::vector<Gift>::iterator& it_end,
+std::vector<Gift>::iterator NNLoadingStrategy::loadTourToSleigh(Santa& santa, std::vector<Gift>& giftList, 
+                                                                const std::vector<Gift>::iterator& it_ref, 
                                                                 unsigned int tour_nbr)
 {
-    auto ref_gift = it_start;
+    auto ref_gift = it_ref;
+    auto it_start = giftList.begin();
+    auto it_end = giftList.end();
 
     santa.unloadSleigh();
+    loadSleigh(santa, *it_ref, tour_nbr);
 
     for(auto neighbour=it_end, gift_it=it_start; ref_gift!=it_end; neighbour=it_end, gift_it=it_start)
     {
