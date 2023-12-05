@@ -20,21 +20,20 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
     auto s = santa.getLoadedGifts();
     auto s_star = s;
     double T = 4000;
-    double T_final = 100;
+    double T_final = 20;
     double alpha = 0.99;
     unsigned int loop_cnt = 0;
 
-
+    // TODO: Chose a different termination condition
     while(T > T_final)
     {
         applyRandomSwap(s);
-        // santa.unloadSleigh();
         santa.load(s);
         temp_WRW = santa.calculateWRW();
 
         double D = temp_WRW - this->best_WRW;
 
-        if((D >= 0) || (std::exp(-D/T) > rndU()))
+        if((D < 0) || (std::exp(-D/T) > rndU()))
         {
             s = santa.getLoadedGifts();
         }
@@ -42,6 +41,7 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
         if(temp_WRW < this->best_WRW)
         {
             s_star = s;
+            this->best_WRW = temp_WRW;
         }
 
         if(loop_cnt == 100)
