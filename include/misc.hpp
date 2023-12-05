@@ -133,7 +133,7 @@ void sort_id(std::vector<Gift>& gift_list);
 void sort_weight(std::vector<Gift>& gift_list);
 
 /**
- * @brief Sorts the list gift_list by distance, using CompareDistanceStrategy.
+ * @brief Sorts the list gift_list by distance to the north pole, using CompareDistanceStrategy.
 */
 void sort_distance(std::vector<Gift>& gift_list);
 
