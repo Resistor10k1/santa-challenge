@@ -85,9 +85,8 @@ int main(int argc, char* argv[])
     giftList = tm_Serious.getTotalBestTour();
 
 //  Save results to file =================================================================
-    // sort_id(giftList);
     cout << "Save distance to the north pole to file..." << endl;
-    output_file.open(caller_path/"data/output_trips.txt");
+    output_file.open(caller_path/"data/output_trips.csv");
     if(output_file.is_open())
     {
         output_file << "GiftId,TripId\n";
@@ -97,13 +96,6 @@ int main(int argc, char* argv[])
         }
     }
     output_file.close();
-
-    // Santa santa_val(__DBL_MAX__);
-    // santa_val.load(giftList);
-
-    // cout << "Check if gift-list has been modified:" << endl;
-    // cout << "WRW: " << santa_val.calculateWRW() << endl;
-    // cout << "List size: " << giftList.size() << endl;
 
     auto stop = high_resolution_clock::now();
     duration_ms += static_cast<double>(duration_cast<milliseconds>(stop-start).count());
