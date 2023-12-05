@@ -32,6 +32,17 @@ void TripManager::startDelivery(void)
         {
             this->total_best_tour.push_back(gift);
         }
+
+        this->loadStrategy.preprocessGifts(this->gift_list);
+
+        for(int index=0; index<gift_list.size(); ++index)
+        {
+            if(gift_list.at(index).getTourNumber() == 0)
+            {
+                gift_ptr = gift_list.begin() + index;
+                break;
+            }
+        }
     }
 }
 
