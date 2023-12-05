@@ -11,7 +11,14 @@ class ILoadStrategy
         int loadSleigh(Santa& santa, Gift& gift, unsigned int tour_nbr)
         {
             gift.setTourNumber(tour_nbr);
-            return santa.add(gift);
+            int ret_val = santa.add(gift);
+
+            if(ret_val != 0)
+            {/* Un-set tour number if gift has no space in sleigh */
+                gift.setTourNumber(0);
+            }
+
+            return ret_val;
         };
         // virtual std::vector<Gift>::iterator loadTourToSleigh(Santa& santa, const std::vector<Gift>::iterator& gift_it, 
         //                                                 const std::vector<Gift>::iterator& it_end, 
