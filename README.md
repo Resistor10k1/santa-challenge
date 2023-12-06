@@ -11,15 +11,15 @@ In 2016, a challenge to help Santa to distribute his gifts was uploaded to *kagg
 
 The goal is to minimize the overall weighted-reindeer-weariness ($WRW$). This weariness is calculated with the following folmula:
 
-$ WRW = \sum_{j=1}^m \sum_{i=1}^{n_j} \sum_{k=i}^{n_j} w_{kj} * Dist(Loc_i, Loc_{i-1})$
+$$WRW = \sum_{j=1}^m \sum_{i=1}^{n_j} \sum_{k=i}^{n_j} w_{kj} * Dist(Loc_i, Loc_{i-1})$$
 
 The $Dist(Loc_i, Loc_j)$ function returns the Haversine distance $d$ between location $i$ and $j$.
 
-$ \phi_1, \phi_2 $ : Latitude of $Loc_1$ resp. $Loc_2$ in radians<br>
-$ \lambda_1, \lambda_2 $ : Longitude of $Loc_1$ resp. $Loc_2$ in radians<br>
+$\phi_1, \phi_2$ : Latitude of $Loc_1$ resp. $Loc_2$ in radians<br>
+$\lambda_1, \lambda_2$ : Longitude of $Loc_1$ resp. $Loc_2$ in radians<br>
 $r$ : Radius of the earth (6371.0087714km)
 
-$ d = 2r \arcsin \left( \sqrt {\sin^2 ({\frac{\phi_2-\phi_1}{2}}) + \cos(\phi_1)\cos(\phi_2) \sin^2 ({\frac{\lambda_2-\lambda_1}{2}})} \right) $
+$$ d = 2r \arcsin \left( \sqrt {\sin^2 ({\frac{\phi_2-\phi_1}{2}}) + \cos(\phi_1)\cos(\phi_2) \sin^2 ({\frac{\lambda_2-\lambda_1}{2}})} \right) $$
 
 ## Solution approach
 
