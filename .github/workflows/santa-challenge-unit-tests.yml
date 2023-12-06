@@ -5,8 +5,16 @@ name: Santa-Challenge unit-tests
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'include/**'
+      - 'source/**'
+      - 'unittests/**'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'include/**'
+      - 'source/**'
+      - 'unittests/**'
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
