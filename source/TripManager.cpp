@@ -24,6 +24,8 @@ void TripManager::startDelivery(void)
         std::cout << "Delivering tour number " << this->current_tour << " ... " << std::endl;
         
         gift_ptr = this->loadStrategy.loadTourToSleigh(santa, gift_list, gift_ptr, current_tour);
+
+        #pragma omp parallel default(none) shared(santa)
         this->distributeStrategy.distributeGifts(santa);
 
         this->total_WRW += this->distributeStrategy.getSolution();
@@ -44,6 +46,10 @@ void TripManager::startDelivery(void)
             }
         }
     }
+
+    // Improve existing tours
+
+
 }
 
 bool TripManager::verify_tour(void)

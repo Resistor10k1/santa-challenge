@@ -4,6 +4,8 @@
 #include <vector>
 #include <cmath>
 #include <random>
+#include <omp.h>
+#include <iostream>
 
 
 void NaiveStrategy::distributeGifts(Santa& santa)
@@ -16,37 +18,52 @@ void NaiveStrategy::distributeGifts(Santa& santa)
 void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
 {
     double temp_WRW = __DBL_MAX__;
-    this->best_WRW = santa.calculateWRW();
-    auto s = santa.getLoadedGifts();
+    double local_best;
+    std::vector<Gift> s;
+    #pragma omp critical
+    {
+        local_best = santa.calculateWRW();
+        s = santa.getLoadedGifts();
+    }
+
     auto s_star = s;
-    double T = 4000;
+    double T = 10000;
     double T_final = 20;
-    double alpha = 0.99;
+    const double alpha = 0.99;
     unsigned int loop_cnt = 0;
+    int nbr_improvements = 0;
+    int nbr_reheats = 0;
 
     // TODO: Chose a different termination condition
-    while(T > T_final)
+    // for(unsigned int loop_cnt = 0; (T > T_final) && ((nbr_reheats-nbr_improvements) > 5); ++loop_cnt)
+    while((T > T_final) && ((nbr_reheats-nbr_improvements) < 5))
     {
         applyRandomSwap(s);
-        santa.load(s);
-        temp_WRW = santa.calculateWRW();
 
-        double D = temp_WRW - this->best_WRW;
+        #pragma omp critical
+        {
+            santa.load(s);
+            temp_WRW = santa.calculateWRW();
+        }
+
+        double D = temp_WRW - local_best;
 
         if((D < 0) || (std::exp(-D/T) > rndU()))
         {
+            #pragma omp critical
             s = santa.getLoadedGifts();
         }
 
-        if(temp_WRW < this->best_WRW)
+        if(temp_WRW < local_best)
         {
             s_star = s;
-            this->best_WRW = temp_WRW;
+            local_best = temp_WRW;
         }
 
-        if(loop_cnt == 100)
+        if(loop_cnt == 200)
         {
-            T *= 3;
+            T *= 1.8;
+            ++nbr_reheats;
         }
         else
         {
@@ -54,8 +71,15 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
         }
         ++loop_cnt;
     }
+    
+    #pragma omp critical
+    {
+        santa.load(s_star);
+        this->best_WRW = local_best;
+    }
 
-    santa.load(s_star);
+    // #pragma omp critical
+    // std::cout <<"Thread-ID "<<omp_get_thread_num()<<": "<<T<<", "<<T_final<<", "<<nbr_reheats<<", "<<nbr_improvements<<", "<<temp_WRW<<std::endl;
 }
 
 double SimulatedAnnealingStrategy::rndU(void)
