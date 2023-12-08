@@ -1,15 +1,30 @@
+/**
+ * @file    DistributeStrategy.hpp
+ * @brief   Contains different approaches on how to improve an existing solution.
+ * @date    2023-12-08
+ * @author  Andri Trottmann
+ */
 
-
-#pragma one
+#pragma once
 #include "Santa.hpp"
 #include "Gift.hpp"
 #include <vector>
 
-
+/**
+ * @brief Abstract class providing an interface to optimization strategies of all kind.
+*/
 class IDistributeStrategy
 {
     public:
+        /**
+         * @brief Executes the optimization algorithm to improve an existing solution.
+         * @param santa Holds the data
+        */
         virtual void distributeGifts(Santa& santa) = 0;
+
+        /**
+         * @brief Returns the best found solution of the strategy
+        */
         virtual double getSolution(void) const { return best_WRW; };
     protected:
         double best_WRW = __DBL_MAX__;
@@ -22,18 +37,28 @@ class NaiveStrategy : public IDistributeStrategy
 {
     public:
         void distributeGifts(Santa& santa) override;
-    // private:
-    //     void _nearestNeighbourhood(void);
-    //     void _2opt(void);
-    //     void _bestImproving(void);
 };
 
+/**
+ * @brief Applies Simulated-Annealing optimization algorithm to an existing solution.
+*/
 class SimulatedAnnealingStrategy : public IDistributeStrategy
 {
     public:
         void distributeGifts(Santa& santa) override;
     
     private:
+
+        /**
+         * @brief Swaps two destinations in a tour.
+         * @details The destinations to swap are chosen randomly, but underlie some constraints.
+         * The destinations can lie 1-5 positions apart from each other (index in the list).
+         * 
+        */
         void applyRandomSwap(std::vector<Gift>& giftList);
+
+        /**
+         * @brief Returns uniformly distributes random value [0,1]
+        */
         double rndU(void);
 };

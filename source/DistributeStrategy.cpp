@@ -10,8 +10,6 @@
 
 void NaiveStrategy::distributeGifts(Santa& santa)
 {
-    // std::vector<Gift> local_giftlist(santa.getLoadedGifts());
-    // std::iter_swap(local_giftlist.begin()+5, local_giftlist.begin()+7);
     best_WRW = santa.calculateWRW();
 }
 
@@ -65,17 +63,17 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
         }
 
         if((loop_cnt+1)%200 == 0)
-        {
+        {/* Reheat the system after 200 iterations */
             T *= 1.3;
             ++nbr_reheats;
         }
         else if((loop_cnt+1)%12 == 0)
-        {
+        {/* Decrease temperature after 12 iterations */
             T *= alpha;
         }
 
         if((loop_cnt-nbr_improvements) > 100)
-        {
+        {/* Reset working solution to current best solution after 100 iterations withou improvement */
             s = s_star;
         }
 
@@ -83,7 +81,7 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
     }
     
     #pragma omp critical
-    {
+    {/* Get the best solution over all threads */
         if(local_best < this->best_WRW)
         {
             std::cout <<"Thread-ID "<<omp_get_thread_num()<<": "<<T<<", "<<T_final<<", "<<nbr_reheats<<", "<<nbr_improvements<<", "<<loop_cnt<<", "<<this->best_WRW<<", "<<local_best<<std::endl;

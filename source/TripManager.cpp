@@ -35,10 +35,11 @@ void TripManager::startDelivery(void)
             this->total_best_tour.push_back(gift);
         }
 
+        // Sort gifts according to the disatnce to north pole
         this->loadStrategy.preprocessGifts(this->gift_list);
 
         for(int index=0; index<gift_list.size(); ++index)
-        {
+        {/* Get closest gift not yet delivered */
             if(gift_list.at(index).getTourNumber() == 0)
             {
                 gift_ptr = gift_list.begin() + index;
@@ -62,8 +63,6 @@ bool TripManager::verify_tour(void)
             ++hit_counter;
         }
     }
-
-    std::cout << "Hit counter is: " << hit_counter << std::endl;
 
     return ((hit_counter == total_best_tour.size()) && (giftID_list.size() == total_best_tour.size()));
 }

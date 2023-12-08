@@ -18,10 +18,6 @@ std::vector<Gift>::iterator NaiveLoadingStrategy::loadTourToSleigh(Santa& santa,
     return gift;
 }
 
-/**
- * @paragraph Loads the gifts in ascending order of the distance to the north pole.
-*/
-
 void NearestLoadingStrategy::preprocessGifts(std::vector<Gift>& giftList)
 {
     sort_distance(giftList);
@@ -50,7 +46,6 @@ std::vector<Gift>::iterator NearestLoadingStrategy::loadTourToSleigh(Santa& sant
 void NNLoadingStrategy::preprocessGifts(std::vector<Gift>& giftList)
 {
     sort_distance(giftList);
-    // loadSleigh(santa, giftList.front(), tour_nbr);
 }
 
 std::vector<Gift>::iterator NNLoadingStrategy::loadTourToSleigh(Santa& santa, std::vector<Gift>& giftList, 

@@ -1,6 +1,14 @@
+/**
+ * @file    ICompareStrategy.hpp
+ * @date    2023-12-08
+ * @author  Andri Trottmann
+ */
 
 #pragma once
 
+/**
+ * @brief Template interface for comparison strategy
+*/
 template<typename T>
 class ICompareStrategy
 {

@@ -1,14 +1,25 @@
-
+/**
+ * @file    GiftFactory.hpp
+ * @brief   Contains different gift-factories
+ * @date    2023-12-08
+ * @author  Andri Trottmann
+ */
 
 #pragma once
 #include "Gift.hpp"
 
+/**
+ * @brief Interface to apply Factory-Pattern
+*/
 class IGiftFactory
 {
     public:
         virtual Gift produceGift(unsigned int id, double latitude, double longitude, double weight) = 0;
 };
 
+/**
+ * @brief Comparison operations of gifts produced with this factory are applied to the weight-attribute of Gift.
+*/
 class GiftWeightFactory : public IGiftFactory
 {
     public:
@@ -24,6 +35,9 @@ class GiftWeightFactory : public IGiftFactory
         Gift g;
 };
 
+/**
+ * @brief Comparison operations of gifts produced with this factory are applied to the id-attribute of Gift.
+*/
 class GiftIDFactory : public IGiftFactory
 {
     public:
@@ -39,6 +53,9 @@ class GiftIDFactory : public IGiftFactory
         Gift g;
 };
 
+/**
+ * @brief Comparison operations of gifts produced with this factory are applied to the distance2pole-attribute of Gift.
+*/
 class GiftDistanceFactory : public IGiftFactory
 {
     public:

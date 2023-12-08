@@ -17,20 +17,11 @@ void Santa::reset_attributes(void)
 
 int Santa::add(const Gift& gift)
 {
-    // Check if a delivery is not running
-    // if(gifts_to_deliver == loaded_gifts.size())
-    // {
-        if((sleigh_current_load+gift.weight()) > sleigh_max_load)
-            return -1; //throw std::runtime_error("Sleigh max load exceeded!");
+    if((sleigh_current_load+gift.weight()) > sleigh_max_load)
+        return -1;
         
-        sleigh_current_load += gift.weight();
-        loaded_gifts.push_back(gift);
-        // ++gifts_to_deliver;
-    // }
-    // else
-    // {
-    //     return -2;
-    // }
+    sleigh_current_load += gift.weight();
+    loaded_gifts.push_back(gift);
     return 0;
 }
 
@@ -57,15 +48,9 @@ double Santa::calculateWRW(void)
         this->WRW += (sleigh_weight + sleigh_current_load) * haversine(current_pos, gift->getCoordinate(), degree);
         this->sleigh_current_load -= gift->weight();
         this->current_pos = gift->getCoordinate();
-        // --gifts_to_deliver;
     }
     WRW += sleigh_weight * haversine(current_pos, {90.0, 0.0}, degree);
     this->current_pos = {90.0, 0.0};
-
-    // Reset sleigh
-    // loaded_gifts.clear();
-    // sleigh_current_load = 0.0;
-    // gifts_to_deliver = 0;
 
     return this->WRW;
 }

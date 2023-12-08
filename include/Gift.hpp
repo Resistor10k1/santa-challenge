@@ -1,4 +1,8 @@
-
+/**
+ * @file    Gift.hpp
+ * @date    2023-12-08
+ * @author  Andri Trottmann
+ */
 
 #pragma once
 #include <initializer_list>
@@ -51,8 +55,6 @@ class Gift
         friend bool operator>=(const Gift& g1, const Gift& g2);
 
         friend std::ostream& operator<<(std::ostream& os, const Gift& g);
-
-        // Gift* getNearest(const std::vector<Gift>& gifts);
 
     private:
         ICompareStrategy<Gift>* compareStrategy; /**< Compare strategy applied with the operator-functions*/
@@ -117,6 +119,9 @@ class CompareDistanceStrategy : public ICompareStrategy<Gift>
         { return (t1.getDistance2Pole() >= t2.getDistance2Pole()); }
 };
 
+/**
+ * @brief Sets the operator-functions of Gift-Class to be applied to the distance2Ref attribute.
+*/
 class CompareDistToRefStrategy : public ICompareStrategy<Gift>
 {
     public:

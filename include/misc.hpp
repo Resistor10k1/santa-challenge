@@ -123,19 +123,22 @@ T median(std::vector<T> vec)
 }
 
 /**
- * @brief Sorts the list gift_list by id, using CompareIDStrategy.
+ * @brief Sorts gift_list by id, using CompareIDStrategy.
 */
 void sort_id(std::vector<Gift>& gift_list);
 
 /**
- * @brief Sorts the list gift_list by weight, using CompareWeightStrategy.
+ * @brief Sorts gift_list by weight, using CompareWeightStrategy.
 */
 void sort_weight(std::vector<Gift>& gift_list);
 
 /**
- * @brief Sorts the list gift_list by distance to the north pole, using CompareDistanceStrategy.
+ * @brief Sorts gift_list by distance to the north pole, using CompareDistanceStrategy.
 */
 void sort_distance(std::vector<Gift>& gift_list);
 
-void sort_distToRef(std::vector<Gift>& gift_list);
+/**
+ * @brief Sorts gift_list by distance to the given reference-coordinate coo, using CompareDistToRefStrategy.
+*/
+void sort_distToRef(std::vector<Gift>& gift_list, Coordinate coo);
 

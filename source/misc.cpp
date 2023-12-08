@@ -181,7 +181,7 @@ void sort_distance(std::vector<Gift>& gift_list)
     }
 }
 
-void sort_distToRef(std::vector<Gift>& gift_list)
+void sort_distToRef(std::vector<Gift>& gift_list, Coordinate coo)
 {
     if(gift_list.size() > 0)
     {
@@ -189,6 +189,7 @@ void sort_distToRef(std::vector<Gift>& gift_list)
         for(auto& gift : gift_list)
         {
             gift.setCompareStrategy(&cdtrs);
+            gift.setDistToRef(coo);
         }
         std::sort(gift_list.begin(), gift_list.end());
     }
