@@ -11,6 +11,7 @@
 #include <filesystem>
 #include <fstream>
 #include <chrono>
+#include <ctime>
 #include "misc.hpp"
 #include "Gift.hpp"
 #include "GiftFactory.hpp"
@@ -86,7 +87,11 @@ int main(int argc, char* argv[])
 
 //  Save results to file =================================================================
     cout << "Save distance to the north pole to file..." << endl;
-    output_file.open(caller_path/"data/output_trips.csv");
+    auto now = system_clock::to_time_t(system_clock::now());
+    string time_now = "0000-00-00_00-00";
+    strftime(time_now.data(), time_now.size()+1, "%F_%H-%M", localtime(&now));
+
+    output_file.open(caller_path/("data/output_trips_"+time_now+".csv"));
     if(output_file.is_open())
     {
         output_file << "GiftId,TripId\n";
@@ -94,6 +99,10 @@ int main(int argc, char* argv[])
         {
             output_file << gift.ID() << "," << gift.getTourNumber() << "\n";
         }
+    }
+    else
+    {
+        cerr << "Could not open file: "<< caller_path/("data/output_trips_"+time_now+".csv") << endl;
     }
     output_file.close();
 
