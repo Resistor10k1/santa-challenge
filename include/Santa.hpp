@@ -3,6 +3,7 @@
 #pragma once
 #include "Gift.hpp"
 #include <vector>
+#include <iostream>
 
 
 /**
@@ -14,6 +15,12 @@ class Santa
         Santa(double max_load);
         int add(const Gift& gift);
         int load(const std::vector<Gift>& giftList);
+
+        int debug_load(const std::vector<Gift>& giftList, int thread_id)
+        {
+            std::cout << "Loading thread: " << thread_id << std::endl;
+            return this->load(giftList);
+        }
 
         /**
          * @brief 'Delivers' the gifts by calculating the WRW.
