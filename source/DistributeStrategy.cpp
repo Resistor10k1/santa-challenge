@@ -107,7 +107,7 @@ void SimulatedAnnealingStrategy::applyRandomSwap(std::vector<Gift>& giftList)
     std::random_device rd;
     std::mt19937_64 gen(rd());
     std::uniform_int_distribution<> init_dist(0, giftList.size()-1);
-    std::uniform_int_distribution<> offset_dist(2, 5);
+    std::uniform_int_distribution<> offset_dist(1, 5);
 
     int start_id = init_dist(gen);
     int offset_id = offset_dist(gen);
