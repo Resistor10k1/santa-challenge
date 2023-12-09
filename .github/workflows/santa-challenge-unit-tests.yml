@@ -4,13 +4,13 @@ name: Santa-Challenge unit-tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
     paths:
       - 'include/**'
       - 'source/**'
       - 'unittests/**'
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
     paths:
       - 'include/**'
       - 'source/**'
@@ -28,20 +28,17 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    # - name: Install OpenMP library
-      # Install the required OpenMP library for usage with clang
-      # run: sudo apt-get install libomp-dev
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build 
-          -DSOURCE=unittest
-          -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} 
-          -DCMAKE_CXX_COMPILER=${{env.CPP_COMPILER}}
-          -DCMAKE_C_COMPILER=${{env.C_COMPILER}}
+          #-DSOURCE=unittest
+          #-DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} 
+          #-DCMAKE_CXX_COMPILER=${{env.CPP_COMPILER}}
+          #-DCMAKE_C_COMPILER=${{env.C_COMPILER}}
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --target all
 
     - name: Run unit tests
       working-directory: ${{github.workspace}}/build
-      run: ctest -V -C # ./unittests/santaChallengeTest
+      run: ctest -V -C
