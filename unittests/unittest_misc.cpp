@@ -5,12 +5,69 @@
 #include <numbers>
 #include <filesystem>
 #include <vector>
+#include <string>
 #include "Gift.hpp"
 #include "misc.hpp"
 #include "GiftFactory.hpp"
 
 namespace fs = std::filesystem;
 
+
+TEST(MiscTest, strSplitTest) {
+    std::string input_str = "Hello World!";
+    std::vector<std::string> output_list;
+    std::vector<std::string> outlist_space_val = {"Hello", "World!"};
+    std::vector<std::string> outlist_o_val = {"Hell", " W", "rld!"};
+    std::vector<std::string> outlist_excl_val = {"Hello World"};
+    std::vector<std::string> outlist_l_val = {"He", "", "o Wor", "d!"};
+
+    str_split(input_str, output_list, ' ');
+    EXPECT_EQ(output_list, outlist_space_val);
+
+    output_list.clear();
+    str_split(input_str, output_list, 'o');
+    EXPECT_EQ(output_list, outlist_o_val);
+    
+    output_list.clear();
+    str_split(input_str, output_list, '!');
+    EXPECT_EQ(output_list, outlist_excl_val);
+
+    output_list.clear();
+    str_split(input_str, output_list, 'l');
+    EXPECT_EQ(output_list, outlist_l_val);
+}
+
+TEST(MiscTest, readFile) {
+    GiftWeightFactory gwf;
+    fs::path path = "../data/example_data.csv";
+    std::vector<Gift> giftList;
+    std::vector<Gift> giftList_val = {  gwf.produceGift(1,16.3457688674,6.30354512503,1.0),
+                                        gwf.produceGift(2,12.494749307,28.6263955635,15.5244795726),
+                                        gwf.produceGift(3,27.794615136,60.0324947881,8.05849862195),
+                                        gwf.produceGift(4,44.4269923769,110.114216113,1.0),
+                                        gwf.produceGift(5,-69.8540884125,87.9468778773,25.0888919163),
+                                        gwf.produceGift(6,53.5679698071,-71.3593080866,38.0001512626),
+                                        gwf.produceGift(7,12.9025840371,79.9669489093,44.2066162418),
+                                        gwf.produceGift(8,-6.29109889296,-64.8917508931,1.0),
+                                        gwf.produceGift(9,-2.68531605304,111.089758191,1.0),
+                                        gwf.produceGift(10,38.4288618657,101.973670947,35.7013112369),
+                                        gwf.produceGift(11,39.0901430146,72.6189278664,27.579921436),
+                                        gwf.produceGift(12,-15.5749342275,39.5572954834,14.5519741369),
+                                        gwf.produceGift(13,73.1896497296,-106.604219923,4.98356232888),
+                                        gwf.produceGift(14,57.0682897236,134.171051275,23.6559977941),
+                                        gwf.produceGift(15,-68.884672727,61.214391432,1.0)
+                                    };
+
+    readGiftsFromFile(path, ',', giftList, gwf);
+
+    for(int i=0; i<15; ++i)
+    {
+        EXPECT_EQ(giftList.at(i).ID(), giftList_val.at(i).ID());
+        EXPECT_EQ(giftList.at(i).latitude(), giftList_val.at(i).latitude());
+        EXPECT_EQ(giftList.at(i).longitude(), giftList_val.at(i).longitude());
+        EXPECT_EQ(giftList.at(i).weight(), giftList_val.at(i).weight());
+    }
+}
 
 TEST(MiscTest, calcHaversineDistance) {
     Coordinate p1 = {1.1, 2.2};
@@ -75,36 +132,27 @@ TEST(MiscTest, calcHaversineDistanceDegree4) {
     EXPECT_NEAR(distance, 1111.95, 0.009);
 }
 
-TEST(MiscTest, readFile) {
+TEST(MiscTest, sumWeight) {
     GiftWeightFactory gwf;
-    fs::path path = "../data/example_data.csv";
-    std::vector<Gift> giftList;
-    std::vector<Gift> giftList_val = {  gwf.produceGift(1,16.3457688674,6.30354512503,1.0),
-                                        gwf.produceGift(2,12.494749307,28.6263955635,15.5244795726),
-                                        gwf.produceGift(3,27.794615136,60.0324947881,8.05849862195),
-                                        gwf.produceGift(4,44.4269923769,110.114216113,1.0),
-                                        gwf.produceGift(5,-69.8540884125,87.9468778773,25.0888919163),
-                                        gwf.produceGift(6,53.5679698071,-71.3593080866,38.0001512626),
-                                        gwf.produceGift(7,12.9025840371,79.9669489093,44.2066162418),
-                                        gwf.produceGift(8,-6.29109889296,-64.8917508931,1.0),
-                                        gwf.produceGift(9,-2.68531605304,111.089758191,1.0),
-                                        gwf.produceGift(10,38.4288618657,101.973670947,35.7013112369),
-                                        gwf.produceGift(11,39.0901430146,72.6189278664,27.579921436),
-                                        gwf.produceGift(12,-15.5749342275,39.5572954834,14.5519741369),
-                                        gwf.produceGift(13,73.1896497296,-106.604219923,4.98356232888),
-                                        gwf.produceGift(14,57.0682897236,134.171051275,23.6559977941),
-                                        gwf.produceGift(15,-68.884672727,61.214391432,1.0)
-                                    };
+    std::vector<Gift> giftList = {  gwf.produceGift(1,16.3457688674,6.30354512503,1.0),
+                                    gwf.produceGift(2,12.494749307,28.6263955635,15.5244795726),
+                                    gwf.produceGift(3,27.794615136,60.0324947881,8.05849862195),
+                                    gwf.produceGift(4,44.4269923769,110.114216113,1.0),
+                                    gwf.produceGift(5,-69.8540884125,87.9468778773,25.0888919163),
+                                    gwf.produceGift(6,53.5679698071,-71.3593080866,38.0001512626),
+                                    gwf.produceGift(7,12.9025840371,79.9669489093,44.2066162418),
+                                    gwf.produceGift(8,-6.29109889296,-64.8917508931,1.0),
+                                    gwf.produceGift(9,-2.68531605304,111.089758191,1.0),
+                                    gwf.produceGift(10,38.4288618657,101.973670947,35.7013112369),
+                                    gwf.produceGift(11,39.0901430146,72.6189278664,27.579921436),
+                                    gwf.produceGift(12,-15.5749342275,39.5572954834,14.5519741369),
+                                    gwf.produceGift(13,73.1896497296,-106.604219923,4.98356232888),
+                                    gwf.produceGift(14,57.0682897236,134.171051275,23.6559977941),
+                                    gwf.produceGift(15,-68.884672727,61.214391432,1.0)
+                                };
+    double weight_val = 242.351404548;
 
-    readGiftsFromFile(path, ',', giftList, gwf);
-
-    for(int i=0; i<15; ++i)
-    {
-        EXPECT_EQ(giftList.at(i).ID(), giftList_val.at(i).ID());
-        EXPECT_EQ(giftList.at(i).latitude(), giftList_val.at(i).latitude());
-        EXPECT_EQ(giftList.at(i).longitude(), giftList_val.at(i).longitude());
-        EXPECT_EQ(giftList.at(i).weight(), giftList_val.at(i).weight());
-    }
+    EXPECT_NEAR(sum_weight(giftList), weight_val, 1e-6);
 }
 
 TEST(MiscTest, meanWeight) {
@@ -151,6 +199,40 @@ TEST(MiscTest, meanDistance) {
     double distance_val = 8435.855395;
 
     EXPECT_NEAR(mean_distance(giftList), distance_val, 1e-6);
+}
+
+TEST(MiscTest, medianIntTest) {
+    std::vector<int> nbr_list = {1, 2, 3, 4, 7, 8, 5, 3, 78, 2};
+    int out_val = 4;
+
+    int out = median(nbr_list);
+
+    EXPECT_EQ(out, out_val);
+}
+
+TEST(MiscTest, medianGiftTest) {
+    GiftWeightFactory gwf;
+    std::vector<Gift> giftList = {  gwf.produceGift(1,16.3457688674,6.30354512503,1.0),
+                                    gwf.produceGift(2,12.494749307,28.6263955635,15.5244795726),
+                                    gwf.produceGift(3,27.794615136,60.0324947881,8.05849862195),
+                                    gwf.produceGift(4,44.4269923769,110.114216113,1.0),
+                                    gwf.produceGift(5,-69.8540884125,87.9468778773,25.0888919163),
+                                    gwf.produceGift(6,53.5679698071,-71.3593080866,38.0001512626),
+                                    gwf.produceGift(7,12.9025840371,79.9669489093,44.2066162418),
+                                    gwf.produceGift(8,-6.29109889296,-64.8917508931,1.0),
+                                    gwf.produceGift(9,-2.68531605304,111.089758191,1.0),
+                                    gwf.produceGift(10,38.4288618657,101.973670947,35.7013112369),
+                                    gwf.produceGift(11,39.0901430146,72.6189278664,27.579921436),
+                                    gwf.produceGift(12,-15.5749342275,39.5572954834,14.5519741369),
+                                    gwf.produceGift(13,73.1896497296,-106.604219923,4.98356232888),
+                                    gwf.produceGift(14,57.0682897236,134.171051275,23.6559977941),
+                                    gwf.produceGift(15,-68.884672727,61.214391432,1.0)
+                                };
+
+    Gift out = median(giftList);
+
+    EXPECT_EQ(out.ID(), 12);
+    EXPECT_EQ(out.weight(), 14.5519741369);
 }
 
 TEST(MiscTest, sortByID) {

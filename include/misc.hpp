@@ -11,6 +11,7 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+#include <algorithm>
 #include <initializer_list>
 #include "Gift.hpp"
 #include "GiftFactory.hpp"
@@ -48,6 +49,7 @@ void printVector(const std::vector<T>& vec)
 /**
  * @brief Splits a string into sub-strings
  * @note If the string ends with a separator character, no empty string is added to the list.
+ * Also, output is not cleared, rather the sub-strings are just added.
  * @param str The string to split
  * @param output List contaning the sub-strings
  * @param separator Separator character to split the string
@@ -108,13 +110,15 @@ double mean_distance(const std::vector<Gift>& g_vec);
  * @brief Returns the median value of list vec.
 */
 template<typename T>
-T median(std::vector<T> vec)
+T median(const std::vector<T> vec)
 {
+    std::vector<T> temp_vec(vec);
     unsigned int i = vec.size() / 2;
+    std::sort(temp_vec.begin(), temp_vec.end());
 
     if(vec.size() > 0)
     {
-        return vec.at(i);
+        return temp_vec.at(i);
     }
     else
     {

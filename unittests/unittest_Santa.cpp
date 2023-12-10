@@ -97,19 +97,6 @@ TEST(SantaTest, checkDelivering) {
                                                     {18921.8049224806381972, 190+10.0},
                                                     {4666.6489449150622022, 100+10.0},
                                                     {5734.4568168356336173, 10.0} };
-
-    // Coordinate current_coor = {90.0, 0.0};
-    // auto it = giftList.begin();
-    // for(; it != giftList.end(); ++it)
-    // {
-    //     cout << "Distance to Gift " << it->ID() << ": ";
-    //     cout << std::setprecision(21) << haversine(current_coor, it->getCoordinate(), degree);
-    //     cout << endl;
-    //     current_coor = it->getCoordinate();
-    // }
-    // cout << "Distance to Gift home: ";
-    // cout << std::setprecision(21) << haversine(current_coor, {90.0, 0.0}, degree);
-    // cout << endl;
                             
     double WRW_val = 0.0;
     for(const auto& [dist, weight] : dist_weight_pairs)
