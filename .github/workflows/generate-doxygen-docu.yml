@@ -46,15 +46,13 @@ jobs:
     - name: Commit changes
       run: |
         git config --global user.name "github-actions[bot]"
-        git config --global user.email github-actions@github.com
+        git config --global user.email github-actions@users.noreply.github.com
         git add -f --all
         git commit -a -m "[bot] Generate doxygen documentation"
     
     - name: Push documentation
-      run: git push origin +gh-pages
+      uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-      # uses: ad-m/github-push-action@master
-      # with:
-      #   github_token: ${{ secrets.GITHUB_TOKEN }}
-      #   branch: "gh-pages"
+        force_with_lease: true
+        branch: "gh-pages"
