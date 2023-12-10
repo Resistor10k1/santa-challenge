@@ -25,11 +25,11 @@ jobs:
     
     steps:
 
-    - name: Checkout repository and install pandoc
+    - name: Checkout repository
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-      
+    - name: Install pandoc
       run: sudo apt-get install pandoc
 
     - name: Generate code documentation
