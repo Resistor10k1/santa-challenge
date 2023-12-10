@@ -36,6 +36,10 @@ jobs:
         working-directory: 'docs/'
         doxyfile-path: 'doxygen/doxygenConfig'
 
+    - name: Convert README
+      working-directory: ${{github.workspace}}
+      run: pandoc README.md -f markdown -t html -s -o docs/index.html --mathml
+
     - name: Commit changes
       run: |
         git config --global user.name "github-actions[bot]"
