@@ -4,7 +4,8 @@
 
 ## Introduction
 
-Help Santa distribute the gifts all over the world. This challenge has been uploaded to <a href="https://www.kaggle.com/competitions/santas-stolen-sleigh" target="_blank">kaggle.com</a> in 2016.
+In the context of a algorithms course, the santa challenge could be solved as a voluntary exercise. This repository contains the code and a short description on how the exercise is solved.
+This challenge has originally been uploaded to <a href="https://www.kaggle.com/competitions/santas-stolen-sleigh" target="_blank">kaggle.com</a> in 2016.
 
 See [Goal](#goal) for the description of the problem, which is basically just the description found on <a href="https://www.kaggle.com/competitions/santas-stolen-sleigh" target="_blank">kaggle.com</a>.
 
@@ -12,7 +13,7 @@ See [Result](#result) for the result achieved with the code in this repository.
 
 ### Goal
 
-The goal is to minimize the overall weighted-reindeer-weariness ($WRW$). All sleigh trips start at the North-Pole (Lat=90, Long=0), then head to each gift in a specified order, and finally head back to the North-Pole. Santa's sleigh has a base weight of 10 and a weight limit of 1000 (excluding the sleigh base weight).
+Help Santa distribute the gifts all over the world. Therefore, the overall weighted-reindeer-weariness ($WRW$) must be minimized. All sleigh trips start at the North-Pole (Lat=90, Long=0), then head to each gift in a specified order, and finally head back to the North-Pole. Santa's sleigh has a base weight of 10 and a weight limit of 1000 (excluding the sleigh base weight).
 
 The weighted-reindeer-weariness is calculated with the following folmula:
 
@@ -47,12 +48,12 @@ In a first step, all gifts are sorted by the distance to the North-Pole in ascen
 
 ## Result
 
-For verifing the solution the Jupyter notebook provided by Mr. Beer is used. The achieved weighted-reindeer-weariness is
+For verifing the solution a Jupyter notebook provided by the lecturer is used. The achieved weighted-reindeer-weariness is
 13'485'852'013.1237 in 1430 trips.
 
 ## Code
 
-All code is written in C++. For a detailed code documentation refer to this <a href="/docs/doxygen/html/index.html" target="_blank">Link</a>
+All code is written in C++. For a detailed code documentation refer to this <a href="./docs/doxygen/html/index.html" target="_blank">Link</a>
 
 ## Some other ideas
 
