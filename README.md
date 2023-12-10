@@ -1,6 +1,6 @@
 # Santa Challenge
 
-![Santa-Challenge unit-tests](https://github.com/Resistor10k1/santa-challenge/actions/workflows/santa-challenge-unit-tests.yml/badge.svg)
+![](https://github.com/Resistor10k1/santa-challenge/actions/workflows/santa-challenge-unit-tests.yml/badge.svg)
 
 ## Introduction
 
@@ -32,7 +32,7 @@ For verifing the solution the Jupyter notebook provided by Mr. Beer is used. The
 
 ## Code
 
-All code is written in C++. For a detailed code documentation refer to this [Link](https://resistor10k1.github.io/santa-challenge).
+All code is written in C++. For a detailed code documentation refer to this [Link](doxygen/html/index.html).
 
 ## Some other ideas
 
