@@ -1,0 +1,51 @@
+# Workflow for building doxygen documentation
+name: Generate doxygen documentation
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'doc/**'
+      - 'include/**'
+      - 'source/**'
+      - 'unittests/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'doc/**'
+      - 'include/**'
+      - 'source/**'
+      - 'unittests/**'
+
+jobs:
+  generate-doxy-docu:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Generate code documentation
+      uses: mattnotmitt/doxygen-action@v1.9.5
+      with:
+        working-directory: 'doc/'
+        doxyfile-path: 'doxygen/doxygenConfig'
+
+    - name: Commit changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email github-actions@github.com
+        git add -f --all
+        git commit -a -m "[bot] Generate doxygen documentation"
+    
+    - name: Push documentation
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: "main"
+
