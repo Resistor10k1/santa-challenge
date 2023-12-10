@@ -5,40 +5,46 @@ on:
   push:
     branches: [ "main" ]
     paths:
+      - 'doc/**'
       - 'include/**'
       - 'source/**'
       - 'unittests/**'
   pull_request:
     branches: [ "main" ]
     paths:
+      - 'doc/**'
       - 'include/**'
       - 'source/**'
       - 'unittests/**'
 
-# env:
-#   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-#   BUILD_TYPE: Debug
-#   CPP_COMPILER: g++
-  # C_COMPILER: gcc
-
 jobs:
   generate-doxy-docu:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
 
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Generate code documentation
       uses: mattnotmitt/doxygen-action@v1.9.5
       with:
-          working-directory: 'doc/'
-          doxyfile-path: 'doc/doxygen'
-  
-  # publish:
-  #   runs-on: ubuntu-latest
+        working-directory: 'doc/'
+        doxyfile-path: 'doc/doxygen'
 
-  #   steps:
+    - name: Commit changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email github-actions@github.com
+        git commit -a -m "[bot] Generate doxygen documentation"
+    
+    - name: Push documentation
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
 
-  #   - name: 
