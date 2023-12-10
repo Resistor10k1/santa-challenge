@@ -51,8 +51,10 @@ jobs:
         git commit -a -m "[bot] Generate doxygen documentation"
     
     - name: Push documentation
-      uses: ad-m/github-push-action@master
+      run: git push origin +gh-pages
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: "main"
-
+      # uses: ad-m/github-push-action@master
+      # with:
+      #   github_token: ${{ secrets.GITHUB_TOKEN }}
+      #   branch: "gh-pages"
