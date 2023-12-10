@@ -4,16 +4,23 @@
 
 ## Introduction
 
-Help Santa distribute the gifts all over the world.
-In 2016, a challenge to help Santa to distribute his gifts was uploaded to *kaggle.com*.
+Help Santa distribute the gifts all over the world. This challenge has been uploaded to <a href="https://www.kaggle.com/competitions/santas-stolen-sleigh" target="_blank">kaggle.com</a> in 2016.
+
+See [Goal](#goal) for the description of the problem, which is basically just the description found on <a href="https://www.kaggle.com/competitions/santas-stolen-sleigh" target="_blank">kaggle.com</a>.
+
+See [Result](#result) for the result achieved with the code in this repository.
 
 ### Goal
 
-The goal is to minimize the overall weighted-reindeer-weariness ($WRW$). This weariness is calculated with the following folmula:
+The goal is to minimize the overall weighted-reindeer-weariness ($WRW$). All sleigh trips start at the North-Pole (Lat=90, Long=0), then head to each gift in a specified order, and finally head back to the North-Pole. Santa's sleigh has a base weight of 10 and a weight limit of 1000 (excluding the sleigh base weight).
+
+The weighted-reindeer-weariness is calculated with the following folmula:
 
 $$WRW = \sum_{j=1}^m \sum_{i=1}^{n_j} \sum_{k=i}^{n_j} w_{kj} * Dist(Loc_i, Loc_{i-1})$$
 
-The $Dist(Loc_i, Loc_j)$ function returns the Haversine distance $d$ between location $i$ and $j$.
+Where $m$ is the number of trips, $n_j =$(#gifts for trip $j$)$+1$, $w_{ij}$ is the weight of the $i$-th gift at trip $j$, $Loc_i$ is the location of gift $i$. $Loc_0$ and $Loc_{n_j}$ are the North-Pole, and $w_{n_{j},j}$ (the last leg of each trip) is always the base weight of the sleigh.
+
+The $Dist(Loc_i, Loc_{i-1})$ function returns the Haversine distance $d$ between location $i$ and $i-1$.
 
 $\phi_1, \phi_2$ : Latitude of $Loc_1$ resp. $Loc_2$ in radians<br>
 $\lambda_1, \lambda_2$ : Longitude of $Loc_1$ resp. $Loc_2$ in radians<br>
@@ -21,9 +28,22 @@ $r$ : Radius of the earth (6371.0087714km)
 
 $$ d = 2r \arcsin \left( \sqrt {\sin^2 ({\frac{\phi_2-\phi_1}{2}}) + \cos(\phi_1)\cos(\phi_2) \sin^2 ({\frac{\lambda_2-\lambda_1}{2}})} \right) $$
 
+#### Example
+
+Two gifts $A$ and $B$ are delivered in a trip. Then the $WRW$ is calculated as follows:
+
+$$
+\newcommand{\NorthPole}{\operatorname{North-Pole}}
+\begin{aligned}
+&Dist(\NorthPole \rightarrow A) &&* (base\_weight + weight(B) + weight(A))&& \\
+&Dist(A \rightarrow B) &&* (base\_weight + weight(B))&& \\
+&Dist(B \rightarrow \NorthPole) &&* (base\_weight)&&
+\end{aligned}
+$$
+
 ## Solution approach
 
-In a first step, all gifts are sorted by the distance to the north pole in ascending order. Starting with the closest gift the tours are built with Nearest-Neighbour. For each tour a Simulated Annealing algorithm is run, to improve the tour.
+In a first step, all gifts are sorted by the distance to the North-Pole in ascending order. Starting with the closest gift, the tours are built with Nearest-Neighbour approach. For each tour, a Simulated Annealing algorithm is run, to improve the tour.
 
 ## Result
 
@@ -32,7 +52,7 @@ For verifing the solution the Jupyter notebook provided by Mr. Beer is used. The
 
 ## Code
 
-All code is written in C++. For a detailed code documentation refer to this [Link](doxygen/html/index.html).
+All code is written in C++. For a detailed code documentation refer to this <a href="/docs/doxygen/html/index.html" target="_blank">Link</a>
 
 ## Some other ideas
 

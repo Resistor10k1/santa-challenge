@@ -4,18 +4,18 @@ name: Generate doxygen documentation
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - 'docs/**'
-      - 'include/**'
-      - 'source/**'
-      - 'unittests/**'
+    # paths:
+    #   - 'docs/**'
+    #   - 'include/**'
+    #   - 'source/**'
+    #   - 'unittests/**'
   pull_request:
     branches: [ "main" ]
-    paths:
-      - 'docs/**'
-      - 'include/**'
-      - 'source/**'
-      - 'unittests/**'
+    # paths:
+    #   - 'docs/**'
+    #   - 'include/**'
+    #   - 'source/**'
+    #   - 'unittests/**'
 
 jobs:
   generate-doxy-docu:
@@ -25,10 +25,11 @@ jobs:
     
     steps:
 
-    - name: Checkout repository
+    - name: Checkout repository and install pandoc
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+
     - name: Install pandoc
       run: sudo apt-get install pandoc
 

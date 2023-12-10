@@ -19,7 +19,6 @@
 <p><img src="https://github.com/Resistor10k1/santa-challenge/actions/workflows/santa-challenge-unit-tests.yml/badge.svg" /></p>
 <h2 id="introduction">Introduction</h2>
 <p>Help Santa distribute the gifts all over the world. In 2016, a challenge to help Santa to distribute his gifts was uploaded to <em>kaggle.com</em>.</p>
-<p>Just a test if it’s really working…</p>
 <h3 id="goal">Goal</h3>
 <p>The goal is to minimize the overall weighted-reindeer-weariness (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mi>R</mi><mi>W</mi></mrow><annotation encoding="application/x-tex">WRW</annotation></semantics></math>). This weariness is calculated with the following folmula:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mi>R</mi><mi>W</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mi>j</mi></msub></munderover><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mi>i</mi></mrow><msub><mi>n</mi><mi>j</mi></msub></munderover><msub><mi>w</mi><mrow><mi>k</mi><mi>j</mi></mrow></msub><mo>*</mo><mi>D</mi><mi>i</mi><mi>s</mi><mi>t</mi><mo stretchy="false" form="prefix">(</mo><mi>L</mi><mi>o</mi><msub><mi>c</mi><mi>i</mi></msub><mo>,</mo><mi>L</mi><mi>o</mi><msub><mi>c</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">WRW = \sum_{j=1}^m \sum_{i=1}^{n_j} \sum_{k=i}^{n_j} w_{kj} * Dist(Loc_i, Loc_{i-1})</annotation></semantics></math></p>
@@ -31,7 +30,7 @@
 <h2 id="result">Result</h2>
 <p>For verifing the solution the Jupyter notebook provided by Mr. Beer is used. The achieved weighted-reindeer-weariness is 13’485’852’013.1237 in 1430 trips.</p>
 <h2 id="code">Code</h2>
-<p>All code is written in C++. For a detailed code documentation refer to this <a href="doxygen/html/index.html">Link</a>.</p>
+<p>All code is written in C++. For a detailed code documentation refer to this <a href="/docs/doxygen/html/index.html">Link</a>{:target="_blank"}.</p>
 <h2 id="some-other-ideas">Some other ideas</h2>
 <p>In general, just find ‘a’ solution and then try to improve it with local improvements such as <em>k-opt Neighbourhood</em>, <em>Randomized Local Search</em> or <em>Simulated Annealing</em>.</p>
 <h3 id="how-to-find-a-solution">How to find ‘a’ solution</h3>
