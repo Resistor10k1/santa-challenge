@@ -54,7 +54,6 @@ For verifing the solution the Jupyter notebook provided by Mr. Beer is used. The
 
 All code is written in C++. For a detailed code documentation refer to this <a href="/docs/doxygen/html/index.html" target="_blank">Link</a>
 
-
 ## Some other ideas
 
 In general, just find 'a' solution and then try to improve it with local improvements such as *k-opt Neighbourhood*, *Randomized Local Search* or *Simulated Annealing*.
