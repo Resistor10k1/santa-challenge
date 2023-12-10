@@ -25,10 +25,12 @@ jobs:
     
     steps:
 
-    - name: Checkout repository
+    - name: Checkout repository and install pandoc
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+      
+      run: sudo apt-get install pandoc
 
     - name: Generate code documentation
       uses: mattnotmitt/doxygen-action@v1.9.5
