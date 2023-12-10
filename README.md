@@ -32,7 +32,7 @@ For verifing the solution the Jupyter notebook provided by Mr. Beer is used. The
 
 ## Code
 
-All code is written in C++. For a detailed code documentation refer to this [Link](doxygen/html/index.html).
+All code is written in C++. For a detailed code documentation refer to this [Link](/docs/doxygen/html/index.html){:target="_blank"}.
 
 ## Some other ideas
 
