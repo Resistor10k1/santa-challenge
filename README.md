@@ -1,6 +1,6 @@
 # Santa Challenge
 
-![Santa-Challenge unit-tests](https://github.com/Resistor10k1/santa-challenge/actions/workflows/santa-challenge-unit-tests.yml/badge.svg)
+![](https://github.com/Resistor10k1/santa-challenge/actions/workflows/santa-challenge-unit-tests.yml/badge.svg)
 
 ## Introduction
 
@@ -32,11 +32,11 @@ For verifing the solution the Jupyter notebook provided by Mr. Beer is used. The
 
 ## Code
 
-All code is written in C++. For a detailed code documentation refer to this [Link](doc/doxygen/html/index.html).
+All code is written in C++. For a detailed code documentation refer to this [Link](doxygen/html/index.html).
 
 ## Some other ideas
 
-In general, just find 'a' solution and then try to imporve it with local improvements such as *k-opt Neighbourhood*, *Randomized Local Search* or *Simulated Annealing*.
+In general, just find 'a' solution and then try to improve it with local improvements such as *k-opt Neighbourhood*, *Randomized Local Search* or *Simulated Annealing*.
 
 ### How to find 'a' solution
 
