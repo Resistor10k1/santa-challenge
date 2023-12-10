@@ -40,6 +40,7 @@ jobs:
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email github-actions@github.com
+        git add -f -all
         git commit -a -m "[bot] Generate doxygen documentation"
     
     - name: Push documentation
