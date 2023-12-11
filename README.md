@@ -33,8 +33,6 @@ Jump into to build folder (`cd build`) and run the program. The program takes th
 ./santa-challenge "../data/gifts.csv"
 ```
 
-
-
 ## Goal of the challenge
 
 Help Santa distribute the gifts all over the world. Therefore, the overall weighted-reindeer-weariness ($WRW$) must be minimized. All sleigh trips start at the North-Pole (Lat=90, Long=0), then head to each gift in a specified order, and finally head back to the North-Pole. Santa's sleigh has a base weight of 10 and a weight limit of 1000 (excluding the sleigh base weight).
@@ -76,7 +74,7 @@ For verifing the solution a Jupyter notebook provided by the lecturer is used. T
 
 ## Code
 
-All code is written in C++. For a detailed code documentation refer to this <a href="https://resistor10k1.github.io/santa-challenge/doxygen/html/index.html" target="_blank">Link</a> (Link does not work out of the repository!).
+All code is written in C++. For a detailed code documentation refer to this <a href="https://resistor10k1.github.io/santa-challenge/doxygen/html/index.html" target="_blank">Link</a>.
 
 ## Some other ideas
 
