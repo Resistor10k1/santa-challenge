@@ -28,7 +28,8 @@ int main(int argc, char* argv[])
     GiftWeightFactory gwf;
     ofstream output_file;
     fs::path gift_file_path;
-    fs::path abs_path = fs::canonical("/proc/self/exe");
+    fs::path exe_path = fs::canonical("/proc/self/exe");
+    fs::path proj_root = exe_path.parent_path().parent_path();
     fs::path caller_path = fs::current_path();
     double duration_ms = 0.0;
     auto start = high_resolution_clock::now();
@@ -41,13 +42,14 @@ int main(int argc, char* argv[])
     }
     else
     {
-        gift_file_path = "../data/example_data.csv";
+        gift_file_path = proj_root/"data/example_data.csv";
     }
 
-    cout << "Absolut path: " << abs_path << endl;
+    cout << "Exe path: " << exe_path << endl;
     cout << "Caller path: " << caller_path << endl;
+    cout << "Project root: " << proj_root << endl;
 
-    cout << "Read some data..." << endl;
+    cout << "Read some data from " << gift_file_path << endl;
     readGiftsFromFile(gift_file_path, ',', giftList, gwf);
     
 //  Print some statistics about the gifts =================================================
@@ -86,12 +88,12 @@ int main(int argc, char* argv[])
     giftList = tm_Serious.getTotalBestTour();
 
 //  Save results to file =================================================================
-    cout << "Save distance to the north pole to file..." << endl;
     auto now = system_clock::to_time_t(system_clock::now());
     string time_now = "0000-00-00_00-00";
     strftime(time_now.data(), time_now.size()+1, "%F_%H-%M", localtime(&now));
 
-    output_file.open(caller_path/("data/output_trips_"+time_now+".csv"));
+    cout << "Save distance to the north pole to " << proj_root/("data/output_trips_"+time_now+".csv") << endl;
+    output_file.open(proj_root/("data/output_trips_"+time_now+".csv"));
     if(output_file.is_open())
     {
         output_file << "GiftId,TripId\n";
@@ -102,7 +104,7 @@ int main(int argc, char* argv[])
     }
     else
     {
-        cerr << "Could not open file: "<< caller_path/("data/output_trips_"+time_now+".csv") << endl;
+        cerr << "Could not open file: "<< proj_root/("data/output_trips_"+time_now+".csv") << endl;
     }
     output_file.close();
 
