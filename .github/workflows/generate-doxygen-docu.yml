@@ -39,9 +39,9 @@ jobs:
         working-directory: 'docs/'
         doxyfile-path: 'doxygen/doxygenConfig'
 
-    - name: Convert README
+    - name: Generate wiki mainpage
       working-directory: ${{github.workspace}}
-      run: pandoc README.md -f markdown -t html -s -o docs/index.html --mathml
+      run: pandoc docs/main_index.md -f markdown -t html -s -o docs/index.html --mathml --metadata title="Wiki Santa-Challenge"
 
     - name: Commit changes
       run: |
