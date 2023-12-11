@@ -110,13 +110,13 @@ double mean_distance(const std::vector<Gift>& g_vec);
  * @brief Returns the median value of list vec.
 */
 template<typename T>
-T median(const std::vector<T> vec)
+T median(const std::vector<T>& vec)
 {
     std::vector<T> temp_vec(vec);
-    unsigned int i = vec.size() / 2;
+    unsigned int i = temp_vec.size() / 2;
     std::sort(temp_vec.begin(), temp_vec.end());
 
-    if(vec.size() > 0)
+    if(temp_vec.size() > 0)
     {
         return temp_vec.at(i);
     }

@@ -146,12 +146,19 @@ void sort_id(std::vector<Gift>& gift_list)
 {
     if(gift_list.size() > 0)
     {
-        CompareIDStrategy cds;
+        CompareIDStrategy cis;
+        ICompareStrategy<Gift>* cmps_ptr = gift_list.front().getCompareStrategy();
+
         for(auto& gift : gift_list)
         {
-            gift.setCompareStrategy(&cds);
+            gift.setCompareStrategy(&cis);
         }
         std::sort(gift_list.begin(), gift_list.end());
+
+        for(auto& gift : gift_list)
+        {
+            gift.setCompareStrategy(cmps_ptr);
+        }
     }
 }
 
@@ -159,12 +166,19 @@ void sort_weight(std::vector<Gift>& gift_list)
 {
     if(gift_list.size() > 0)
     {
-        CompareWeightStrategy cds;
+        CompareWeightStrategy cws;
+        ICompareStrategy<Gift>* cmps_ptr = gift_list.front().getCompareStrategy();
+
         for(auto& gift : gift_list)
         {
-            gift.setCompareStrategy(&cds);
+            gift.setCompareStrategy(&cws);
         }
         std::sort(gift_list.begin(), gift_list.end());
+
+        for(auto& gift : gift_list)
+        {
+            gift.setCompareStrategy(cmps_ptr);
+        }
     }
 }
 
@@ -173,11 +187,18 @@ void sort_distance(std::vector<Gift>& gift_list)
     if(gift_list.size() > 0)
     {
         CompareDistanceStrategy cds;
+        ICompareStrategy<Gift>* cmps_ptr = gift_list.front().getCompareStrategy();
+
         for(auto& gift : gift_list)
         {
             gift.setCompareStrategy(&cds);
         }
         std::sort(gift_list.begin(), gift_list.end());
+
+        for(auto& gift : gift_list)
+        {
+            gift.setCompareStrategy(cmps_ptr);
+        }
     }
 }
 
@@ -186,12 +207,19 @@ void sort_distToRef(std::vector<Gift>& gift_list, Coordinate coo)
     if(gift_list.size() > 0)
     {
         CompareDistToRefStrategy cdtrs;
+        ICompareStrategy<Gift>* cmps_ptr = gift_list.front().getCompareStrategy();
+
         for(auto& gift : gift_list)
         {
             gift.setCompareStrategy(&cdtrs);
             gift.setDistToRef(coo);
         }
         std::sort(gift_list.begin(), gift_list.end());
+
+        for(auto& gift : gift_list)
+        {
+            gift.setCompareStrategy(cmps_ptr);
+        }
     }
 }
 
