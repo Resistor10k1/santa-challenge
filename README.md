@@ -69,12 +69,20 @@ In a first step, all gifts are sorted by the distance to the North-Pole in ascen
 
 ## Result
 
-For verifing the solution a Jupyter notebook provided by the lecturer is used. The achieved weighted-reindeer-weariness is
-13'485'852'013.1237 in 1430 trips.
+For verifing the solution a Jupyter notebook provided by the lecturer is used. The achieved weighted-reindeer-weariness is 13'452'086'880.13939 in 1430 trips.
+
+![Overview of all tours](figures/whole_map.png)
+
+All tours are also shown in an interactive [map](figures/map.html). A single tour looks something like this:
+
+![Single tour](figures/firstTrip_map.png)
+
 
 ## Code
 
-All code is written in C++. For a detailed code documentation refer to this <a href="https://resistor10k1.github.io/santa-challenge/doxygen/html/index.html" target="_blank">Link</a>.
+// TODO : Undo un-comment
+<!-- All code is written in C++. For a detailed code documentation refer to this <a href="https://resistor10k1.github.io/santa-challenge/doxygen/html/index.html" target="_blank">Link</a>. -->
+All code is written in C++. For a detailed code documentation refer to this <a href="doxygen/html/index.html" target="_blank">Link</a>.
 
 ## Some other ideas
 
