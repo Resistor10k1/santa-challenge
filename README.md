@@ -33,8 +33,6 @@ Jump into to build folder (`cd build`) and run the program. The program takes th
 ./santa-challenge "../data/gifts.csv"
 ```
 
-
-
 ## Goal of the challenge
 
 Help Santa distribute the gifts all over the world. Therefore, the overall weighted-reindeer-weariness ($WRW$) must be minimized. All sleigh trips start at the North-Pole (Lat=90, Long=0), then head to each gift in a specified order, and finally head back to the North-Pole. Santa's sleigh has a base weight of 10 and a weight limit of 1000 (excluding the sleigh base weight).
@@ -47,22 +45,21 @@ Where $m$ is the number of trips, $n_j =$(#gifts for trip $j$)$+1$, $w_{ij}$ is 
 
 The $Dist(Loc_i, Loc_{i-1})$ function returns the Haversine distance $d$ between location $i$ and $i-1$.
 
-$\phi_1, \phi_2$ : Latitude of $Loc_1$ resp. $Loc_2$ in radians<br>
+$\varphi_1, \varphi_2$ : Latitude of $Loc_1$ resp. $Loc_2$ in radians<br>
 $\lambda_1, \lambda_2$ : Longitude of $Loc_1$ resp. $Loc_2$ in radians<br>
 $r$ : Radius of the earth (6371.0087714km)
 
-$$ d = 2r \arcsin \left( \sqrt {\sin^2 ({\frac{\phi_2-\phi_1}{2}}) + \cos(\phi_1)\cos(\phi_2) \sin^2 ({\frac{\lambda_2-\lambda_1}{2}})} \right) $$
+$$ d = 2r \arcsin \left( \sqrt {\sin^2 ({\frac{\varphi_2-\varphi_1}{2}}) + \cos(\varphi_1)\cos(\varphi_2) \sin^2 ({\frac{\lambda_2-\lambda_1}{2}})} \right) $$
 
 #### Example
 
 Two gifts $A$ and $B$ are delivered in a trip. Then the $WRW$ is calculated as follows:
 
 $$
-\newcommand{\NorthPole}{\operatorname{North-Pole}}
 \begin{aligned}
-&Dist(\NorthPole \rightarrow A) &&* (base\_weight + weight(B) + weight(A))&& \\
+&Dist(NorthPole \rightarrow A) &&* (base\_weight + weight(B) + weight(A))&& \\
 &Dist(A \rightarrow B) &&* (base\_weight + weight(B))&& \\
-&Dist(B \rightarrow \NorthPole) &&* (base\_weight)&&
+&Dist(B \rightarrow NorthPole) &&* (base\_weight)&&
 \end{aligned}
 $$
 
@@ -77,7 +74,7 @@ For verifing the solution a Jupyter notebook provided by the lecturer is used. T
 
 ## Code
 
-All code is written in C++. For a detailed code documentation refer to the <a href="https://resistor10k1.github.io/santa-challenge/docs/doxygen/index.html" target="_blank">wiki</a>
+All code is written in C++. For a detailed code documentation refer to this <a href="https://resistor10k1.github.io/santa-challenge/doxygen/html/index.html" target="_blank">Link</a>.
 
 ## Some other ideas
 
