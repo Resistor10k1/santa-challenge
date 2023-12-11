@@ -76,7 +76,7 @@ For verifing the solution a Jupyter notebook provided by the lecturer is used. T
 
 ## Code
 
-All code is written in C++. For a detailed code documentation refer to this <a href="/doxygen/index.html" target="_blank">Link</a> (Link does not work out of the repository!).
+All code is written in C++. For a detailed code documentation refer to this <a href="https://resistor10k1.github.io/santa-challenge/docs/doxygen/html/index.html" target="_blank">Link</a> (Link does not work out of the repository!).
 
 ## Some other ideas
 
