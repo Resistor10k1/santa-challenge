@@ -7,11 +7,35 @@
 In the context of a algorithms course, the santa challenge could be solved as a voluntary exercise. This repository contains the code and a short description on how the exercise is solved.
 This challenge has originally been uploaded to <a href="https://www.kaggle.com/competitions/santas-stolen-sleigh" target="_blank">kaggle.com</a> in 2016.
 
-See [Goal](#goal) for the description of the problem, which is basically just the description found on <a href="https://www.kaggle.com/competitions/santas-stolen-sleigh" target="_blank">kaggle.com</a>.
+See [Goal](#goal-of-the-challenge) for the description of the problem, which is basically just the description found on <a href="https://www.kaggle.com/competitions/santas-stolen-sleigh" target="_blank">kaggle.com</a>.
 
 See [Result](#result) for the result achieved with the code in this repository.
 
-### Goal
+Refer to the <a href="https://resistor10k1.github.io/santa-challenge/" target="_blank">wiki</a> for additional information.
+
+## Setup
+
+### Build
+
+First, clone the git repository. Afterwards, configure CMake and build the project.
+```
+git clone https://github.com/Resistor10k1/santa-challenge.git
+cd santa-challenge
+mkdir build && cd build
+cmake ..
+cmake --build . --target all
+```
+
+### Run
+
+Jump into to build folder (`cd build`) and run the program. The program takes the relative path to the data file as an argument. If no argument is given, a small example data file is taken to show the program's functionality.
+```
+./santa-challenge "../data/gifts.csv"
+```
+
+
+
+## Goal of the challenge
 
 Help Santa distribute the gifts all over the world. Therefore, the overall weighted-reindeer-weariness ($WRW$) must be minimized. All sleigh trips start at the North-Pole (Lat=90, Long=0), then head to each gift in a specified order, and finally head back to the North-Pole. Santa's sleigh has a base weight of 10 and a weight limit of 1000 (excluding the sleigh base weight).
 
@@ -53,7 +77,7 @@ For verifing the solution a Jupyter notebook provided by the lecturer is used. T
 
 ## Code
 
-All code is written in C++. For a detailed code documentation refer to the <a href="https://resistor10k1.github.io/santa-challenge/" target="_blank">wiki</a>
+All code is written in C++. For a detailed code documentation refer to the <a href="https://resistor10k1.github.io/santa-challenge/docs/doxygen/index.html" target="_blank">wiki</a>
 
 ## Some other ideas
 
