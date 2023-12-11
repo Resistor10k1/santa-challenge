@@ -47,22 +47,21 @@ Where $m$ is the number of trips, $n_j =$(#gifts for trip $j$)$+1$, $w_{ij}$ is 
 
 The $Dist(Loc_i, Loc_{i-1})$ function returns the Haversine distance $d$ between location $i$ and $i-1$.
 
-$\phi_1, \phi_2$ : Latitude of $Loc_1$ resp. $Loc_2$ in radians<br>
+$\varphi_1, \varphi_2$ : Latitude of $Loc_1$ resp. $Loc_2$ in radians<br>
 $\lambda_1, \lambda_2$ : Longitude of $Loc_1$ resp. $Loc_2$ in radians<br>
 $r$ : Radius of the earth (6371.0087714km)
 
-$$ d = 2r \arcsin \left( \sqrt {\sin^2 ({\frac{\phi_2-\phi_1}{2}}) + \cos(\phi_1)\cos(\phi_2) \sin^2 ({\frac{\lambda_2-\lambda_1}{2}})} \right) $$
+$$ d = 2r \arcsin \left( \sqrt {\sin^2 ({\frac{\varphi_2-\varphi_1}{2}}) + \cos(\varphi_1)\cos(\varphi_2) \sin^2 ({\frac{\lambda_2-\lambda_1}{2}})} \right) $$
 
 #### Example
 
 Two gifts $A$ and $B$ are delivered in a trip. Then the $WRW$ is calculated as follows:
 
 $$
-\newcommand{\NorthPole}{\operatorname{North-Pole}}
 \begin{aligned}
-&Dist(\NorthPole \rightarrow A) &&* (base\_weight + weight(B) + weight(A))&& \\
+&Dist(NorthPole \rightarrow A) &&* (base\_weight + weight(B) + weight(A))&& \\
 &Dist(A \rightarrow B) &&* (base\_weight + weight(B))&& \\
-&Dist(B \rightarrow \NorthPole) &&* (base\_weight)&&
+&Dist(B \rightarrow NorthPole) &&* (base\_weight)&&
 \end{aligned}
 $$
 
@@ -77,7 +76,7 @@ For verifing the solution a Jupyter notebook provided by the lecturer is used. T
 
 ## Code
 
-All code is written in C++. For a detailed code documentation refer to the <a href="https://resistor10k1.github.io/santa-challenge/docs/doxygen/index.html" target="_blank">wiki</a>
+All code is written in C++. For a detailed code documentation refer to this <a href="/doxygen/index.html" target="_blank">Link</a> (Link does not work out of the repository!).
 
 ## Some other ideas
 
