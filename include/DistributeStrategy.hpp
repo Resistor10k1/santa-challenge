@@ -53,9 +53,9 @@ class SimulatedAnnealingStrategy : public IDistributeStrategy
          * @brief Swaps two destinations in a tour.
          * @details The destinations to swap are chosen randomly, but underlie some constraints.
          * The destinations can lie 1-5 positions apart from each other (index in the list).
-         * 
+         * @param nbrOfPermutations Determines how many random swaps are performed
         */
-        void applyRandomSwap(std::vector<Gift>& giftList);
+        void applyRandomSwap(std::vector<Gift>& giftList, unsigned int nbrOfPermutations);
 
         /**
          * @brief Returns uniformly distributes random value [0,1]
