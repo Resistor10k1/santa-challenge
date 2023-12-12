@@ -90,3 +90,27 @@ std::vector<Gift>::iterator NNLoadingStrategy::loadTourToSleigh(Santa& santa, st
 
     return ref_gift;
 }
+
+
+
+
+void PilotNNLoadingStrategy::preprocessGifts(std::vector<Gift>& giftList)
+{
+    sort_distance(giftList);
+}
+
+std::vector<Gift>::iterator PilotNNLoadingStrategy::loadTourToSleigh(Santa& santa, std::vector<Gift>& giftList, 
+                                                                     const std::vector<Gift>::iterator& it_ref, 
+                                                                     unsigned int tour_nbr)
+{
+    auto ref_gift = it_ref;
+    auto it_start = giftList.begin();
+    auto it_end = giftList.end();
+
+    std::vector<Gift> local_giftList(giftList);
+
+    santa.unloadSleigh();
+    loadSleigh(santa, *it_ref, tour_nbr);
+
+    sort_distToRef(local_giftList, (*ref_gift).getCoordinate());
+}
