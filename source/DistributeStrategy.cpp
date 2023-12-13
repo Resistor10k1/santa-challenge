@@ -13,6 +13,36 @@ void NaiveStrategy::distributeGifts(Santa& santa)
     best_WRW = santa.calculateWRW();
 }
 
+SimulatedAnnealingStrategy::SimulatedAnnealingStrategy() { }
+SimulatedAnnealingStrategy::SimulatedAnnealingStrategy(const std::initializer_list<double> ilist)
+{
+    this->setMagicNumbers(ilist);
+}
+
+void SimulatedAnnealingStrategy::setMagicNumbers(const std::initializer_list<double> ilist)
+{
+    auto it = ilist.begin();
+    unsigned int size = ilist.size();
+
+    this->rndSwap_min_offset = (size >= 1) ? static_cast<unsigned int>(std::ceil(*it)) : 1;
+    this->rndSwap_max_offset = (size >= 2) ? static_cast<unsigned int>(std::ceil(*(it+1))) : 15;
+    this->cool_intervall = (size >= 3) ? static_cast<unsigned int>(std::ceil(*(it+2))) : 13;
+    this->reheat_intervall = (size >= 4) ? static_cast<unsigned int>(std::ceil(*(it+3))) : 51;
+    this->inital_temperature = (size >= 5) ? *(it+4) : 100000.0;
+    this->final_temperature = (size >= 6) ? *(it+5) : 0.001;
+}
+
+std::initializer_list<double> SimulatedAnnealingStrategy::getMagicNumbers(void)
+{
+    return {static_cast<double>(this->rndSwap_min_offset),
+            static_cast<double>(this->rndSwap_max_offset),
+            static_cast<double>(this->cool_intervall),
+            static_cast<double>(this->reheat_intervall),
+            this->inital_temperature,
+            this->final_temperature
+            };
+}
+
 void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
 {
     double temp_WRW = __DBL_MAX__;
@@ -28,8 +58,8 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
     }
     #pragma omp barrier
     auto s_star = s;
-    double T = 100000;
-    double T_final = 0.001;
+    double T = this->inital_temperature;
+    double T_final = this->final_temperature;
     const double alpha = 0.9;
     unsigned int loop_cnt = 0;
     int nbr_improvements = 0;
@@ -63,22 +93,16 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
             ++nbr_improvements;
         }
 
-        if((loop_cnt+1)%51 == 0)
+        if((loop_cnt+1)%this->reheat_intervall == 0)
         {/* Reheat the system after 200 iterations */
             T *= 1.3;
             ++nbr_reheats;
         }
-        else if((loop_cnt+1)%13 == 0)
+        else if((loop_cnt+1)%this->cool_intervall == 0)
         // else if((nbr_improvements+1)%4 == 0)
         {/* Decrease temperature after 12 iterations */
             T *= alpha;
         }
-
-        // if(((loop_cnt-nbr_improvements)%100 == 0) && (loop_cnt > 100))
-        // if((loop_cnt-nbr_improvements) > 100)
-        // {/* Reset working solution to current best solution after 100 iterations without improvement */
-        //     s = s_star;
-        // }
 
         ++loop_cnt;
     }
@@ -108,7 +132,7 @@ void SimulatedAnnealingStrategy::applyRandomSwap(std::vector<Gift>& giftList, un
     std::random_device rd;
     std::mt19937_64 gen(rd());
     std::uniform_int_distribution<> init_dist(0, giftList.size()-1);
-    std::uniform_int_distribution<> offset_dist(1, 15);
+    std::uniform_int_distribution<> offset_dist(this->rndSwap_min_offset, this->rndSwap_max_offset);
 
     for(unsigned int i=0; i<nbrOfPermutations; ++i)
     {
