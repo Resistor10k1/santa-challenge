@@ -352,5 +352,33 @@ TEST(MiscTest, sortByDistance2Ref) {
     }
 }
 
+TEST(MiscTest, sortByDistance2Ref_RefInList) {
+    GiftWeightFactory gwf;
+    std::vector<Gift> giftList = {  gwf.produceGift(30, 16.3457688674, 6.30354512503, 1.0),             //  9794.61 x
+                                    gwf.produceGift(34, 12.494749307, 28.6263955635, 15.5244795726),    //  8367.12 x
+                                    gwf.produceGift(37, 27.794615136, 60.0324947881, 8.05849862195),    //  4777.20 x
+                                    gwf.produceGift(4, 44.4269923769, 110.114216113, 1.0),              //     0.00 x
+                                    gwf.produceGift(80, -69.8540884125, 87.9468778773, 25.0888919163),  // 12835.14 x
+                                    gwf.produceGift(112, 53.5679698071, -71.3593080866, 38.0001512626), //  9117.65 x
+                                    gwf.produceGift(7, 12.9025840371, 79.9669489093, 44.2066162418),    //  4524.42 x
+                                    gwf.produceGift(81, -6.29109889296, -64.8917508931, 1.0),           // 15746.87 x
+                                    gwf.produceGift(9, -2.68531605304, 111.089758191, 1.0),             //  5239.56 x
+                                    gwf.produceGift(1, 38.4288618657, 101.973670947, 35.7013112369),    //   950.65 X
+                                    gwf.produceGift(101, 39.0901430146, 72.6189278664, 27.579921436),   //  3137.75 x
+                                    gwf.produceGift(2, -15.5749342275, 39.5572954834, 14.5519741369),   //  9746.02 x
+                                    gwf.produceGift(17, 73.1896497296, -106.604219923, 4.98356232888),  //  6638.31 x
+                                    gwf.produceGift(18, 57.0682897236, 134.171051275, 23.6559977941),   //  2179.80 x
+                                    gwf.produceGift(15, -68.884672727, 61.214391432, 1.0)               // 13225.43 x
+                                };
+    std::vector<unsigned int> giftIDs_val = { 
+        4, 1, 18, 101, 7, 37, 9, 17, 34, 112, 2, 30, 80, 15, 81
+    };
+    
+    sort_distToRef(giftList, {44.4269923769, 110.114216113});
 
+    for(unsigned int i=0; i<giftList.size(); ++i)
+    {
+        EXPECT_EQ(giftList.at(i).ID(), giftIDs_val.at(i));
+    }
+}
 

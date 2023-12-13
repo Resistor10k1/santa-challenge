@@ -75,6 +75,7 @@ int main(int argc, char* argv[])
     NaiveLoadingStrategy naiveLoader;
     NearestLoadingStrategy nearestLoader;
     NNLoadingStrategy nnLoader;
+    PilotNNLoadingStrategy pilotLoader;
 
     NaiveStrategy naiveDistributer;
     SimulatedAnnealingStrategy saDistributer;
