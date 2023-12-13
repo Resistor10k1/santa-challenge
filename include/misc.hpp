@@ -106,6 +106,23 @@ double mean_weight(const std::vector<Gift>& g_vec);
 */
 double mean_distance(const std::vector<Gift>& g_vec);
 
+template<typename T>
+T mean(const std::vector<T>& vec)
+{
+    T sum = 0.0;
+
+    if(vec.size() > 0)
+    {
+        for(auto val : vec)
+        {
+            sum += val;
+        }
+
+        sum /= vec.size();
+    }
+    return sum;
+}
+
 /**
  * @brief Returns the median value of list vec.
 */
