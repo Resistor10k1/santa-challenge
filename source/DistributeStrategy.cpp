@@ -32,7 +32,7 @@ void SimulatedAnnealingStrategy::setMagicNumbers(const std::initializer_list<dou
     this->final_temperature = (size >= 6) ? *(it+5) : 0.001;
 }
 
-std::initializer_list<double> SimulatedAnnealingStrategy::getMagicNumbers(void)
+std::array<double, 6> SimulatedAnnealingStrategy::getMagicNumbers(void)
 {
     return {static_cast<double>(this->rndSwap_min_offset),
             static_cast<double>(this->rndSwap_max_offset),

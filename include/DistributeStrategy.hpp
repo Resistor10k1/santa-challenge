@@ -9,6 +9,7 @@
 #include "Santa.hpp"
 #include "Gift.hpp"
 #include <vector>
+#include <array>
 
 /**
  * @brief Abstract class providing an interface to optimization strategies of all kind.
@@ -49,7 +50,7 @@ class SimulatedAnnealingStrategy : public IDistributeStrategy
         SimulatedAnnealingStrategy(const std::initializer_list<double> ilist);
 
         void setMagicNumbers(const std::initializer_list<double> ilist);
-        std::initializer_list<double> getMagicNumbers(void);
+        std::array<double, 6> getMagicNumbers(void);
 
         void distributeGifts(Santa& santa) override;
     
