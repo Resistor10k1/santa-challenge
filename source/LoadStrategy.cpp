@@ -108,9 +108,37 @@ std::vector<Gift>::iterator PilotNNLoadingStrategy::loadTourToSleigh(Santa& sant
     auto it_end = giftList.end();
 
     std::vector<Gift> local_giftList(giftList);
+    std::vector<double> tour_edges;
 
     santa.unloadSleigh();
     loadSleigh(santa, *it_ref, tour_nbr);
 
-    sort_distToRef(local_giftList, (*ref_gift).getCoordinate());
+    while(ref_gift != it_end)
+    {
+        sort_distToRef(local_giftList, (*ref_gift).getCoordinate());
+        for(auto gift=local_giftList.begin()+1; gift!=local_giftList.end(); ++gift)
+        {
+            if((*gift).getTourNumber() == 0)
+            {
+                double distToRef = (*gift).getDistToRef();
+                if(mean(tour_edges) <= distToRef) /* mean of tour_edges <= distToRef */
+                {
+                    int ret_val = loadSleigh(santa, *gift, tour_nbr);
+
+                    if(ret_val == 0)
+                    {
+                        ref_gift = gift;
+                        tour_edges.push_back(distToRef);
+                        break; // look for new reference
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    }
+
+    return ref_gift;
 }
