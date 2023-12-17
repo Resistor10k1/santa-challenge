@@ -47,7 +47,7 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
 {
     double temp_WRW = __DBL_MAX__;
     double local_best;
-    Santa local_santa = santa;
+    Santa local_santa(santa);
     std::vector<Gift> s;
     #pragma omp critical
     {
@@ -57,6 +57,7 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
         s = local_santa.getLoadedGifts();
     }
     #pragma omp barrier
+    
     auto s_star = s;
     double T = this->inital_temperature;
     double T_final = this->final_temperature;
@@ -71,11 +72,11 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
     {
         applyRandomSwap(s, static_cast<unsigned int>(std::ceil(T)));
 
-        #pragma omp critical
-        {
-            local_santa.load(s);
-            temp_WRW = local_santa.calculateWRW();
-        }
+        // #pragma omp critical
+        // {
+        local_santa.load(s);
+        temp_WRW = local_santa.calculateWRW();
+        // }
 
         double D = temp_WRW - local_best;
 
@@ -98,11 +99,17 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
             T *= 1.3;
             ++nbr_reheats;
         }
-        else if((loop_cnt+1)%this->cool_intervall == 0)
+
+        if((loop_cnt+1)%this->cool_intervall == 0)
         // else if((nbr_improvements+1)%4 == 0)
         {/* Decrease temperature after 12 iterations */
             T *= alpha;
         }
+
+        // if((loop_cnt-nbr_improvements)%101 == 0)
+        // {
+        //     s = s_star;
+        // }
 
         ++loop_cnt;
     }
@@ -111,10 +118,16 @@ void SimulatedAnnealingStrategy::distributeGifts(Santa& santa)
     {/* Get the best solution over all threads */
         if(local_best < this->best_WRW)
         {
+#ifndef EVAL_MAGIC_NUMBERS
             std::cout <<"Thread-ID "<<omp_get_thread_num()<<": "<<T<<", "<<T_final<<", "<<nbr_reheats<<", "<<nbr_improvements<<", "<<loop_cnt<<", "<<this->best_WRW<<", "<<local_best<<std::endl;
+#endif
             santa.load(s_star);
+            // std::cout << omp_get_thread_num() << " S_star loaded" << std::endl;
             this->best_WRW = local_best;
+            // std::cout << omp_get_thread_num() << ": best_WRW updated" << std::endl;
         }
+
+        // std::cout << "Thread " << omp_get_thread_num() << " done." << std::endl;
     }
 }
 
@@ -139,9 +152,16 @@ void SimulatedAnnealingStrategy::applyRandomSwap(std::vector<Gift>& giftList, un
         int start_id = init_dist(gen);
         int offset_id = offset_dist(gen);
 
-        if((start_id+offset_id) >= giftList.size())
+        if(((start_id+offset_id) >= giftList.size()))
         {
-            offset_id *= -1;
+            if((start_id-offset_id) < 0)
+            {
+                offset_id = -1*start_id;
+            }
+            else
+            {
+                offset_id *= -1;
+            }
         }
 
         std::iter_swap(giftList.begin()+start_id, giftList.begin()+start_id+offset_id);
