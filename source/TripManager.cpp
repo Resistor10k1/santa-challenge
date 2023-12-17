@@ -21,7 +21,17 @@ void TripManager::startDelivery(void)
 
     for(; gift_ptr!=gift_list.end(); ++this->current_tour)
     {
+        #ifdef EVAL_MAGIC_NUMBERS
+        if(this->current_tour == 6)
+        {
+            this->current_tour = 1;
+            break;
+        }
+        #endif
+    
+    #ifndef EVAL_MAGIC_NUMBERS
         std::cout << "Delivering tour number " << this->current_tour << " ... " << std::endl;
+    #endif
         
         gift_ptr = this->loadStrategy.loadTourToSleigh(santa, gift_list, gift_ptr, current_tour);
 
@@ -29,13 +39,22 @@ void TripManager::startDelivery(void)
         this->distributeStrategy.distributeGifts(santa);
 
         this->total_WRW += this->distributeStrategy.getSolution();
-
+    #ifndef EVAL_MAGIC_NUMBERS
+        std::cout << "Delivery number " << this->current_tour << " completed with " << this->distributeStrategy.getSolution() << std::endl;
+    #endif
+        
         for(auto gift : santa.getLoadedGifts())
         {
             this->total_best_tour.push_back(gift);
         }
 
-        // Sort gifts according to the disatnce to north pole
+    #ifndef EVAL_MAGIC_NUMBERS
+        std::cout << "Current WRW -> " << this->total_WRW << std::endl;
+        std::cout << "Gifts delivered: " << this->total_best_tour.size() << " / " << this->gift_list.size() << std::endl;
+    #endif
+
+        /* Prepare for next iteration */
+        // Sort gifts according to the distance to north pole
         this->loadStrategy.preprocessGifts(this->gift_list);
 
         for(int index=0; index<gift_list.size(); ++index)
@@ -49,7 +68,7 @@ void TripManager::startDelivery(void)
     }
 
     // Improve existing tours
-
+    /* Maybe, do the whole Simulated-Annealing with swapping points from different tours */
 
 }
 

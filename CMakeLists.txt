@@ -39,6 +39,11 @@ message(STATUS "Build config: ${CMAKE_BUILD_TYPE}")
 add_executable(${PROJECT_NAME})
 add_subdirectory(source)
 add_compile_options(${compile_options})
+
+if(${EVAL_MAGIC_NUMBERS} STREQUAL "true")
+        target_compile_definitions(${PROJECT_NAME} PRIVATE EVAL_MAGIC_NUMBERS)
+endif()
+
 message(STATUS "main compile options: ${compile_options}")
 find_package(OpenMP REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX)
