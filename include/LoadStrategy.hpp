@@ -102,6 +102,22 @@ class NNLoadingStrategy : public ILoadStrategy
                                                             unsigned int tour_nbr) override;
 };
 
+class NNClusterLoadingStrategy : public ILoadStrategy
+{
+    public:
+        /**
+         * @brief
+        */
+        void preprocessGifts(std::vector<Gift>& giftList) override;
+
+        /**
+         * @brief Performs Nearest-Neighbour algorithm with some preview (pilot) strategy
+        */
+        virtual std::vector<Gift>::iterator loadTourToSleigh(Santa& santa, std::vector<Gift>& giftList, 
+                                                            const std::vector<Gift>::iterator& it_ref, 
+                                                            unsigned int tour_nbr) override;
+};
+
 class PilotNNLoadingStrategy : public ILoadStrategy
 {
     public:
@@ -116,4 +132,7 @@ class PilotNNLoadingStrategy : public ILoadStrategy
         virtual std::vector<Gift>::iterator loadTourToSleigh(Santa& santa, std::vector<Gift>& giftList, 
                                                             const std::vector<Gift>::iterator& it_ref, 
                                                             unsigned int tour_nbr) override;
+        
+    private:
+        int tryLoadSleigh(Santa& santa, Gift& neighbour, const Gift& ref, std::vector<Gift>& giftList, unsigned int tour_nbr);
 };
