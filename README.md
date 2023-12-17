@@ -50,6 +50,22 @@ In a first step, all gifts are sorted by the distance to the North-Pole in ascen
 
 ## Result
 
+output_trips_2023-12-12_14-52.csv:
+Jupyter output: 13451646157.283916
+C++ output: 13451646096.8983364105 in 4103592 ms
+
+probablyNewBest.csv:
+Jupyter output: 13450929488.631664
+C++ output: 13450929428.2493152618 in 9375112 ms
+
+candidate_2023-12-17_17-22.csv:
+Jupyter output: 13449245037.96434
+C++ output: 13449244977.5895557404 in 20749713 ms, 1430 tours
+Magic numbers: {1, 25, 32, 128, 100000.0, 0.001}
+
+without SA:
+13485862196.2283859253 in 4139765 ms
+
 For verifing the solution a Jupyter notebook provided by the lecturer is used. The achieved weighted-reindeer-weariness is 13'452'086'880.13939 in 1430 trips. All tours are shown in Figure "Overview of all tours". All tours are also shown in an interactive <a href="https://resistor10k1.github.io/santa-challenge/figures/map.html" target="_blank">map</a>.
 
 ![Overview of all tours](docs/figures/whole_map.png)

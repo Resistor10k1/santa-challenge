@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/santa-challenge",
-            "args": ["${workspaceFolder}/data/gifts.csv"],
+            "args": ["${workspaceFolder}/data/example_data.csv"],
             "stopAtEntry": true,
             "cwd": "${fileDirname}",
             "environment": [],
