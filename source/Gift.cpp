@@ -10,6 +10,7 @@ Gift::Gift(unsigned int id, double latitude, double longitude, double weight,
 {
     distance2pole = haversine(90, 0.0, this->coordinate, degree);
     distanceToRef = 0.0;
+    tour_nr = 0;
 }
 
 Gift::Gift(const std::initializer_list<double> ilist, ICompareStrategy<Gift>* cs) :
@@ -36,9 +37,10 @@ Gift::Gift(const Gift& g) :
         compareStrategy(g.compareStrategy)
 {}
 Gift::Gift(ICompareStrategy<Gift>* cs) :
-        id(0), coordinate({0.0, 0.0}), w(0.0), distance2pole(0.0), distanceToRef(0.0), tour_nr(0), compareStrategy(cs)
+        id(0), w(0.0), distanceToRef(0.0), tour_nr(0), compareStrategy(cs)
 {
-    // distance2pole = haversine(90, 0.0, this->coordinate, degree);
+    coordinate = {0.0, 0.0};
+    distance2pole = haversine(90, 0.0, this->coordinate, degree);
 }
 
 void Gift::setDistToRef(const Coordinate& coo)
