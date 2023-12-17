@@ -35,7 +35,7 @@ TEST(GiftTest, checkConstructors) {
     EXPECT_EQ(g4.latitude(), 0.0);
     EXPECT_EQ(g4.longitude(), 0.0);
     EXPECT_EQ(g4.weight(), 0.0);
-    EXPECT_EQ(g4.getDistance2Pole(), 0.0);
+    EXPECT_NEAR(g4.getDistance2Pole(), 10007.56, 0.009);
     EXPECT_EQ(g4.getTourNumber(), 0);
 }
 
@@ -80,6 +80,46 @@ TEST(GiftTest, inequalityOperator) {
     Gift g2(2, 0.2, 0.2, 0.2, &cs);
 
     EXPECT_NE(g1, g2);
+}
+
+TEST(GiftTest, compareOperator_weight) {
+    CompareWeightStrategy cs;
+    Gift g1(1, 0.1, 0.1, 0.1, &cs);
+    Gift g2(2, 0.2, 0.2, 0.2, &cs);
+
+    EXPECT_NE(g1, g2);
+
+    g2 = {2, 0.1, 0.1, 0.1};
+    EXPECT_EQ(g1, g2);
+}
+
+TEST(GiftTest, compareOperator_distToPole) {
+    CompareDistanceStrategy cs;
+    Gift g1(1, 0.1, 0.1, 0.1, &cs);
+    Gift g2(2, 0.2, 0.2, 0.2, &cs);
+
+    EXPECT_NE(g1, g2);
+
+    g2 = {2, 0.1, 0.1, 0.1};
+    EXPECT_EQ(g1, g2);
+}
+
+TEST(GiftTest, compareOperator_distToRef) {
+    CompareDistToRefStrategy cs;
+    Gift g1(1, 0.1, 0.1, 0.1, &cs);
+    Gift g2(2, 0.2, 0.2, 0.2, &cs);
+
+    Coordinate ref = {30, 40};
+
+    g1.setDistToRef(ref);
+    g2.setDistToRef(ref);
+
+    EXPECT_NE(g1, g2);
+    EXPECT_GT(g1, g2);
+
+    g2 = {2, 0.1, 0.1, 0.1};
+    g2.setDistToRef(ref);
+    EXPECT_EQ(g1, g2);
 }
 
 TEST(CompareStrategyTest, changeStrategyRuntime) {
