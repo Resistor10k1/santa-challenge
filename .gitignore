@@ -1,3 +1,4 @@
 build/
 docs/doxygen/html
+docs/_site/
 data/
