@@ -41,7 +41,11 @@ jobs:
 
     - name: Generate wiki mainpage
       working-directory: ${{github.workspace}}
-      run: pandoc docs/main_index.md -f markdown -t html -s -o docs/index.html --mathml --metadata title="Wiki Santa-Challenge"
+      run: pandoc docs/main_index.md -f markdown -t html -s -o docs/main_index.html --mathml --metadata title="Wiki Santa-Challenge"
+
+    - name: Concatenate index for Jekyll
+      working-directory: ${{github.workspace}}/docs
+      run: cat jekyll_header.txt main_index.html > index.html
 
     - name: Commit changes
       run: |
