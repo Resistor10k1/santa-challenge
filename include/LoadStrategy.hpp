@@ -102,11 +102,14 @@ class NNLoadingStrategy : public ILoadStrategy
                                                             unsigned int tour_nbr) override;
 };
 
-class NNClusterLoadingStrategy : public ILoadStrategy
+/**
+ * @brief Takes the closest points to a reference point, to get a cluster.
+*/
+class ClusterLoadingStrategy : public ILoadStrategy
 {
     public:
         /**
-         * @brief
+         * @brief Sorts the gifts according to their distance to the north pole.
         */
         void preprocessGifts(std::vector<Gift>& giftList) override;
 
@@ -118,21 +121,3 @@ class NNClusterLoadingStrategy : public ILoadStrategy
                                                             unsigned int tour_nbr) override;
 };
 
-class PilotNNLoadingStrategy : public ILoadStrategy
-{
-    public:
-        /**
-         * @brief
-        */
-        void preprocessGifts(std::vector<Gift>& giftList) override;
-
-        /**
-         * @brief Performs Nearest-Neighbour algorithm with some preview (pilot) strategy
-        */
-        virtual std::vector<Gift>::iterator loadTourToSleigh(Santa& santa, std::vector<Gift>& giftList, 
-                                                            const std::vector<Gift>::iterator& it_ref, 
-                                                            unsigned int tour_nbr) override;
-        
-    private:
-        int tryLoadSleigh(Santa& santa, Gift& neighbour, const Gift& ref, std::vector<Gift>& giftList, unsigned int tour_nbr);
-};
