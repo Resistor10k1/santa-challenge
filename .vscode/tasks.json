@@ -6,7 +6,7 @@
         {
             "type": "shell",
             "label": "main_index",
-            "command": "pandoc docs/main_index.md -f markdown -t html -s -o docs/index.html --mathml --metadata title=\"Wiki Santa-Challenge\"",
+            "command": "pandoc -c docs/main_style.css -s docs/main_index.md -f markdown -t html -o docs/index.html --mathml --metadata title=\"Wiki Santa-Challenge\"",
             "options":{
                 "cwd": "${workspaceFolder}"
             },

@@ -76,7 +76,8 @@ probablyNewBest.csv:
 - C++ output: 13450929428.2493152618 in 9375112 ms
 
 candidate_2023-12-17_17-22.csv:
-- Jupyter output: 13449245037.96434
+- kaggle output: 13'449'226'461.1015
+- Jupyter output: 13'449'245'037.96434
 - C++ output: 13'449'244'977.5895557404 in 20749713 ms, 1430 tours
 - Magic numbers: {1, 25, 32, 128, 100000.0, 0.001}
 

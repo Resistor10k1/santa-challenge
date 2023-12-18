@@ -6,9 +6,11 @@
 
 - Additional information to the mathematics behind the optimization problem [Section Some mathematics](#some-mathematics)
 
-- <a href="https://resistor10k1.github.io/santa-challenge/doxygen/html/index.html">Code documentation</a>
+<!-- - <a href="https://resistor10k1.github.io/santa-challenge/doxygen/html/index.html">Code documentation</a> -->
+- <a href="doxygen/html/index.html">Code documentation</a>
 
-- <a href="https://resistor10k1.github.io/santa-challenge/figures/map.html" target="_blank">Interactive map</a>
+<!-- - <a href="https://resistor10k1.github.io/santa-challenge/figures/map.html" target="_blank">Interactive map</a> -->
+- <a href="figures/map.html" target="_blank">Interactive map</a>
 
 
 ## Technical details
