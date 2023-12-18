@@ -41,7 +41,7 @@ jobs:
 
     - name: Generate wiki mainpage
       working-directory: ${{github.workspace}}
-      run: pandoc docs/main_index.md -c docs/main_style.css -f markdown -t html -s -o docs/index.html --mathml --metadata title="Wiki Santa-Challenge"
+      run: pandoc docs/main_index.md -f markdown -t html -s -o docs/index.html --mathml --metadata title="Wiki Santa-Challenge"
 
     - name: Commit changes
       run: |
