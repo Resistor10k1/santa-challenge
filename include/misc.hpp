@@ -58,8 +58,8 @@ void str_split(const std::string& str, std::vector<std::string>& output, char se
 
 /**
  * @brief Reads the package drop locations from a CSV file.
- * @details The format of a location is: GiftId,Latitude,Longitude,Weight. The latitude and longitude can 
- * be in format 'degree' or 'radiant'.
+ * @details The format of a location is: GiftId,Latitude,Longitude,Weight. The latitude and longitude is expected
+ * to be in 'degree'.
  * @param path Path to the csv file containing the gift data
  * @param separator Separator character used in the csv file.
  * @param output List with the data extracted as Giff objects

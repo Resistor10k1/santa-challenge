@@ -82,11 +82,7 @@ int main(int argc, char* argv[])
 #endif
 
 //  Decide which strategies to use and deliver gifts =====================================
-    // NaiveLoadingStrategy naiveLoader;
-    // NearestLoadingStrategy nearestLoader;
     NNLoadingStrategy nnLoader;
-    // PilotNNLoadingStrategy pilotLoader;
-    NNClusterLoadingStrategy clusterLoader;
 
     #ifdef EVAL_MAGIC_NUMBERS
     unsigned int eval_progress = 0;
@@ -136,16 +132,12 @@ int main(int argc, char* argv[])
                                            {1, 25, 16, 128, 100000.0, 0.001},
                                            {1,  5, 32,  96, 100000.0, 0.001},
                                            {1,  5, 32, 128, 100000.0, 0.001},
-                                           {1, 10, 32,  32, 100000.0, 0.001},
                                            {1, 10, 32,  96, 100000.0, 0.001},
                                            {1, 10, 32, 128, 100000.0, 0.001},
-                                           {1, 15, 32,  32, 100000.0, 0.001},
                                            {1, 15, 32,  96, 100000.0, 0.001},
                                            {1, 15, 32, 128, 100000.0, 0.001},
-                                           {1, 20, 32,  32, 100000.0, 0.001},
                                            {1, 20, 32,  96, 100000.0, 0.001},
                                            {1, 20, 32, 128, 100000.0, 0.001},
-                                           {1, 25, 32,  32, 100000.0, 0.001},
                                            {1, 25, 32,  96, 100000.0, 0.001},
                                            {1, 25, 32, 128, 100000.0, 0.001}};
 
@@ -170,6 +162,7 @@ int main(int argc, char* argv[])
         tm_Serious.startDelivery();
 
     #ifndef EVAL_MAGIC_NUMBERS
+        cout << endl;
         cout << "Delivery by 'Serious Trip-Manager' is " << (tm_Serious.verify_tour() ? "complete" : "not complete") << endl;
         cout << "Number of tours: " << tm_Serious.getNumberOfTours() << endl;
         cout << "Resulted in a WRW of " << setprecision(21) << tm_Serious.getTotalWRW() << endl;

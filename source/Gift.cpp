@@ -27,8 +27,6 @@ Gift::Gift(const std::initializer_list<double> ilist, ICompareStrategy<Gift>* cs
     distance2pole = haversine(90, 0.0, this->coordinate, degree);
     distanceToRef = 0.0;
     this->tour_nr = 0;
-    // this->distance2pole = (size >= 5) ? *(it+4) : 0.0;
-    // this->tour_nr = (size >= 6) ? *(it+5) : 9999999;
 }
 
 Gift::Gift(const Gift& g) :
@@ -78,8 +76,6 @@ Gift& Gift::operator=(const std::initializer_list<double> ilist)
     distance2pole = haversine(90, 0.0, this->coordinate, degree);
     distanceToRef = 0.0;
     this->tour_nr = 0;
-    // this->distance2pole = (size >= 5) ? *(it+4) : 0.0;
-    // this->tour_nr = (size >= 6) ? *(it+5) : 9999999;
 
     return *this;
 }
@@ -113,29 +109,9 @@ bool operator>=(const Gift& g1, const Gift& g2)
 
 std::ostream& operator<<(std::ostream& os, const Gift& g)
 {
-    // os << "Gift with ID " << g.id << ": " << std::endl;
-    // os << "Latitude: " << g.lat << " deg" << std::endl;
-    // os << "Longitude: " << g.lon << " deg" << std::endl;
-    // os << "Weight: " << g.w << " kg" << std::endl;
-    // os << "Distance2Pole: " << g.distance2pole << " km" << std::endl;
-
     os << g.id << ", " << g.coordinate.latitude << ", " << g.coordinate.longitude << ", ";
     os << g.w << ", " << g.distance2pole << std::endl;
 
     return os;
 }
 
-// Gift* Gift::getNearest(const std::vector<Gift>& gifts)
-// {
-//     std::vector<double> distances;
-
-//     if(gifts.size() > 0)
-//     {
-//         for(auto& gift : gifts)
-//         {
-            
-//         }
-//     }
-
-//     return this;
-// }
