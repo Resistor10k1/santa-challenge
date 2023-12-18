@@ -1,13 +1,15 @@
-
+---
+layout: default
+---
 
 ## Overview
 
 - Technical details about the build system and computational machine used: [Section Technical details](#technical-details)
 
-- Additional information to the mathematics behind the optimization problem [Section Some mathematics](#some-mathematics)
+- Additional information to the mathematics behind the optimization problem [Section Formulas](#some-mathematics)
 
 <!-- - <a href="https://resistor10k1.github.io/santa-challenge/doxygen/html/index.html">Code documentation</a> -->
-- <a href="doxygen/html/index.html">Code documentation</a>
+- The actual code is available in the <a href="doxygen/html/index.html">documentation</a>
 
 <!-- - <a href="https://resistor10k1.github.io/santa-challenge/figures/map.html" target="_blank">Interactive map</a> -->
 - <a href="figures/map.html" target="_blank">Interactive map</a>
@@ -15,12 +17,15 @@
 
 ## Technical details
 
+- Language: C++ (C++-20)
+- Libraries: Standard-Library and Open-MP
 - Compiler:  GNU 11.4.0 
 - Optimization:  -O3
 - CPU: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz with 8 Cores (physical + virtual)
+- Machine: Ubuntu 22.04
 
 
-## Some mathematics
+## Formulas
 
 Recall the goal to help Santa distribute the gifts all over the world. Therefore, the overall weighted-reindeer-weariness ($WRW$) must be minimized. All sleigh trips start at the North-Pole (Lat=90, Long=0), then head to each gift in a specified order, and finally head back to the North-Pole. Santa's sleigh has a base weight of 10 and a weight limit of 1000 (excluding the sleigh base weight).
 

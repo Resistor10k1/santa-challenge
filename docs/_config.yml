@@ -19,13 +19,12 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Santa-Challenge
-email: your-email@example.com
+# email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: /santa-challenge/ # the subpath of your site, e.g. /blog
-url: https://resistor10k1.github.io # the base hostname & protocol for your site, e.g. http://example.com
+  This site provides some additional information to the Santa-Challenge.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: https://resistor10k1.github.io/santa-challenge # the base hostname & protocol for your site, e.g. http://example.com
+# domain: resistor10k1.github.io
 #twitter_username: jekyllrb
 github_username:  Resistor10k1
 
@@ -46,8 +45,12 @@ show_downloads: false
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
-#   - .sass-cache/
+exclude:
+  - about.md
+  - main_index.md
+  - main_index.html
+  - jekyll_header.txt
+  # - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
 #   - Gemfile
