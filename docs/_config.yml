@@ -21,9 +21,9 @@
 title: Santa-Challenge
 # email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  This site provides some additional information about the Santa-Challenge. Test.
-baseurl: "/docs/" # the subpath of your site, e.g. /blog
-url: https://resistor10k1.github.io/santa-challenge # the base hostname & protocol for your site, e.g. http://example.com
+  This site provides some additional information about the Santa-Challenge.
+baseurl: "/santa-challenge/" # the subpath of your site, e.g. /blog
+url: https://resistor10k1.github.io # the base hostname & protocol for your site, e.g. http://example.com
 # domain: resistor10k1.github.io
 #twitter_username: jekyllrb
 github_username:  Resistor10k1
