@@ -12,6 +12,23 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {},
+    packages: ['base','configmacros','ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -134,6 +151,10 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>mean_weight</b> (co
 double&#160;</td><td class="memItemRight" valign="bottom"><b>mean_distance</b> (const std::vector&lt; <a class="el" href="../../d4/d22/classGift.html">Gift</a> &gt; &amp;g_vec)</td></tr>
 <tr class="memdesc:aa9c38adf79e344837c3b1c4f29e1c6f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the mean of the distances to the north pole of the gifts in list g_vec. <br /></td></tr>
 <tr class="separator:aa9c38adf79e344837c3b1c4f29e1c6f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7faa42018c328bc093d3b4c522f639"><td class="memTemplParams" colspan="2"><a id="a3f7faa42018c328bc093d3b4c522f639" name="a3f7faa42018c328bc093d3b4c522f639"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3f7faa42018c328bc093d3b4c522f639"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>mean</b> (const std::vector&lt; T &gt; &amp;vec)</td></tr>
+<tr class="separator:a3f7faa42018c328bc093d3b4c522f639"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e9f75f97754d41aaeb5f128f887cebf"><td class="memTemplParams" colspan="2"><a id="a5e9f75f97754d41aaeb5f128f887cebf" name="a5e9f75f97754d41aaeb5f128f887cebf"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a5e9f75f97754d41aaeb5f128f887cebf"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>median</b> (const std::vector&lt; T &gt; &amp;vec)</td></tr>
@@ -287,7 +308,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Reads the package drop locations from a CSV file. </p>
-<p >The format of a location is: GiftId,Latitude,Longitude,Weight. The latitude and longitude can be in format 'degree' or 'radiant'. </p><dl class="params"><dt>Parameters</dt><dd>
+<p >The format of a location is: GiftId,Latitude,Longitude,Weight. The latitude and longitude is expected to be in 'degree'. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>Path to the csv file containing the gift data </td></tr>
     <tr><td class="paramname">separator</td><td>Separator character used in the csv file. </td></tr>

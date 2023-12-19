@@ -12,6 +12,23 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {},
+    packages: ['base','configmacros','ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -133,38 +150,55 @@ $(function() {
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keywordtype">double</span> <a class="code hl_function" href="../../d0/d0e/misc_8hpp.html#aa9c38adf79e344837c3b1c4f29e1c6f3">mean_distance</a>(<span class="keyword">const</span> std::vector&lt;Gift&gt;&amp; g_vec);</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="../../d0/d0e/misc_8hpp.html#a5e9f75f97754d41aaeb5f128f887cebf">  113</a></span>T <a class="code hl_function" href="../../d0/d0e/misc_8hpp.html#a5e9f75f97754d41aaeb5f128f887cebf">median</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; vec)</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>{</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    std::vector&lt;T&gt; temp_vec(vec);</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = temp_vec.size() / 2;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    std::sort(temp_vec.begin(), temp_vec.end());</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">if</span>(temp_vec.size() &gt; 0)</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    {</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">return</span> temp_vec.at(i);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>T mean(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; vec)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>{</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    T sum = 0.0;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordflow">if</span>(vec.size() &gt; 0)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">for</span>(<span class="keyword">auto</span> val : vec)</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            sum += val;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        }</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        sum /= vec.size();</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">throw</span> std::range_error(<span class="stringliteral">&quot;Cannot calculate median of vector of size 0!&quot;</span>);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    }</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>}</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d0/d0e/misc_8hpp.html#ae4f78a33cd18f49c22ef4a90c0c0ec50">sort_id</a>(std::vector&lt;Gift&gt;&amp; gift_list);</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d0/d0e/misc_8hpp.html#aab3130fcf7fa2738f574631f7cc914f5">sort_weight</a>(std::vector&lt;Gift&gt;&amp; gift_list);</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d0/d0e/misc_8hpp.html#a2cd34e9415d0d007d1638e0b61c8e4e4">sort_distance</a>(std::vector&lt;Gift&gt;&amp; gift_list);</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d0/d0e/misc_8hpp.html#a7a8fc28cc0a0d62ebc0f01334e2d5288">sort_distToRef</a>(std::vector&lt;Gift&gt;&amp; gift_list, <a class="code hl_struct" href="../../d1/d60/structCoordinate.html">Coordinate</a> coo);</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">return</span> sum;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="../../d0/d0e/misc_8hpp.html#a5e9f75f97754d41aaeb5f128f887cebf">  130</a></span>T <a class="code hl_function" href="../../d0/d0e/misc_8hpp.html#a5e9f75f97754d41aaeb5f128f887cebf">median</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; vec)</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>{</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    std::vector&lt;T&gt; temp_vec(vec);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = temp_vec.size() / 2;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    std::sort(temp_vec.begin(), temp_vec.end());</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordflow">if</span>(temp_vec.size() &gt; 0)</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordflow">return</span> temp_vec.at(i);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    }</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keywordflow">throw</span> std::range_error(<span class="stringliteral">&quot;Cannot calculate median of vector of size 0!&quot;</span>);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>}</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d0/d0e/misc_8hpp.html#ae4f78a33cd18f49c22ef4a90c0c0ec50">sort_id</a>(std::vector&lt;Gift&gt;&amp; gift_list);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d0/d0e/misc_8hpp.html#aab3130fcf7fa2738f574631f7cc914f5">sort_weight</a>(std::vector&lt;Gift&gt;&amp; gift_list);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d0/d0e/misc_8hpp.html#a2cd34e9415d0d007d1638e0b61c8e4e4">sort_distance</a>(std::vector&lt;Gift&gt;&amp; gift_list);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d0/d0e/misc_8hpp.html#a7a8fc28cc0a0d62ebc0f01334e2d5288">sort_distToRef</a>(std::vector&lt;Gift&gt;&amp; gift_list, <a class="code hl_struct" href="../../d1/d60/structCoordinate.html">Coordinate</a> coo);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
 <div class="ttc" id="aGiftFactory_8hpp_html"><div class="ttname"><a href="../../d1/d57/GiftFactory_8hpp.html">GiftFactory.hpp</a></div><div class="ttdoc">Contains different gift-factories.</div></div>
 <div class="ttc" id="aGift_8hpp_html"><div class="ttname"><a href="../../dc/d7a/Gift_8hpp.html">Gift.hpp</a></div></div>
 <div class="ttc" id="aclassIGiftFactory_html"><div class="ttname"><a href="../../de/d10/classIGiftFactory.html">IGiftFactory</a></div><div class="ttdoc">Interface to apply Factory-Pattern.</div><div class="ttdef"><b>Definition:</b> GiftFactory.hpp:15</div></div>
 <div class="ttc" id="amisc_8hpp_html_a04ae0e0e110833b1d663364bda5bd075"><div class="ttname"><a href="../../d0/d0e/misc_8hpp.html#a04ae0e0e110833b1d663364bda5bd075">str_split</a></div><div class="ttdeci">void str_split(const std::string &amp;str, std::vector&lt; std::string &gt; &amp;output, char separator=';')</div><div class="ttdoc">Splits a string into sub-strings.</div><div class="ttdef"><b>Definition:</b> misc.cpp:12</div></div>
 <div class="ttc" id="amisc_8hpp_html_a26e34acb77e1447667c8421e9b84de00"><div class="ttname"><a href="../../d0/d0e/misc_8hpp.html#a26e34acb77e1447667c8421e9b84de00">CoordinateFormat</a></div><div class="ttdeci">CoordinateFormat</div><div class="ttdoc">Coordinate format for calculation in haversine().</div><div class="ttdef"><b>Definition:</b> misc.hpp:75</div></div>
 <div class="ttc" id="amisc_8hpp_html_a2cd34e9415d0d007d1638e0b61c8e4e4"><div class="ttname"><a href="../../d0/d0e/misc_8hpp.html#a2cd34e9415d0d007d1638e0b61c8e4e4">sort_distance</a></div><div class="ttdeci">void sort_distance(std::vector&lt; Gift &gt; &amp;gift_list)</div><div class="ttdoc">Sorts gift_list by distance to the north pole, using CompareDistanceStrategy.</div><div class="ttdef"><b>Definition:</b> misc.cpp:185</div></div>
-<div class="ttc" id="amisc_8hpp_html_a5e9f75f97754d41aaeb5f128f887cebf"><div class="ttname"><a href="../../d0/d0e/misc_8hpp.html#a5e9f75f97754d41aaeb5f128f887cebf">median</a></div><div class="ttdeci">T median(const std::vector&lt; T &gt; &amp;vec)</div><div class="ttdoc">Returns the median value of list vec.</div><div class="ttdef"><b>Definition:</b> misc.hpp:113</div></div>
+<div class="ttc" id="amisc_8hpp_html_a5e9f75f97754d41aaeb5f128f887cebf"><div class="ttname"><a href="../../d0/d0e/misc_8hpp.html#a5e9f75f97754d41aaeb5f128f887cebf">median</a></div><div class="ttdeci">T median(const std::vector&lt; T &gt; &amp;vec)</div><div class="ttdoc">Returns the median value of list vec.</div><div class="ttdef"><b>Definition:</b> misc.hpp:130</div></div>
 <div class="ttc" id="amisc_8hpp_html_a721cdbc6bd980bd328255feba8168f26"><div class="ttname"><a href="../../d0/d0e/misc_8hpp.html#a721cdbc6bd980bd328255feba8168f26">printVector</a></div><div class="ttdeci">void printVector(const std::vector&lt; T &gt; &amp;vec)</div><div class="ttdoc">Prints the content of a vector to the console.</div><div class="ttdef"><b>Definition:</b> misc.hpp:27</div></div>
 <div class="ttc" id="amisc_8hpp_html_a73d6e7672072ec2630cc4d715308a6b8"><div class="ttname"><a href="../../d0/d0e/misc_8hpp.html#a73d6e7672072ec2630cc4d715308a6b8">readGiftsFromFile</a></div><div class="ttdeci">void readGiftsFromFile(fs::path path, char separator, std::vector&lt; Gift &gt; &amp;output, IGiftFactory &amp;giftFactory)</div><div class="ttdoc">Reads the package drop locations from a CSV file.</div><div class="ttdef"><b>Definition:</b> misc.cpp:27</div></div>
 <div class="ttc" id="amisc_8hpp_html_a7a8fc28cc0a0d62ebc0f01334e2d5288"><div class="ttname"><a href="../../d0/d0e/misc_8hpp.html#a7a8fc28cc0a0d62ebc0f01334e2d5288">sort_distToRef</a></div><div class="ttdeci">void sort_distToRef(std::vector&lt; Gift &gt; &amp;gift_list, Coordinate coo)</div><div class="ttdoc">Sorts gift_list by distance to the given reference-coordinate coo, using CompareDistToRefStrategy.</div><div class="ttdef"><b>Definition:</b> misc.cpp:205</div></div>

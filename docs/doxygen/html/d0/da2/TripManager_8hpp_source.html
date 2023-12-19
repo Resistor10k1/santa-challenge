@@ -12,6 +12,23 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {},
+    packages: ['base','configmacros','ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -113,11 +130,11 @@ $(function() {
 <div class="ttc" id="aGift_8hpp_html"><div class="ttname"><a href="../../dc/d7a/Gift_8hpp.html">Gift.hpp</a></div></div>
 <div class="ttc" id="aLoadStrategy_8hpp_html"><div class="ttname"><a href="../../d3/d06/LoadStrategy_8hpp.html">LoadStrategy.hpp</a></div><div class="ttdoc">Contains different approaches on how to find an initial solution.</div></div>
 <div class="ttc" id="aSanta_8hpp_html"><div class="ttname"><a href="../../da/da0/Santa_8hpp.html">Santa.hpp</a></div></div>
-<div class="ttc" id="aclassIDistributeStrategy_html"><div class="ttname"><a href="../../da/df6/classIDistributeStrategy.html">IDistributeStrategy</a></div><div class="ttdoc">Abstract class providing an interface to optimization strategies of all kind.</div><div class="ttdef"><b>Definition:</b> DistributeStrategy.hpp:17</div></div>
+<div class="ttc" id="aclassIDistributeStrategy_html"><div class="ttname"><a href="../../da/df6/classIDistributeStrategy.html">IDistributeStrategy</a></div><div class="ttdoc">Abstract class providing an interface to optimization strategies of all kind.</div><div class="ttdef"><b>Definition:</b> DistributeStrategy.hpp:18</div></div>
 <div class="ttc" id="aclassILoadStrategy_html"><div class="ttname"><a href="../../dd/d83/classILoadStrategy.html">ILoadStrategy</a></div><div class="ttdoc">Abstract class providing an interface.</div><div class="ttdef"><b>Definition:</b> LoadStrategy.hpp:17</div></div>
 <div class="ttc" id="aclassSanta_html"><div class="ttname"><a href="../../d3/d65/classSanta.html">Santa</a></div><div class="ttdoc">Class abstracting santa.</div><div class="ttdef"><b>Definition:</b> Santa.hpp:17</div></div>
 <div class="ttc" id="aclassTripManager_html"><div class="ttname"><a href="../../d1/d0b/classTripManager.html">TripManager</a></div><div class="ttdoc">Manages a santa and determines how the gifts are delivered by the injected ILoadStrategy and IDistrib...</div><div class="ttdef"><b>Definition:</b> TripManager.hpp:19</div></div>
-<div class="ttc" id="aclassTripManager_html_a9aa0a26584c9ef4a9b649d24b598b2fb"><div class="ttname"><a href="../../d1/d0b/classTripManager.html#a9aa0a26584c9ef4a9b649d24b598b2fb">TripManager::verify_tour</a></div><div class="ttdeci">bool verify_tour(void)</div><div class="ttdoc">Verifies if the tour found with startDelivery is legit.</div><div class="ttdef"><b>Definition:</b> TripManager.cpp:56</div></div>
+<div class="ttc" id="aclassTripManager_html_a9aa0a26584c9ef4a9b649d24b598b2fb"><div class="ttname"><a href="../../d1/d0b/classTripManager.html#a9aa0a26584c9ef4a9b649d24b598b2fb">TripManager::verify_tour</a></div><div class="ttdeci">bool verify_tour(void)</div><div class="ttdoc">Verifies if the tour found with startDelivery is legit.</div><div class="ttdef"><b>Definition:</b> TripManager.cpp:75</div></div>
 <div class="ttc" id="aclassTripManager_html_afcea41c92165f9d19d7d6195d40026d1"><div class="ttname"><a href="../../d1/d0b/classTripManager.html#afcea41c92165f9d19d7d6195d40026d1">TripManager::startDelivery</a></div><div class="ttdeci">void startDelivery(void)</div><div class="ttdoc">Starts searching for a best possible delivery pattern with the strategies given in the Ctor.</div><div class="ttdef"><b>Definition:</b> TripManager.cpp:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

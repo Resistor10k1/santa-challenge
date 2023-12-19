@@ -12,6 +12,23 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {},
+    packages: ['base','configmacros','ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -70,14 +87,14 @@ $(function() {
 
 <div class="contents">
 &#160;<ul>
-<li>add()&#160;:&#160;<a class="el" href="d3/d65/classSanta.html#acdc8e21787293803e4d1f49b5badeb36">Santa</a></li>
+<li>add()&#160;:&#160;<a class="el" href="d3/d65/classSanta.html#a9f0cbf25c365e41bc328e7f31990ec43">Santa</a></li>
 <li>calculateWRW()&#160;:&#160;<a class="el" href="d3/d65/classSanta.html#ab81828f7a8e8a0f79a48eb5c73386116">Santa</a></li>
 <li>distributeGifts()&#160;:&#160;<a class="el" href="da/df6/classIDistributeStrategy.html#a5bed84b3b59279bd72bcd5f11811177e">IDistributeStrategy</a>, <a class="el" href="d6/d97/classNaiveStrategy.html#a407f41830428a623c8721c886c16104d">NaiveStrategy</a>, <a class="el" href="dc/db6/classSimulatedAnnealingStrategy.html#a81715f4e075341ac8c82119936f84f7d">SimulatedAnnealingStrategy</a></li>
 <li>getSolution()&#160;:&#160;<a class="el" href="da/df6/classIDistributeStrategy.html#aeefda0150a2dc7d890942eaf257b7d5e">IDistributeStrategy</a></li>
 <li>load()&#160;:&#160;<a class="el" href="d3/d65/classSanta.html#ab706af964e9b284c48464293f5d7eab5">Santa</a></li>
 <li>loadSleigh()&#160;:&#160;<a class="el" href="dd/d83/classILoadStrategy.html#a40ea61084eb29e54828d6058942f6eac">ILoadStrategy</a></li>
-<li>loadTourToSleigh()&#160;:&#160;<a class="el" href="dd/d83/classILoadStrategy.html#ab5db93ab10878200d36f63d993497f60">ILoadStrategy</a>, <a class="el" href="d9/d48/classNaiveLoadingStrategy.html#a680f03fe6b8549c09e7fffe8acda9cc7">NaiveLoadingStrategy</a>, <a class="el" href="d6/db0/classNearestLoadingStrategy.html#a626eea8bd51c952ce6316b15ba3c113a">NearestLoadingStrategy</a>, <a class="el" href="da/dc1/classNNLoadingStrategy.html#ad8df7096c6a326c08acf6ed0e98770f0">NNLoadingStrategy</a></li>
-<li>preprocessGifts()&#160;:&#160;<a class="el" href="dd/d83/classILoadStrategy.html#a7ba06f9dbdda70551faeeab28add0c09">ILoadStrategy</a>, <a class="el" href="d6/db0/classNearestLoadingStrategy.html#acfc35b8a1949f92620222b54cf233eea">NearestLoadingStrategy</a>, <a class="el" href="da/dc1/classNNLoadingStrategy.html#ad3094ea53c3099724fb287eb4396803e">NNLoadingStrategy</a></li>
+<li>loadTourToSleigh()&#160;:&#160;<a class="el" href="d5/df0/classClusterLoadingStrategy.html#a1ee23edba1ce2fd7e4020d6365325f4f">ClusterLoadingStrategy</a>, <a class="el" href="dd/d83/classILoadStrategy.html#ab5db93ab10878200d36f63d993497f60">ILoadStrategy</a>, <a class="el" href="d9/d48/classNaiveLoadingStrategy.html#a680f03fe6b8549c09e7fffe8acda9cc7">NaiveLoadingStrategy</a>, <a class="el" href="d6/db0/classNearestLoadingStrategy.html#a626eea8bd51c952ce6316b15ba3c113a">NearestLoadingStrategy</a>, <a class="el" href="da/dc1/classNNLoadingStrategy.html#ad8df7096c6a326c08acf6ed0e98770f0">NNLoadingStrategy</a></li>
+<li>preprocessGifts()&#160;:&#160;<a class="el" href="d5/df0/classClusterLoadingStrategy.html#ab1b53a3c9dec2122d37b32678eb6036a">ClusterLoadingStrategy</a>, <a class="el" href="dd/d83/classILoadStrategy.html#a7ba06f9dbdda70551faeeab28add0c09">ILoadStrategy</a>, <a class="el" href="d6/db0/classNearestLoadingStrategy.html#acfc35b8a1949f92620222b54cf233eea">NearestLoadingStrategy</a>, <a class="el" href="da/dc1/classNNLoadingStrategy.html#ad3094ea53c3099724fb287eb4396803e">NNLoadingStrategy</a></li>
 <li>startDelivery()&#160;:&#160;<a class="el" href="d1/d0b/classTripManager.html#afcea41c92165f9d19d7d6195d40026d1">TripManager</a></li>
 <li>unloadSleigh()&#160;:&#160;<a class="el" href="d3/d65/classSanta.html#ab5515a6a412bd5f00433a71080b0e063">Santa</a></li>
 <li>verify_tour()&#160;:&#160;<a class="el" href="d1/d0b/classTripManager.html#a9aa0a26584c9ef4a9b649d24b598b2fb">TripManager</a></li>

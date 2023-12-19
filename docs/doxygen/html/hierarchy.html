@@ -12,6 +12,23 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {},
+    packages: ['base','configmacros','ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -90,11 +107,12 @@ $(function() {
 <tr id="row_5_1_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="de/de1/classGiftIDFactory.html" target="_self">GiftIDFactory</a></td><td class="desc">Comparison operations of gifts produced with this factory are applied to the id-attribute of <a class="el" href="d4/d22/classGift.html" title="Data abstraction of location where a package is dropped.">Gift</a> </td></tr>
 <tr id="row_5_2_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="d8/dcc/classGiftWeightFactory.html" target="_self">GiftWeightFactory</a></td><td class="desc">Comparison operations of gifts produced with this factory are applied to the weight-attribute of <a class="el" href="d4/d22/classGift.html" title="Data abstraction of location where a package is dropped.">Gift</a> </td></tr>
 <tr id="row_6_" class="odd"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_6_" class="arrow" onclick="toggleFolder('6_')">&#9660;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="dd/d83/classILoadStrategy.html" target="_self">ILoadStrategy</a></td><td class="desc">Abstract class providing an interface </td></tr>
-<tr id="row_6_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="da/dc1/classNNLoadingStrategy.html" target="_self">NNLoadingStrategy</a></td><td class="desc">Applies Nearest-Neighbour algorithm to determine an initial solution </td></tr>
-<tr id="row_6_1_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="d9/d48/classNaiveLoadingStrategy.html" target="_self">NaiveLoadingStrategy</a></td><td class="desc">Loads the gifts one by one as they are given in the list without any optimization </td></tr>
-<tr id="row_6_2_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="d6/db0/classNearestLoadingStrategy.html" target="_self">NearestLoadingStrategy</a></td><td class="desc">Loads the gifts in order of their distance to the north pole </td></tr>
-<tr id="row_7_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="d3/d65/classSanta.html" target="_self">Santa</a></td><td class="desc">Class abstracting santa </td></tr>
-<tr id="row_8_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="d1/d0b/classTripManager.html" target="_self">TripManager</a></td><td class="desc">Manages a santa and determines how the gifts are delivered by the injected <a class="el" href="dd/d83/classILoadStrategy.html" title="Abstract class providing an interface.">ILoadStrategy</a> and <a class="el" href="da/df6/classIDistributeStrategy.html" title="Abstract class providing an interface to optimization strategies of all kind.">IDistributeStrategy</a> </td></tr>
+<tr id="row_6_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="d5/df0/classClusterLoadingStrategy.html" target="_self">ClusterLoadingStrategy</a></td><td class="desc">Takes the closest points to a reference point, to get a cluster </td></tr>
+<tr id="row_6_1_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="da/dc1/classNNLoadingStrategy.html" target="_self">NNLoadingStrategy</a></td><td class="desc">Applies Nearest-Neighbour algorithm to determine an initial solution </td></tr>
+<tr id="row_6_2_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="d9/d48/classNaiveLoadingStrategy.html" target="_self">NaiveLoadingStrategy</a></td><td class="desc">Loads the gifts one by one as they are given in the list without any optimization </td></tr>
+<tr id="row_6_3_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="d6/db0/classNearestLoadingStrategy.html" target="_self">NearestLoadingStrategy</a></td><td class="desc">Loads the gifts in order of their distance to the north pole </td></tr>
+<tr id="row_7_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="d3/d65/classSanta.html" target="_self">Santa</a></td><td class="desc">Class abstracting santa </td></tr>
+<tr id="row_8_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="d1/d0b/classTripManager.html" target="_self">TripManager</a></td><td class="desc">Manages a santa and determines how the gifts are delivered by the injected <a class="el" href="dd/d83/classILoadStrategy.html" title="Abstract class providing an interface.">ILoadStrategy</a> and <a class="el" href="da/df6/classIDistributeStrategy.html" title="Abstract class providing an interface to optimization strategies of all kind.">IDistributeStrategy</a> </td></tr>
 </table>
 </div><!-- directory -->
 </div><!-- contents -->

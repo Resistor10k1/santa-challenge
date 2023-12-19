@@ -12,6 +12,23 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {},
+    packages: ['base','configmacros','ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -72,10 +89,20 @@ $(function() {
   <div class="headertitle"><div class="title">Santa-Challenge code documentation </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_doxygen_MAINPAGE"></a> </p>
+<div class="textblock"><p ><a class="anchor" id="md_doxygen_MAINPAGE"></a> <a href="../../index.html">Go back to main page</a></p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Introduction</h1>
-<p >Just a short documentation of the code used to solve the santa-challenge.</p>
+<p >The code here is specifically written to solve the Santa-Challenge. Portability and maintainability are secondary concerns.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Used libraries</h1>
+<p >The libraries used are the C++ standard library and the OpenMP library. C++20 standard is required.</p>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Class diagrams</h1>
+<p >This diagram is not complete, but shows the most important parts.</p>
+<p ><img src="../../figures/santa-challenge.png" alt="" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Some activity diagrams</h1>
+<p >(Imagine beautiful diagrams here)</p>
 <p ><a href="../../index.html">Go back to main page</a> </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->

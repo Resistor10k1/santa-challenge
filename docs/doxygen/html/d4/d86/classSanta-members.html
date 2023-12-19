@@ -12,6 +12,23 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {},
+    packages: ['base','configmacros','ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -75,7 +92,7 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="../../d3/d65/classSanta.html">Santa</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="../../d3/d65/classSanta.html#acdc8e21787293803e4d1f49b5badeb36">add</a>(const Gift &amp;gift)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="../../d3/d65/classSanta.html#a9f0cbf25c365e41bc328e7f31990ec43">add</a>(const Gift gift)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="../../d3/d65/classSanta.html#ab81828f7a8e8a0f79a48eb5c73386116">calculateWRW</a>(void)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>debug_load</b>(const std::vector&lt; Gift &gt; &amp;giftList, int thread_id) (defined in <a class="el" href="../../d3/d65/classSanta.html">Santa</a>)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>getCurrentPos</b>(void) const (defined in <a class="el" href="../../d3/d65/classSanta.html">Santa</a>)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
@@ -86,8 +103,9 @@ $(function() {
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getWRW</b>(void) const (defined in <a class="el" href="../../d3/d65/classSanta.html">Santa</a>)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="../../d3/d65/classSanta.html#ab706af964e9b284c48464293f5d7eab5">load</a>(const std::vector&lt; Gift &gt; &amp;giftList)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Santa</b>(double max_load) (defined in <a class="el" href="../../d3/d65/classSanta.html">Santa</a>)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>setLoadedGifts</b>(std::vector&lt; Gift &gt; giftList) (defined in <a class="el" href="../../d3/d65/classSanta.html">Santa</a>)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="../../d3/d65/classSanta.html#ab5515a6a412bd5f00433a71080b0e063">unloadSleigh</a>(void)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Santa</b>(const Santa &amp;s) (defined in <a class="el" href="../../d3/d65/classSanta.html">Santa</a>)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setLoadedGifts</b>(std::vector&lt; Gift &gt; giftList) (defined in <a class="el" href="../../d3/d65/classSanta.html">Santa</a>)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="../../d3/d65/classSanta.html#ab5515a6a412bd5f00433a71080b0e063">unloadSleigh</a>(void)</td><td class="entry"><a class="el" href="../../d3/d65/classSanta.html">Santa</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

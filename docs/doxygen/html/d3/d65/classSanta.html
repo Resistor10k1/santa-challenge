@@ -12,6 +12,23 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {},
+    packages: ['base','configmacros','ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,9 +103,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a286499c41c417337133a1c84290170f5"><td class="memItemLeft" align="right" valign="top"><a id="a286499c41c417337133a1c84290170f5" name="a286499c41c417337133a1c84290170f5"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Santa</b> (double max_load)</td></tr>
 <tr class="separator:a286499c41c417337133a1c84290170f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdc8e21787293803e4d1f49b5badeb36"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d65/classSanta.html#acdc8e21787293803e4d1f49b5badeb36">add</a> (const <a class="el" href="../../d4/d22/classGift.html">Gift</a> &amp;gift)</td></tr>
-<tr class="memdesc:acdc8e21787293803e4d1f49b5badeb36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a single gift to the sleigh.  <a href="../../d3/d65/classSanta.html#acdc8e21787293803e4d1f49b5badeb36">More...</a><br /></td></tr>
-<tr class="separator:acdc8e21787293803e4d1f49b5badeb36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ed6c45b1d1cb7094c20197f09f17fd0"><td class="memItemLeft" align="right" valign="top"><a id="a8ed6c45b1d1cb7094c20197f09f17fd0" name="a8ed6c45b1d1cb7094c20197f09f17fd0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Santa</b> (const <a class="el" href="../../d3/d65/classSanta.html">Santa</a> &amp;s)</td></tr>
+<tr class="separator:a8ed6c45b1d1cb7094c20197f09f17fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f0cbf25c365e41bc328e7f31990ec43"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d65/classSanta.html#a9f0cbf25c365e41bc328e7f31990ec43">add</a> (const <a class="el" href="../../d4/d22/classGift.html">Gift</a> gift)</td></tr>
+<tr class="memdesc:a9f0cbf25c365e41bc328e7f31990ec43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a single gift to the sleigh.  <a href="../../d3/d65/classSanta.html#a9f0cbf25c365e41bc328e7f31990ec43">More...</a><br /></td></tr>
+<tr class="separator:a9f0cbf25c365e41bc328e7f31990ec43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab706af964e9b284c48464293f5d7eab5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d65/classSanta.html#ab706af964e9b284c48464293f5d7eab5">load</a> (const std::vector&lt; <a class="el" href="../../d4/d22/classGift.html">Gift</a> &gt; &amp;giftList)</td></tr>
 <tr class="memdesc:ab706af964e9b284c48464293f5d7eab5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a list of gifts to the sleigh.  <a href="../../d3/d65/classSanta.html#ab706af964e9b284c48464293f5d7eab5">More...</a><br /></td></tr>
 <tr class="separator:ab706af964e9b284c48464293f5d7eab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,8 +148,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>unloadSleigh</b> (voi
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Class abstracting santa. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="acdc8e21787293803e4d1f49b5badeb36" name="acdc8e21787293803e4d1f49b5badeb36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdc8e21787293803e4d1f49b5badeb36">&#9670;&#160;</a></span>add()</h2>
+<a id="a9f0cbf25c365e41bc328e7f31990ec43" name="a9f0cbf25c365e41bc328e7f31990ec43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f0cbf25c365e41bc328e7f31990ec43">&#9670;&#160;</a></span>add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -137,7 +157,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>unloadSleigh</b> (voi
         <tr>
           <td class="memname">int Santa::add </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../d4/d22/classGift.html">Gift</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="../../d4/d22/classGift.html">Gift</a>&#160;</td>
           <td class="paramname"><em>gift</em></td><td>)</td>
           <td></td>
         </tr>

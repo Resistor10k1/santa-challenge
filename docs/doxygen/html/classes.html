@@ -12,6 +12,23 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {},
+    packages: ['base','configmacros','ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -76,7 +93,7 @@ $(function() {
 <div class="classindex">
 <dl class="classindex even">
 <dt class="alphachar"><a id="letter_C" name="letter_C">C</a></dt>
-<dd><a class="el" href="d0/d81/classCompareDistanceStrategy.html">CompareDistanceStrategy</a></dd><dd><a class="el" href="d8/df5/classCompareDistToRefStrategy.html">CompareDistToRefStrategy</a></dd><dd><a class="el" href="d3/d70/classCompareIDStrategy.html">CompareIDStrategy</a></dd><dd><a class="el" href="d7/d7a/classCompareWeightStrategy.html">CompareWeightStrategy</a></dd><dd><a class="el" href="d1/d60/structCoordinate.html">Coordinate</a></dd></dl>
+<dd><a class="el" href="d5/df0/classClusterLoadingStrategy.html">ClusterLoadingStrategy</a></dd><dd><a class="el" href="d0/d81/classCompareDistanceStrategy.html">CompareDistanceStrategy</a></dd><dd><a class="el" href="d8/df5/classCompareDistToRefStrategy.html">CompareDistToRefStrategy</a></dd><dd><a class="el" href="d3/d70/classCompareIDStrategy.html">CompareIDStrategy</a></dd><dd><a class="el" href="d7/d7a/classCompareWeightStrategy.html">CompareWeightStrategy</a></dd><dd><a class="el" href="d1/d60/structCoordinate.html">Coordinate</a></dd></dl>
 <dl class="classindex odd">
 <dt class="alphachar"><a id="letter_G" name="letter_G">G</a></dt>
 <dd><a class="el" href="d4/d22/classGift.html">Gift</a></dd><dd><a class="el" href="da/d58/classGiftDistanceFactory.html">GiftDistanceFactory</a></dd><dd><a class="el" href="de/de1/classGiftIDFactory.html">GiftIDFactory</a></dd><dd><a class="el" href="d8/dcc/classGiftWeightFactory.html">GiftWeightFactory</a></dd></dl>

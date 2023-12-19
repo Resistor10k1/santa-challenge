@@ -12,6 +12,23 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {},
+    packages: ['base','configmacros','ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -86,9 +103,10 @@ Inheritance diagram for ILoadStrategy:</div>
  <div class="center">
   <img src="../../dd/d83/classILoadStrategy.png" usemap="#ILoadStrategy_map" alt=""/>
   <map id="ILoadStrategy_map" name="ILoadStrategy_map">
-<area href="../../da/dc1/classNNLoadingStrategy.html" title="Applies Nearest-Neighbour algorithm to determine an initial solution." alt="NNLoadingStrategy" shape="rect" coords="0,56,148,80"/>
-<area href="../../d9/d48/classNaiveLoadingStrategy.html" title="Loads the gifts one by one as they are given in the list without any optimization." alt="NaiveLoadingStrategy" shape="rect" coords="158,56,306,80"/>
-<area href="../../d6/db0/classNearestLoadingStrategy.html" title="Loads the gifts in order of their distance to the north pole." alt="NearestLoadingStrategy" shape="rect" coords="316,56,464,80"/>
+<area href="../../d5/df0/classClusterLoadingStrategy.html" title="Takes the closest points to a reference point, to get a cluster." alt="ClusterLoadingStrategy" shape="rect" coords="0,56,148,80"/>
+<area href="../../da/dc1/classNNLoadingStrategy.html" title="Applies Nearest-Neighbour algorithm to determine an initial solution." alt="NNLoadingStrategy" shape="rect" coords="158,56,306,80"/>
+<area href="../../d9/d48/classNaiveLoadingStrategy.html" title="Loads the gifts one by one as they are given in the list without any optimization." alt="NaiveLoadingStrategy" shape="rect" coords="316,56,464,80"/>
+<area href="../../d6/db0/classNearestLoadingStrategy.html" title="Loads the gifts in order of their distance to the north pole." alt="NearestLoadingStrategy" shape="rect" coords="474,56,622,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -157,7 +175,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>loadSleigh</b> (<a cla
 <p>Adds multiple gifts to the tour. </p>
 <p >The adding can be performed with an arbitrary algorithm. Only gifts from giftList with tour_nr-attribute = 0 are considered. </p><dl class="section return"><dt>Returns</dt><dd>Returns a gift which cannot be added anymore, because the sleigh is full. Returns giftList.end(), if no candidates are left in giftList (The tour_nr-attributes of all gifts in giftList != 0). </dd></dl>
 
-<p>Implemented in <a class="el" href="../../d9/d48/classNaiveLoadingStrategy.html#a680f03fe6b8549c09e7fffe8acda9cc7">NaiveLoadingStrategy</a>, <a class="el" href="../../d6/db0/classNearestLoadingStrategy.html#a626eea8bd51c952ce6316b15ba3c113a">NearestLoadingStrategy</a>, and <a class="el" href="../../da/dc1/classNNLoadingStrategy.html#ad8df7096c6a326c08acf6ed0e98770f0">NNLoadingStrategy</a>.</p>
+<p>Implemented in <a class="el" href="../../d9/d48/classNaiveLoadingStrategy.html#a680f03fe6b8549c09e7fffe8acda9cc7">NaiveLoadingStrategy</a>, <a class="el" href="../../d6/db0/classNearestLoadingStrategy.html#a626eea8bd51c952ce6316b15ba3c113a">NearestLoadingStrategy</a>, <a class="el" href="../../da/dc1/classNNLoadingStrategy.html#ad8df7096c6a326c08acf6ed0e98770f0">NNLoadingStrategy</a>, and <a class="el" href="../../d5/df0/classClusterLoadingStrategy.html#a1ee23edba1ce2fd7e4020d6365325f4f">ClusterLoadingStrategy</a>.</p>
 
 </div>
 </div>
@@ -188,7 +206,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>loadSleigh</b> (<a cla
 <p>Can be used to apply some pre-processing to the destinations. </p>
 <p >Default pre-processing function does nothing. </p>
 
-<p>Reimplemented in <a class="el" href="../../d6/db0/classNearestLoadingStrategy.html#acfc35b8a1949f92620222b54cf233eea">NearestLoadingStrategy</a>, and <a class="el" href="../../da/dc1/classNNLoadingStrategy.html#ad3094ea53c3099724fb287eb4396803e">NNLoadingStrategy</a>.</p>
+<p>Reimplemented in <a class="el" href="../../d6/db0/classNearestLoadingStrategy.html#acfc35b8a1949f92620222b54cf233eea">NearestLoadingStrategy</a>, <a class="el" href="../../da/dc1/classNNLoadingStrategy.html#ad3094ea53c3099724fb287eb4396803e">NNLoadingStrategy</a>, and <a class="el" href="../../d5/df0/classClusterLoadingStrategy.html#ab1b53a3c9dec2122d37b32678eb6036a">ClusterLoadingStrategy</a>.</p>
 
 </div>
 </div>

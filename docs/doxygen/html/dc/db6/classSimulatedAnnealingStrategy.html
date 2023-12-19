@@ -12,6 +12,23 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {},
+    packages: ['base','configmacros','ams']
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -92,6 +109,15 @@ Inheritance diagram for SimulatedAnnealingStrategy:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:af6e443832ec458d0a5bb81baf2d35ddf"><td class="memItemLeft" align="right" valign="top"><a id="af6e443832ec458d0a5bb81baf2d35ddf" name="af6e443832ec458d0a5bb81baf2d35ddf"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SimulatedAnnealingStrategy</b> (const std::initializer_list&lt; double &gt; ilist)</td></tr>
+<tr class="separator:af6e443832ec458d0a5bb81baf2d35ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e5c8a0cbe5045e968c46520862cb075"><td class="memItemLeft" align="right" valign="top"><a id="a2e5c8a0cbe5045e968c46520862cb075" name="a2e5c8a0cbe5045e968c46520862cb075"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setMagicNumbers</b> (const std::initializer_list&lt; double &gt; ilist)</td></tr>
+<tr class="separator:a2e5c8a0cbe5045e968c46520862cb075"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbba71b3a26caf9e59a3f154e6dbade5"><td class="memItemLeft" align="right" valign="top"><a id="adbba71b3a26caf9e59a3f154e6dbade5" name="adbba71b3a26caf9e59a3f154e6dbade5"></a>
+std::array&lt; double, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getMagicNumbers</b> (void)</td></tr>
+<tr class="separator:adbba71b3a26caf9e59a3f154e6dbade5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81715f4e075341ac8c82119936f84f7d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db6/classSimulatedAnnealingStrategy.html#a81715f4e075341ac8c82119936f84f7d">distributeGifts</a> (<a class="el" href="../../d3/d65/classSanta.html">Santa</a> &amp;santa) override</td></tr>
 <tr class="memdesc:a81715f4e075341ac8c82119936f84f7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the optimization algorithm to improve an existing solution.  <a href="../../dc/db6/classSimulatedAnnealingStrategy.html#a81715f4e075341ac8c82119936f84f7d">More...</a><br /></td></tr>
 <tr class="separator:a81715f4e075341ac8c82119936f84f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
