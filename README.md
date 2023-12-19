@@ -1,7 +1,3 @@
----
-layout: default
----
-
 # Santa Challenge
 
 ![](https://github.com/Resistor10k1/santa-challenge/actions/workflows/santa-challenge-unit-tests.yml/badge.svg)
