@@ -17,7 +17,7 @@ layout: default
 
 ## Technical details
 
-- Language: C++ (C++-20)
+- Language: C++ (C++-20 standard)
 - Libraries: Standard-Library and Open-MP
 - Compiler:  GNU 11.4.0 
 - Optimization:  -O3

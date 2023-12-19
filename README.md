@@ -67,29 +67,10 @@ Final temperature $T_f$                | 0.001
 
 ## Result
 
-output_trips_2023-12-12_14-52.csv:
-- Jupyter output: 13451646157.283916
-- C++ output: 13451646096.8983364105 in 4103592 ms
+For verifing the solution a Jupyter notebook provided by the lecturer is used. The achieved weighted-reindeer-weariness is 13'449'226'461.1015 in 1430 trips. It took 20'749'713 ms => 5.76 h to find this solution.
 
-probablyNewBest.csv:
-- Jupyter output: 13450929488.631664
-- C++ output: 13450929428.2493152618 in 9375112 ms
+The main work is done by the Nearest-Neighbour algorithm, because without Simulated-Annealing a $WRW$ of 13'485'862'196.2284 is achieved. Therefore, it is important to have a sufficiently good initial solution.
 
-candidate_2023-12-17_17-22.csv:
-- kaggle output: 13'449'226'461.1015
-- Jupyter output: 13'449'245'037.96434
-- C++ output: 13'449'244'977.5895557404 in 20749713 ms, 1430 tours
-- Magic numbers: {1, 25, 32, 128, 100000.0, 0.001}
-
-Cluster-Loader instead of Nearest-Neighbour-Loader:
-- C++ output: 37'894'714'449.319519043 in 19663718 ms, 1431 tours
-
-without SA:
-13'485'862'196.2283859253 in 4139765 ms
-
-For verifing the solution a Jupyter notebook provided by the lecturer is used. The achieved weighted-reindeer-weariness is 13'452'086'880.13939 in 1430 trips.
-
-When playing around with different strategies for getting an initial solution, it becomes clear that this is a crucial step. The Simulated-Annealing algorithm gives some improvement. If the initial solution is already not very good, many improvements can be made but might not result in a very good solution in the end.
 
 All tours are shown in Figure "Overview of all tours". All tours are also shown in an interactive <a href="https://resistor10k1.github.io/santa-challenge/figures/map.html" target="_blank">map</a>.
 
