@@ -5,6 +5,18 @@
     "tasks": [
         {
             "type": "shell",
+            "label": "main_index",
+            "command": "pandoc docs/main_index.md -f markdown -t html -s -o docs/main_index.html --mathml --metadata title=\"Wiki Santa-Challenge\"",
+            "options":{
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "type": "shell",
             "label": "doxygen",
             "command": "doxygen doxygen/doxygenConfig",
             "options":{

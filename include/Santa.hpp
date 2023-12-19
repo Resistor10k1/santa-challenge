@@ -18,12 +18,14 @@ class Santa
     public:
         Santa(double max_load);
 
+        Santa(const Santa& s);
+
         /**
          * @brief Adds a single gift to the sleigh.
          * @return Returns 0 if gift could be added.
          * Returns -1 if sleigh_max_load-attribute is exceeded.
         */
-        int add(const Gift& gift);
+        int add(const Gift gift);
 
         /**
          * @brief Adds a list of gifts to the sleigh.

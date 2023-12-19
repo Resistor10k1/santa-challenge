@@ -8,6 +8,7 @@ file(GLOB test_targets
         "${PROJECT_SOURCE_DIR}/source/Gift.cpp"
         "${PROJECT_SOURCE_DIR}/source/Santa.cpp"
         "${PROJECT_SOURCE_DIR}/source/TripManager.cpp"
+        "${PROJECT_SOURCE_DIR}/source/DistributeStrategy.cpp"
 )
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG")
@@ -17,9 +18,11 @@ target_sources(santaChallengeTest
                 unittest_misc.cpp
                 unittest_Gift.cpp
                 unittest_Santa.cpp
+                unittest_SA.cpp
 )
 target_include_directories(santaChallengeTest PRIVATE "${PROJECT_SOURCE_DIR}/include")
 target_link_libraries(santaChallengeTest PRIVATE gtest_main)
+target_link_libraries(santaChallengeTest PRIVATE OpenMP::OpenMP_CXX)
 # add_test(NAME SantaChallenge_test COMMAND ./santaChallengeTest)
 
 # # Enable testing in CI pipeline

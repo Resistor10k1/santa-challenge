@@ -39,12 +39,17 @@ jobs:
         working-directory: 'docs/'
         doxyfile-path: 'doxygen/doxygenConfig'
 
-    - name: Convert README
+    - name: Generate wiki mainpage
       working-directory: ${{github.workspace}}
-      run: pandoc README.md -f markdown -t html -s -o docs/index.html --mathml
+      run: pandoc docs/main_index.md -f markdown -t html -s -o docs/main_index.html --mathml --metadata title="Wiki Santa-Challenge"
+
+    - name: Concatenate index for Jekyll
+      working-directory: ${{github.workspace}}/docs
+      run: cat jekyll_header.txt main_index.html > index.html
 
     - name: Commit changes
       run: |
+        git checkout main
         git config --global user.name "github-actions[bot]"
         git config --global user.email github-actions@users.noreply.github.com
         git add -f --all
@@ -54,5 +59,5 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        force_with_lease: true
+        # force_with_lease: true
         branch: "main"

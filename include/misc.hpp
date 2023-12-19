@@ -58,8 +58,8 @@ void str_split(const std::string& str, std::vector<std::string>& output, char se
 
 /**
  * @brief Reads the package drop locations from a CSV file.
- * @details The format of a location is: GiftId,Latitude,Longitude,Weight. The latitude and longitude can 
- * be in format 'degree' or 'radiant'.
+ * @details The format of a location is: GiftId,Latitude,Longitude,Weight. The latitude and longitude is expected
+ * to be in 'degree'.
  * @param path Path to the csv file containing the gift data
  * @param separator Separator character used in the csv file.
  * @param output List with the data extracted as Giff objects
@@ -105,6 +105,23 @@ double mean_weight(const std::vector<Gift>& g_vec);
  * @brief Calculates the mean of the distances to the north pole of the gifts in list g_vec.
 */
 double mean_distance(const std::vector<Gift>& g_vec);
+
+template<typename T>
+T mean(const std::vector<T>& vec)
+{
+    T sum = 0.0;
+
+    if(vec.size() > 0)
+    {
+        for(auto val : vec)
+        {
+            sum += val;
+        }
+
+        sum /= vec.size();
+    }
+    return sum;
+}
 
 /**
  * @brief Returns the median value of list vec.

@@ -9,6 +9,7 @@
 #include "Santa.hpp"
 #include "Gift.hpp"
 #include <vector>
+#include <array>
 
 /**
  * @brief Abstract class providing an interface to optimization strategies of all kind.
@@ -45,17 +46,30 @@ class NaiveStrategy : public IDistributeStrategy
 class SimulatedAnnealingStrategy : public IDistributeStrategy
 {
     public:
+        SimulatedAnnealingStrategy(void);
+        SimulatedAnnealingStrategy(const std::initializer_list<double> ilist);
+
+        void setMagicNumbers(const std::initializer_list<double> ilist);
+        std::array<double, 6> getMagicNumbers(void);
+
         void distributeGifts(Santa& santa) override;
     
     private:
+        unsigned int rndSwap_min_offset = 1;
+        unsigned int rndSwap_max_offset = 15;
+        unsigned int cool_intervall = 13;
+        unsigned int reheat_intervall = 51;
+        double inital_temperature = 100000.0;
+        double final_temperature = 0.001;
 
         /**
          * @brief Swaps two destinations in a tour.
          * @details The destinations to swap are chosen randomly, but underlie some constraints.
-         * The destinations can lie 1-5 positions apart from each other (index in the list).
-         * 
+         * The minimum and maximum distance between the destinations is determined by rndSwap_min_offset resp.
+         * rndSwap_max_offset. 
+         * @param nbrOfPermutations Determines how many random swaps are performed
         */
-        void applyRandomSwap(std::vector<Gift>& giftList);
+        void applyRandomSwap(std::vector<Gift>& giftList, unsigned int nbrOfPermutations);
 
         /**
          * @brief Returns uniformly distributes random value [0,1]

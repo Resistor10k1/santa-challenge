@@ -8,27 +8,38 @@ layout: default
 
 ## Introduction
 
-In the context of a algorithms course, the santa challenge could be solved as a voluntary exercise. This repository contains the code and a short description on how the exercise is solved.
+In the context of a algorithms course, the Santa-Challenge could be solved as a voluntary exercise. This repository contains the code and a short description on how the exercise is solved.
 This challenge has originally been uploaded to <a href="https://www.kaggle.com/competitions/santas-stolen-sleigh" target="_blank">kaggle.com</a> in 2016.
 
-See [Goal](#goal-of-the-challenge) for the description of the problem, which is basically just the description found on <a href="https://www.kaggle.com/competitions/santas-stolen-sleigh" target="_blank">kaggle.com</a>.
+Refer to the <a href="https://resistor10k1.github.io/santa-challenge/" target="_blank">wiki</a>  for the description of the problem and for additional information.
 
 See [Result](#result) for the result achieved with the code in this repository.
 
-Refer to the <a href="https://resistor10k1.github.io/santa-challenge/" target="_blank">wiki</a> for additional information.
+## Backstory
 
-## Setup
+Santa's magical sleigh has gone missing. Unfortunately, Christmas is very close and Santa does not want to cancel. Therefore, Santa needs the help of Computer-Science students with nothing better to do than to determine a tour to deliver the gifts as efficient as possible and to save Christmas.
+
+## Get started
 
 ### Build
 
-First, clone the git repository. Afterwards, configure CMake and build the project.
+Clone the git repository:
 ```
 git clone https://github.com/Resistor10k1/santa-challenge.git
 cd santa-challenge
+```
+And just run the build script:
+```
+bash build.sh
+```
+Or do it manually:
+```
 mkdir build && cd build
 cmake ..
 cmake --build . --target all
 ```
+
+**_NOTE:_**  If the Clang compiler is used, the `libomp-dev` library must be installed.
 
 ### Run
 
@@ -36,49 +47,48 @@ Jump into to build folder (`cd build`) and run the program. The program takes th
 ```
 ./santa-challenge "../data/gifts.csv"
 ```
+Three different data files are available in the *data* folder:
+- *example_data.csv*: A very small data set of 15 gifts. Suitable for a quick test-run of the program.
+- *small_gifts.csv*: A small data set of 200 gifts. Suitable for testing.
+- *gifts.csv*: The data set of 100'000 gifts, used to solve the challenge.
 
-## Goal of the challenge
-
-Help Santa distribute the gifts all over the world. Therefore, the overall weighted-reindeer-weariness ($WRW$) must be minimized. All sleigh trips start at the North-Pole (Lat=90, Long=0), then head to each gift in a specified order, and finally head back to the North-Pole. Santa's sleigh has a base weight of 10 and a weight limit of 1000 (excluding the sleigh base weight).
-
-The weighted-reindeer-weariness is calculated with the following folmula:
-
-$$WRW = \sum_{j=1}^m \sum_{i=1}^{n_j} \sum_{k=i}^{n_j} w_{kj} * Dist(Loc_i, Loc_{i-1})$$
-
-Where $m$ is the number of trips, $n_j =$(#gifts for trip $j$)$+1$, $w_{ij}$ is the weight of the $i$-th gift at trip $j$, $Loc_i$ is the location of gift $i$. $Loc_0$ and $Loc_{n_j}$ are the North-Pole, and $w_{n_{j},j}$ (the last leg of each trip) is always the base weight of the sleigh.
-
-The $Dist(Loc_i, Loc_{i-1})$ function returns the Haversine distance $d$ between location $i$ and $i-1$.
-
-$\varphi_1, \varphi_2$ : Latitude of $Loc_1$ resp. $Loc_2$ in radians<br>
-$\lambda_1, \lambda_2$ : Longitude of $Loc_1$ resp. $Loc_2$ in radians<br>
-$r$ : Radius of the earth (6371.0087714km)
-
-$$ d = 2r \arcsin \left( \sqrt {\sin^2 ({\frac{\varphi_2-\varphi_1}{2}}) + \cos(\varphi_1)\cos(\varphi_2) \sin^2 ({\frac{\lambda_2-\lambda_1}{2}})} \right) $$
-
-#### Example
-
-Two gifts $A$ and $B$ are delivered in a trip. Then the $WRW$ is calculated as follows:
-
-$$
-\begin{aligned}
-&Dist(NorthPole \rightarrow A) &&* (base\_weight + weight(B) + weight(A))&& \\
-&Dist(A \rightarrow B) &&* (base\_weight + weight(B))&& \\
-&Dist(B \rightarrow NorthPole) &&* (base\_weight)&&
-\end{aligned}
-$$
+When the calculations are finished, the result is saved in the folder *data*. The format of the file is **output_trips_*\<year\>*-*\<month\>*-*\<day\>*_*\<hour\>*-*\<minute\>*.csv**.
 
 ## Solution approach
 
-In a first step, all gifts are sorted by the distance to the North-Pole in ascending order. Starting with the closest gift, the tours are built with Nearest-Neighbour approach. For each tour, a Simulated Annealing algorithm is run, to improve the tour.
+In a first step, all gifts are sorted by the distance to the North-Pole in ascending order. Starting with the closest gift, the tours are built with Nearest-Neighbour approach to find an initial solution.
+For each tour, a Simulated Annealing algorithm is run, to improve the existing tour and find a better solution.
+
+**Simulated-Annealing parameters:**
+
+Parameter                              | Value
+:---                                   | :----:
+Neighbourhood size for 2-opt swapping  | 25
+"Cooling" intervall with $\alpha=0.9$  | 32
+"Reheating" intervall with $\beta=1.3$ | 128
+Initial temperature $T_0$              | 100'000
+Final temperature $T_f$                | 0.001
 
 ## Result
 
-For verifing the solution a Jupyter notebook provided by the lecturer is used. The achieved weighted-reindeer-weariness is
-13'485'852'013.1237 in 1430 trips.
+For verifing the solution a Jupyter notebook provided by the lecturer is used. The achieved weighted-reindeer-weariness is 13'449'226'461.1015 in 1430 trips. It took 20'749'713 ms => 5.76 h to find this solution.
+
+The main work is done by the Nearest-Neighbour algorithm, because without Simulated-Annealing a $WRW$ of 13'485'862'196.2284 is achieved. Therefore, it is important to have a sufficiently good initial solution.
+
+
+All tours are shown in Figure "Overview of all tours". All tours are also shown in an interactive <a href="https://resistor10k1.github.io/santa-challenge/figures/map.html" target="_blank">map</a>.
+
+![Overview of all tours](docs/figures/whole_map.png)
+
+A single tour looks something like this:
+
+![Single tour](docs/figures/firstTrip_map.png)
+
 
 ## Code
 
 All code is written in C++. For a detailed code documentation refer to this <a href="https://resistor10k1.github.io/santa-challenge/doxygen/html/index.html" target="_blank">Link</a>.
+<!-- All code is written in C++. For a detailed code documentation refer to this <a href="doxygen/html/index.html" target="_blank">Link</a>. -->
 
 ## Some other ideas
 

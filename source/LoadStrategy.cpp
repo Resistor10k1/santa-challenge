@@ -1,6 +1,7 @@
 
 #include "LoadStrategy.hpp"
 #include "misc.hpp"
+#include <algorithm>
 
 std::vector<Gift>::iterator NaiveLoadingStrategy::loadTourToSleigh(Santa& santa, std::vector<Gift>& giftList, 
                                                                 const std::vector<Gift>::iterator& it_ref, 
@@ -27,8 +28,6 @@ std::vector<Gift>::iterator NearestLoadingStrategy::loadTourToSleigh(Santa& sant
                                                                 const std::vector<Gift>::iterator& it_ref, 
                                                                 unsigned int tour_nbr)
 {
-    // auto gift = it_start;
-
     auto gift = giftList.begin();
     auto it_end = giftList.end();
 
@@ -90,3 +89,36 @@ std::vector<Gift>::iterator NNLoadingStrategy::loadTourToSleigh(Santa& santa, st
 
     return ref_gift;
 }
+
+void ClusterLoadingStrategy::preprocessGifts(std::vector<Gift>& giftList)
+{
+    sort_distance(giftList);
+}
+
+std::vector<Gift>::iterator ClusterLoadingStrategy::loadTourToSleigh(Santa& santa, std::vector<Gift>& giftList, 
+                                                                       const std::vector<Gift>::iterator& it_ref, 
+                                                                       unsigned int tour_nbr)
+{
+    auto ref_gift = it_ref;
+    auto it_start = giftList.begin();
+    auto it_end = giftList.end();
+    auto local_giftList(giftList);
+    
+    santa.unloadSleigh();
+
+    sort_distToRef(local_giftList, (*ref_gift).getCoordinate());
+
+    for(auto neighbour=it_start; neighbour!=it_end; ++neighbour)
+    {
+        if((*neighbour).getTourNumber() == 0)
+        {
+            if(loadSleigh(santa, *neighbour, tour_nbr) != 0)
+            {
+                return neighbour;
+            }
+        }
+    }
+
+    return it_end;
+}
+
